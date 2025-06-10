@@ -10,4 +10,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookingClone.Application\BookingClone.Application.csproj" />
+    <ProjectReference Include="..\BookingClone.Infrastructure\BookingClone.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

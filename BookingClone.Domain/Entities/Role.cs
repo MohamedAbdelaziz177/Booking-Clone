@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace BookingClone.Domain.Entities;
 
-namespace BookingClone.Domain.Entities
+public class Role
 {
-    internal class Role
-    {
-    }
+    public int Id { get; set; }
+
+    public string Name { get; set; } = "USER";
+
+    public ICollection<User> users { get; set; } = default!;
 }
