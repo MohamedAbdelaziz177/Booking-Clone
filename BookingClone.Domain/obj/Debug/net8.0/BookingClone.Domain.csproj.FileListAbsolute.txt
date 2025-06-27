@@ -1,0 +1,12 @@
+F:\BookingClone\BookingClone.Domain\bin\Debug\net8.0\BookingClone.Domain.deps.json
+F:\BookingClone\BookingClone.Domain\bin\Debug\net8.0\BookingClone.Domain.dll
+F:\BookingClone\BookingClone.Domain\bin\Debug\net8.0\BookingClone.Domain.pdb
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.csproj.AssemblyReference.cache
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.GeneratedMSBuildEditorConfig.editorconfig
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.AssemblyInfoInputs.cache
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.AssemblyInfo.cs
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.csproj.CoreCompileInputs.cache
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.dll
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\refint\BookingClone.Domain.dll
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.pdb
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\ref\BookingClone.Domain.dll

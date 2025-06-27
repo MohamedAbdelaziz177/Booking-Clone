@@ -1,5 +1,10 @@
 
-namespace BookingClone
+using BookingClone.Domain.Entities;
+using BookingClone.Infrastructure.Persistance;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+namespace BookingClone.Api
 {
     public class Program
     {
@@ -13,6 +18,14 @@ namespace BookingClone
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("default")));
+
+
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
 
             var app = builder.Build();
 

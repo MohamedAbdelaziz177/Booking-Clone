@@ -7,7 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\" />
+    <Folder Include="Features\Auth\Commands\" />
+    <Folder Include="Features\Auth\Handlers\" />
+    <Folder Include="Features\FeedBack\Commands\" />
+    <Folder Include="Features\FeedBack\Handlers\CommandHandlers\" />
+    <Folder Include="Features\FeedBack\Handlers\QueryHandlers\" />
+    <Folder Include="Features\FeedBack\Queries\" />
+    <Folder Include="Features\Payment\Commands\" />
+    <Folder Include="Features\Payment\Handlers\" />
+    <Folder Include="Validators\HotelValidators\" />
+    <Folder Include="Validators\ReservationValidators\" />
+    <Folder Include="Validators\RoomValidators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.3" />
+    <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
