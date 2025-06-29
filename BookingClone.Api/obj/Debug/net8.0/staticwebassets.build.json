@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "03x3SGkeYoVrIWCE3hrDWxAYvlq1601VP0WQ38HHeB8=",
+  "Source": "BookingClone.Api",
+  "BasePath": "_content/BookingClone.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
