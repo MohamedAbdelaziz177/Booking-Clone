@@ -16,7 +16,7 @@ public class RoomMapper : Profile
         CreateMap<Room, RoomResponseDto>()
             .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type.ToString()))
             .ForMember(dest => dest.HotelName, opt => opt.MapFrom(src => src.Hotel.Name))
-            .ForMember(dest => dest.RoomImagesUrls, opt =>
+            .ForMember(dest => dest.RoomImageDtos, opt =>
             {
                 opt.MapFrom(src => src.RoomImages.Select(ri =>
                 new RoomImgDto() { ImageId = ri.Id, ImageUrl = ri.ImgUrl}).ToList());
