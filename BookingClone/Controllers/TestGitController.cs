@@ -7,5 +7,6 @@ namespace BookingClone.Api.Controllers
     [ApiController]
     public class TestGitController : ControllerBase
     {
+        // Fuck Git -_-
     }
 }
