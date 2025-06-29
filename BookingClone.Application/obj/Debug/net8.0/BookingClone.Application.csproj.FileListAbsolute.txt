@@ -13,3 +13,4 @@ F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Applicati
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\refint\BookingClone.Application.dll
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Application.pdb
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\ref\BookingClone.Application.dll
+F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Application.sourcelink.json

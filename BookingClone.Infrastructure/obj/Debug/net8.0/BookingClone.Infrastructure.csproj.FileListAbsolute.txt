@@ -17,3 +17,4 @@ F:\BookingClone\BookingClone.Infrastructure\obj\Debug\net8.0\BookingClone.Infras
 F:\BookingClone\BookingClone.Infrastructure\obj\Debug\net8.0\ref\BookingClone.Infrastructure.dll
 F:\BookingClone\BookingClone.Infrastructure\bin\Debug\net8.0\BookingClone.Application.dll
 F:\BookingClone\BookingClone.Infrastructure\bin\Debug\net8.0\BookingClone.Application.pdb
+F:\BookingClone\BookingClone.Infrastructure\obj\Debug\net8.0\BookingClone.Infrastructure.sourcelink.json
