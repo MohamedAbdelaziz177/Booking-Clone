@@ -13,6 +13,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey(r => r.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
+        builder.HasMany(u => u.RefreshTokens)
+            .WithOne(r => r.User)
+            .HasForeignKey(u => u.UserId);
+
         //builder.Property(u => u.PasswordResetOtp)
         //    .IsRequired(false);
         //

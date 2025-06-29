@@ -91,6 +91,35 @@ namespace BookingClone.Infrastructure.Migrations
                     b.ToTable("hotels");
                 });
 
+            modelBuilder.Entity("BookingClone.Domain.Entities.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("refreshTokens");
+                });
+
             modelBuilder.Entity("BookingClone.Domain.Entities.Reservation", b =>
                 {
                     b.Property<int>("Id")
@@ -102,7 +131,7 @@ namespace BookingClone.Infrastructure.Migrations
                     b.Property<DateTime>("BookingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 6, 10, 15, 12, 22, 464, DateTimeKind.Local).AddTicks(2034));
+                        .HasDefaultValue(new DateTime(2025, 6, 29, 22, 12, 2, 120, DateTimeKind.Local).AddTicks(3294));
 
                     b.Property<DateTime>("CheckInDate")
                         .HasColumnType("datetime2");
@@ -423,6 +452,17 @@ namespace BookingClone.Infrastructure.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("BookingClone.Domain.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("BookingClone.Domain.Entities.User", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BookingClone.Domain.Entities.Reservation", b =>
                 {
                     b.HasOne("BookingClone.Domain.Entities.Room", "Room")
@@ -536,6 +576,8 @@ namespace BookingClone.Infrastructure.Migrations
 
             modelBuilder.Entity("BookingClone.Domain.Entities.User", b =>
                 {
+                    b.Navigation("RefreshTokens");
+
                     b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618

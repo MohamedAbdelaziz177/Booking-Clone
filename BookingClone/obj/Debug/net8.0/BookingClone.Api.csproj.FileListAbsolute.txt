@@ -158,3 +158,9 @@ F:\BookingClone\BookingClone\bin\Debug\net8.0\FluentValidation.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\MediatR.dll
 F:\BookingClone\BookingClone\obj\Debug\net8.0\BookingClone.Api.sourcelink.json
+F:\BookingClone\BookingClone\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+F:\BookingClone\BookingClone\bin\Debug\net8.0\MailKit.dll
+F:\BookingClone\BookingClone\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\BookingClone\BookingClone\bin\Debug\net8.0\MimeKit.dll
+F:\BookingClone\BookingClone\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+F:\BookingClone\BookingClone\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll

@@ -1,28 +1,173 @@
 ﻿using BookingClone.Application.Contracts;
+using BookingClone.Application.Features.Auth.Commands;
 using BookingClone.Application.Features.Auth.Responses;
 using BookingClone.Domain.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using BookingClone.Domain.IRepositories;
+using BookingClone.Application.Exceptions;
 
 namespace BookingClone.Infrastructure.Services;
 
 public class JwtService : IJwtService
 {
-    public string GenerateAccessToken(User user)
+    private readonly IConfiguration configuration;
+    private readonly UserManager<User> userManager;
+    private readonly IHostEnvironment environment;
+    private readonly IUnitOfWork unitOfWork;
+
+    public JwtService(IConfiguration configuration,
+        UserManager<User> userManager,
+        IHostEnvironment environment,
+        IUnitOfWork unitOfWork)
     {
-        throw new NotImplementedException();
+        this.configuration = configuration;
+        this.userManager = userManager;
+        this.environment = environment;
+        this.unitOfWork = unitOfWork;
     }
 
-    public string GenerateRefreshToken(string refreshToken)
+    private DateTime GetTokenExpiration()
     {
-        throw new NotImplementedException();
+        return !environment.IsProduction() ? DateTime.Now.AddDays(1) : DateTime.Now.AddMinutes(15);
+    }
+    public async Task<string> GenerateAccessTokenAsync(User user)
+    {
+
+        List<Claim> claims = new List<Claim>()
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Email, user.Email!),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString())
+
+        };
+
+        var roles = await userManager.GetRolesAsync(user);
+
+        foreach (var role in roles)
+            claims.Add(new Claim(ClaimTypes.Role, role));
+
+
+        JwtSecurityToken Token = new JwtSecurityToken(
+
+            issuer: configuration["JWT:Issuer"],
+
+            audience: configuration["JWT:Audience"],
+
+            expires: GetTokenExpiration(),
+
+            signingCredentials: new SigningCredentials(
+
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"]!)),
+            SecurityAlgorithms.HmacSha256
+
+            )
+
+            );
+
+        return new JwtSecurityTokenHandler().WriteToken(Token);
     }
 
-    public TokenResponseDto GetTokens(User user)
+    
+    private RefreshToken GetRefreshToken(User user)
     {
-        throw new NotImplementedException(); 
+        RefreshToken refreshToken = new RefreshToken();
+
+        refreshToken.UserId = user.Id;
+        refreshToken.IsRevoked = false;
+        refreshToken.ExpiryDate = DateTime.Now.AddDays(15);
+
+        refreshToken.Token = Guid.NewGuid().ToString() + "_" + Guid.NewGuid().ToString();
+
+
+
+        return refreshToken;
     }
 
-    public bool ValidateRefreshToken(string refreshToken)
+    private async Task<RefreshToken> GetRefreshTokenAsync(string userId)
     {
-        throw new NotImplementedException();
+        User? user = await userManager.FindByIdAsync(userId);
+
+        if(user == null)
+            throw new EntityNotFoundException("No such user exists");
+
+        return this.GetRefreshToken(user);
+    }
+
+    
+    //public async Task<(string token, bool refreshed)> GenerateRefreshToken(string refreshToken)
+    //{
+    //    var ValidationRes = ValidateRefreshToken(refreshToken);
+    //
+    //    if (!ValidationRes.valid)
+    //        return ("", false);
+    //
+    //    RefreshToken token = await GetRefreshToken(ValidationRes.refToken.UserId);
+    //
+    //    return (token.Token, true);
+    //}
+
+    private async Task<TokenResponseDto> GetTokensAsync(User user)
+    {
+        return new TokenResponseDto()
+        {
+            AccessToken = await this.GenerateAccessTokenAsync(user),
+            RefreshToken =  this.GetRefreshToken(user).Token,
+            AccessTokenExpiration = this.GetTokenExpiration(),
+            RefreshTokenExpiration = DateTime.Now.AddDays(15)
+        };
+    }
+
+    public async Task<TokenResponseDto> GetTokensAsync(string userId)
+    {
+        User? user = await userManager.FindByIdAsync(userId);
+
+        if (user == null)
+            throw new EntityNotFoundException("No such user exists");
+
+        return await GetTokensAsync(user);
+    }
+
+    public async Task<TokenResponseDto> RefreshTokenAsync(string refreshToken)
+    {
+        var ValidationRes = await ValidateRefreshTokenAsync(refreshToken);
+
+        if (!ValidationRes.valid)
+            throw new RefreshTokenNotValidException("Refresh Token is not valid");
+
+        return await GetTokensAsync(ValidationRes.refToken.UserId);
+
+    }
+
+    private async Task<(bool valid, RefreshToken refToken)> ValidateRefreshTokenAsync(string refreshToken)
+    {
+        if (string.IsNullOrEmpty(refreshToken))
+            return (false, null!);
+
+        RefreshToken? token = await unitOfWork.RefreshRokenRepo.GetByTokenAsync(refreshToken);
+
+        if (token == null || token.IsRevoked || token.ExpiryDate < DateTime.Now)
+            return (false, null!);
+
+        return (true, token);
     }
 }
+
+
+/*
+
+--- (o_o) full process abstraction (o_o) --- 
+
+New User ? ---> call public GetTokens (userId)
+User with expired access token ? ->> call public RefreshToken(ref-token)
+
+all the rest are just helper methods o_o :( 
+ 
+ */

@@ -157,3 +157,6 @@ F:\BookingClone\BookingClone\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.De
 F:\BookingClone\BookingClone\bin\Debug\net8.0\FluentValidation.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\MediatR.dll
+F:\BookingClone\BookingClone.API\obj\Debug\net8.0\BookingClone.Api.dll
+F:\BookingClone\BookingClone.API\obj\Debug\net8.0\refint\BookingClone.Api.dll
+F:\BookingClone\BookingClone.API\obj\Debug\net8.0\BookingClone.Api.pdb

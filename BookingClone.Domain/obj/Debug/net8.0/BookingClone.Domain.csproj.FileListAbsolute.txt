@@ -10,3 +10,4 @@ F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.dll
 F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\refint\BookingClone.Domain.dll
 F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.pdb
 F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\ref\BookingClone.Domain.dll
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.sourcelink.json

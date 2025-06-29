@@ -20,5 +20,7 @@ public class User : IdentityUser
 
     public List<Reservation> Reservations { get; set; } = new List<Reservation>();
 
+    public List<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+
 
 }

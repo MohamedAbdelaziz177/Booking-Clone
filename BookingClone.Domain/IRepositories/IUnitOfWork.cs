@@ -15,6 +15,9 @@ public interface IUnitOfWork
 
     IUserRepo UserRepo { get; }
 
+    IRefreshRokenRepo RefreshRokenRepo { get; }
+
+
     Task<int> SaveChangesAsync();
 
 

@@ -6,11 +6,13 @@ namespace BookingClone.Application.Contracts;
 
 public interface IJwtService
 {
-    string GenerateAccessToken(User user);
+    Task<string> GenerateAccessTokenAsync(User user);
 
-    string GenerateRefreshToken(string refreshToken);
+    //Task<(string token, bool refreshed)> GenerateRefreshToken(string refreshToken);
 
-    TokenResponseDto GetTokens(User user);
+    Task<TokenResponseDto> GetTokensAsync(string userId);
 
-    bool ValidateRefreshToken(string refreshToken);
+    Task<TokenResponseDto> RefreshTokenAsync(string refreshToken);
+
+    //bool ValidateRefreshToken(string refreshToken);
 }

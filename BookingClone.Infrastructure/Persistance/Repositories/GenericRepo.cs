@@ -7,7 +7,7 @@ public class GenericRepo<T> : IGenericRepo<T> where T : class
 {
 
     private readonly DbSet<T> dbSet;
-    private readonly AppDbContext con;
+    protected readonly AppDbContext con;
 
     public GenericRepo(AppDbContext con)
     {

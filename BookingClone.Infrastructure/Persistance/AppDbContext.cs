@@ -33,5 +33,7 @@ public class AppDbContext : IdentityDbContext<User>
     public DbSet<RoomImage> roomsImage { get; set; }
 
     public DbSet<Reservation> reservations { get; set; }
+
+    public DbSet<RefreshToken> refreshTokens { get; set; }
     
 }

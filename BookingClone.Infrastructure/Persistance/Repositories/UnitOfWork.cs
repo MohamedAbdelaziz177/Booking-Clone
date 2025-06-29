@@ -17,7 +17,7 @@ public class UnitOfWork : IUnitOfWork
     public IReservationRepo ReservationRepo { get; private set; }
 
     public IUserRepo UserRepo { get; private set; }
-
+    public IRefreshRokenRepo RefreshRokenRepo { get; private set; }
 
     public UnitOfWork(
         AppDbContext con,
@@ -26,7 +26,8 @@ public class UnitOfWork : IUnitOfWork
         IRoomImageRepo roomImageRepo,
         IFeedbackRepo feedbackRepo,
         IReservationRepo reservationRepo,
-        IUserRepo userRepo)
+        IUserRepo userRepo,
+        IRefreshRokenRepo refreshRokenRepo)
     {
         this.con = con;
         HotelRepo = hotelRepo;
@@ -35,6 +36,7 @@ public class UnitOfWork : IUnitOfWork
         FeedbackRepo = feedbackRepo;
         ReservationRepo = reservationRepo;
         UserRepo = userRepo;
+        RefreshRokenRepo = refreshRokenRepo;
     }
 
     public async Task<int> SaveChangesAsync()
