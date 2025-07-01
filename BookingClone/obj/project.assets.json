@@ -1902,7 +1902,10 @@
         },
         "runtime": {
           "bin/placeholder/BookingClone.Application.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "BookingClone.Domain/1.0.0": {
         "type": "project",

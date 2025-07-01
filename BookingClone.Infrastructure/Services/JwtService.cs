@@ -12,6 +12,8 @@ using System.Security.Claims;
 using System.Text;
 using BookingClone.Domain.IRepositories;
 using BookingClone.Application.Exceptions;
+using Microsoft.VisualBasic;
+using BookingClone.Application.Common;
 
 namespace BookingClone.Infrastructure.Services;
 
@@ -35,7 +37,8 @@ public class JwtService : IJwtService
 
     private DateTime GetTokenExpiration()
     {
-        return !environment.IsProduction() ? DateTime.Now.AddDays(1) : DateTime.Now.AddMinutes(15);
+        return !environment.IsProduction() ? DateTime.UtcNow.AddDays(1) 
+            : DateTime.UtcNow.AddMinutes(MagicValues.ACCESS_TOKEN_LIFE_TIME_MINS);
     }
     public async Task<string> GenerateAccessTokenAsync(User user)
     {
@@ -63,6 +66,8 @@ public class JwtService : IJwtService
 
             expires: GetTokenExpiration(),
 
+            claims: claims,
+
             signingCredentials: new SigningCredentials(
 
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"]!)),
@@ -76,29 +81,29 @@ public class JwtService : IJwtService
     }
 
     
-    private RefreshToken GetRefreshToken(User user)
+    private async Task<RefreshToken> GenerateRefreshTokenAsync(User user)
     {
         RefreshToken refreshToken = new RefreshToken();
 
         refreshToken.UserId = user.Id;
         refreshToken.IsRevoked = false;
-        refreshToken.ExpiryDate = DateTime.Now.AddDays(15);
+        refreshToken.ExpiryDate = DateTime.UtcNow.AddDays(MagicValues.REFRESH_TOKEN_LIFE_TIME_DAYS);
 
         refreshToken.Token = Guid.NewGuid().ToString() + "_" + Guid.NewGuid().ToString();
 
-
+        await unitOfWork.RefreshRokenRepo.AddAsync(refreshToken);
 
         return refreshToken;
     }
 
-    private async Task<RefreshToken> GetRefreshTokenAsync(string userId)
+    private async Task<RefreshToken> GenerateRefreshTokenAsync(string userId)
     {
         User? user = await userManager.FindByIdAsync(userId);
 
         if(user == null)
             throw new EntityNotFoundException("No such user exists");
 
-        return this.GetRefreshToken(user);
+        return await this.GenerateRefreshTokenAsync(user);
     }
 
     
@@ -116,12 +121,13 @@ public class JwtService : IJwtService
 
     private async Task<TokenResponseDto> GetTokensAsync(User user)
     {
+        RefreshToken refreshToken = await this.GenerateRefreshTokenAsync(user);
         return new TokenResponseDto()
         {
             AccessToken = await this.GenerateAccessTokenAsync(user),
-            RefreshToken =  this.GetRefreshToken(user).Token,
+            RefreshToken = refreshToken.Token,
             AccessTokenExpiration = this.GetTokenExpiration(),
-            RefreshTokenExpiration = DateTime.Now.AddDays(15)
+            RefreshTokenExpiration = refreshToken.ExpiryDate
         };
     }
 
