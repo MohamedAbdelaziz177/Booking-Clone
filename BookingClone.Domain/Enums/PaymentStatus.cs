@@ -2,6 +2,8 @@
 namespace BookingClone.Domain.Enums;
 public enum PaymentStatus
 {
-    Completed,
+    Pending,
+    Succedded,
+    Canceled,
     Refunded
 }
