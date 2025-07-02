@@ -21,6 +21,7 @@ public class AppDbContext : IdentityDbContext<User>
         new RoomConfiguration().Configure(builder.Entity<Room>());
         new RoomImageConfiguration().Configure(builder.Entity<RoomImage>());
         new UserConfiguration().Configure(builder.Entity<User>());
+        new PaymentConfiguration().Configure(builder.Entity<Payment>());
 
     }
 
@@ -35,5 +36,7 @@ public class AppDbContext : IdentityDbContext<User>
     public DbSet<Reservation> reservations { get; set; }
 
     public DbSet<RefreshToken> refreshTokens { get; set; }
+
+    public DbSet<Payment> payments { get; set; }
     
 }

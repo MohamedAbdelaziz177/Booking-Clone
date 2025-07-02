@@ -11,6 +11,8 @@ public class Payment
 
     public PaymentStatus Status {  get; set; }
 
+    public string IntentId { get; set; } = string.Empty;
+
     public int ReservationId {  get; set; }
 
     public Reservation Reservation { get; set; } = new();
