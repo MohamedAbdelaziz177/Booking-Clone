@@ -13,9 +13,7 @@
     <Folder Include="Features\FeedBack\Queries\" />
     <Folder Include="Features\Payment\Commands\" />
     <Folder Include="Features\Payment\Handlers\" />
-    <Folder Include="Validators\HotelValidators\" />
     <Folder Include="Validators\ReservationValidators\" />
-    <Folder Include="Validators\RoomValidators\" />
   </ItemGroup>
 
 	<ItemGroup>

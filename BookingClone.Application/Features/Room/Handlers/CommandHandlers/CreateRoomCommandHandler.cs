@@ -23,6 +23,8 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Resul
     {
         var room = mapper.Map<RoomEntity>(request);
 
+        room.RoomNumber = Guid.NewGuid().ToString();
+
         await unitOfWork.RoomRepo.AddAsync(room);
 
         RoomResponseDto roomResponseDto = mapper.Map<RoomResponseDto>(room);
