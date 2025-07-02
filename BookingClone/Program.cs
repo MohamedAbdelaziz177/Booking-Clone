@@ -1,8 +1,10 @@
 
+using BookingClone.Api.GlobalExceptionHandler;
 using BookingClone.Domain.Entities;
 using BookingClone.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace BookingClone.Api
 {
@@ -36,6 +38,8 @@ namespace BookingClone.Api
                 app.UseSwaggerUI();
             }
 
+            app.UseMiddleware<GlobalExceptionMiddleware>();
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

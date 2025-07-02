@@ -11,4 +11,7 @@ public static class MagicValues
     public static readonly int ACCESS_TOKEN_LIFE_TIME_MINS = 15;
 
     public static readonly int OTP_EXPIRY_MINS = 5;
+
+    public static readonly int PAGE_SIZE = 8;
+    
 }
