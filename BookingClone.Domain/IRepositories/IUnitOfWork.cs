@@ -17,6 +17,7 @@ public interface IUnitOfWork
 
     IRefreshRokenRepo RefreshRokenRepo { get; }
 
+    IPaymentRepo PaymentRepo { get; }
 
     Task<int> SaveChangesAsync();
 
