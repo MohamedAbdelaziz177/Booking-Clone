@@ -9,7 +9,7 @@ public class Payment
 
     public decimal Amount {  get; set; }
 
-    public PaymentStatus Status {  get; set; }
+    public PaymentStatus Status {  get; set; } = PaymentStatus.Pending;
 
     public string IntentId { get; set; } = string.Empty;
 
