@@ -32,7 +32,9 @@ namespace BookingClone.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllRooms(int PageIdx = 0,
             string SortField = "Id",
-            string SortDir = "Desc"
+            string SortDir = "Desc",
+            string City = "All",
+            bool Active = true
             )
         {
             var Query = new GetRoomPageQuery()
