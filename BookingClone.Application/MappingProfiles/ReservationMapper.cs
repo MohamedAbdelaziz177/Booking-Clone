@@ -8,10 +8,11 @@ public class ReservationMapper : Profile
 {
     public ReservationMapper() 
     {
-        CreateMap<CreateReservationCommand, Reservation>().ReverseMap();
+        CreateMap<Reservation, CreateReservationCommand>()
+            .ForMember(dest => dest.UserId, opt => opt.Ignore())
+            .ReverseMap();
 
-        CreateMap<UpdateReservationCommand, Reservation>().ReverseMap();
-
+        CreateMap<Reservation, UpdateReservationCommand>().ReverseMap();
 
     }
 }
