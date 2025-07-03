@@ -17,11 +17,11 @@ public class Reservation
 
     public DateTime CheckOutDate { get; set; }
 
-    public ReservationStatus ReservationStatus { get; set; }
+    public ReservationStatus ReservationStatus { get; set; } = ReservationStatus.Pending;
 
     public Room Room { get; set; } = new Room();
 
-    public User user { get; set; } = new User();
+    public User User { get; set; } = new User();
 
     public List<FeedBack>? FeedBacks { get; set; }
 
