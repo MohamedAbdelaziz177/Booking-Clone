@@ -8,9 +8,9 @@ F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Applicati
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Application.AssemblyInfoInputs.cache
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Application.AssemblyInfo.cs
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Application.csproj.CoreCompileInputs.cache
+F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Application.sourcelink.json
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingC.1A64BF2B.Up2Date
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Application.dll
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\refint\BookingClone.Application.dll
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Application.pdb
 F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\ref\BookingClone.Application.dll
-F:\BookingClone\BookingClone.Application\obj\Debug\net8.0\BookingClone.Application.sourcelink.json

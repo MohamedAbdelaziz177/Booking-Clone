@@ -241,6 +241,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.15, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[48.3.0, )"
             }
           },
           "imports": [
@@ -293,6 +297,9 @@
             "projectReferences": {
               "F:\\BookingClone\\BookingClone.Application\\BookingClone.Application.csproj": {
                 "projectPath": "F:\\BookingClone\\BookingClone.Application\\BookingClone.Application.csproj"
+              },
+              "F:\\BookingClone\\BookingClone.Domain\\BookingClone.Domain.csproj": {
+                "projectPath": "F:\\BookingClone\\BookingClone.Domain\\BookingClone.Domain.csproj"
               },
               "F:\\BookingClone\\BookingClone.Infrastructure\\BookingClone.Infrastructure.csproj": {
                 "projectPath": "F:\\BookingClone\\BookingClone.Infrastructure\\BookingClone.Infrastructure.csproj"

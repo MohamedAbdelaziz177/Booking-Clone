@@ -2,9 +2,7 @@
 
 using BookingClone.Application.Common;
 using BookingClone.Application.Features.Reservation.Responses;
-using BookingClone.Domain.Entities;
 using MediatR;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookingClone.Application.Features.Reservation.Commands;
 

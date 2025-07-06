@@ -6,8 +6,8 @@ F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.Generat
 F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.AssemblyInfoInputs.cache
 F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.AssemblyInfo.cs
 F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.csproj.CoreCompileInputs.cache
+F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.sourcelink.json
 F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.dll
 F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\refint\BookingClone.Domain.dll
 F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.pdb
 F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\ref\BookingClone.Domain.dll
-F:\BookingClone\BookingClone.Domain\obj\Debug\net8.0\BookingClone.Domain.sourcelink.json
