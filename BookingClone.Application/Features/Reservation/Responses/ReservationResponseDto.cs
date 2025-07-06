@@ -17,7 +17,7 @@ public class ReservationResponseDto
     public DateTime CheckOutDate { get; set; }
 
 
-    public ReservationStatus ReservationStatus { get; set; }
+    public string ReservationStatus { get; set; } = string.Empty.ToString();
 
     public int GetNightsNo() => (CheckOutDate - CheckInDate).Days;
 
