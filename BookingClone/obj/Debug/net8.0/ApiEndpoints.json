@@ -164,6 +164,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BookingClone.Api.Controllers.PaymentController",
+    "Method": "Pay",
+    "RelativePath": "api/Payment/pay",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "BookingClone.Application.Features.Payment.Commands.CreatePaymentCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingClone.Api.Controllers.PaymentController",
+    "Method": "Refund",
+    "RelativePath": "api/Payment/refund",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "BookingClone.Application.Features.Payment.Commands.RefundPaymentCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BookingClone.Api.Controllers.ReservationController",
     "Method": "CreateReservation",
     "RelativePath": "api/Reservation",
@@ -251,6 +283,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingClone.Api.Controllers.ReservationController",
+    "Method": "GetMyReservations",
+    "RelativePath": "api/Reservation/my-reservations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

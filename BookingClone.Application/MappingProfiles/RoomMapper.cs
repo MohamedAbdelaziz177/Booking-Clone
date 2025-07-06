@@ -22,5 +22,7 @@ public class RoomMapper : Profile
                 new RoomImgDto() { ImageId = ri.Id, ImageUrl = ri.ImgUrl}).ToList());
             })
             .ReverseMap();
+
+        
     }
 }

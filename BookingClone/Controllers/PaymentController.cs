@@ -15,16 +15,16 @@ namespace BookingClone.Api.Controllers
             this.mediator = mediator;
         }
 
-        //[HttpPost("pay")]
-        //public async Task<IActionResult> Pay(CreatePaymentCommand command)
-        //{
-        //    return null;
-        //}
-        //
-        //[HttpPost("refund")]
-        //public async Task<IActionResult> Refund(RefundPaymentCommand command)
-        //{
-        //    return null;
-        //}
+        [HttpPost("pay")]
+        public async Task<IActionResult> Pay(CreatePaymentCommand command)
+        {
+            return null;
+        }
+        
+        [HttpPost("refund")]
+        public async Task<IActionResult> Refund(RefundPaymentCommand command)
+        {
+            return null;
+        }
     }
 }
