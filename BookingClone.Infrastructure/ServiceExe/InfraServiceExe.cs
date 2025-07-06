@@ -13,12 +13,12 @@ namespace BookingClone.Infrastructure.ServiceExe;
 
 public static class InfraServiceExe
 {
-    public static void AddComponents(this IServiceCollection Service, IConfiguration configuration)
+    public static void AddInfraComponents(this IServiceCollection Service, IConfiguration configuration)
     {
         Service.AddDbContext<AppDbContext>(options =>
         options.UseSqlServer(configuration.GetConnectionString("cs")));
 
-        Service.AddScoped<IUnitOfWork, UnitOfWork>();
+
         Service.AddScoped<IHotelRepo, HotelRepo>();
         Service.AddScoped<IRoomImageRepo, RoomImageRepo>();
         Service.AddScoped<IRoomRepo, RoomRepo>();
@@ -26,6 +26,9 @@ public static class InfraServiceExe
         Service.AddScoped<IFeedbackRepo, FeedbackRepo>();
         Service.AddScoped<IRefreshRokenRepo, RefreshTokenRepo>();
         Service.AddScoped<IUserRepo, UserRepo>();
+        Service.AddScoped<IPaymentRepo, PaymentRepo>();
+        Service.AddScoped<IUnitOfWork, UnitOfWork>();
+       
 
         Service.AddScoped<IEmailService, EmailService>();
         Service.AddScoped<IStripeService, StripeService>();

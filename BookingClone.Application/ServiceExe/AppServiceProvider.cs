@@ -1,5 +1,7 @@
 ﻿using BookingClone.Application.MappingProfiles;
+using BookingClone.Application.Validators.HotelValidators;
 using BookingClone.Domain.IRepositories;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,11 @@ namespace BookingClone.Application.ServiceExe;
 
 public static class AppServiceProvider
 {
-    public static void AddComponents(this IServiceCollection Service)
+    public static void AddAppComponents(this IServiceCollection Service)
     {
         Service.AddAutoMapper(typeof(AuthMapper).Assembly);
-
+        Service.AddValidatorsFromAssembly(typeof(CreateHotelCommandValidator).Assembly);
     }
+
+    
 }
