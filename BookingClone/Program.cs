@@ -2,6 +2,7 @@
 using BookingClone.Api.GlobalExceptionHandler;
 using BookingClone.Domain.Entities;
 using BookingClone.Infrastructure.Persistance;
+using DotNetEnv;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
@@ -12,6 +13,7 @@ namespace BookingClone.Api
     {
         public static void Main(string[] args)
         {
+            Env.Load();
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
