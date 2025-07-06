@@ -31,6 +31,7 @@ public class UpdateRoomCommandValidator : AbstractValidator<UpdateRoomCommand>
 
         RuleFor(x => x.HotelId)
             .GreaterThan(0).WithMessage("HotelId must be valid.");
+
         this.roomRepo = roomRepo;
     }
 

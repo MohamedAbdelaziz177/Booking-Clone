@@ -46,7 +46,10 @@ public class GenericRepo<T> : IGenericRepo<T> where T : class
         string sortDir = "desc"
         )
     {
-        return new List<T>();
+        var lst = await dbSet.Skip((pageIdx - 1) * pageSize).Take(pageSize).ToListAsync();
+    
+       
+        return lst;
     }
 
     public async Task<T?> GetByIdAsync(int id)
