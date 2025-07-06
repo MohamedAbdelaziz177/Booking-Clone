@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BookingClone.Application.Features.Reservation.Queries;
 
-public class GetReservationsPageQuery : PaginatedQuery<List<ReservationResponseDto>>
+public class GetReservationsPageQuery : PaginatedQuery<Result<List<ReservationResponseDto>>>
 {
    
 }
