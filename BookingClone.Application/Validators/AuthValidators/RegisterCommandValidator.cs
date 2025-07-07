@@ -16,6 +16,7 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
             .WithMessage("Password And ConfirmPassword don't match");
 
         RuleFor(rc => rc.FirstName)
+            .NotEmpty().WithMessage("FName cannot be less than 4 characters")
             .MinimumLength(4)
             .WithMessage("FName cannot be less than 4 characters")
             .MaximumLength(15)

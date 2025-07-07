@@ -38,18 +38,18 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
 
     public async Task<Result<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
-        
+        logger.LogInformation(request.FirstName + request.LastName + request.Email);
+
+
         var user = await userManager.FindByEmailAsync(request.Email);
 
         if (user != null)
             throw new RegistrationFailedException("Email already exists");
 
         var AddedUser = request.Adapt<User>();
-        //var AddedUser = new User() { Email = request.Email,
-        //    Firstname = request.FirstName,
-        //    Lastname = request.LastName,
-        //    
-        //};
+
+        logger.LogInformation(AddedUser.Firstname + AddedUser.Firstname + AddedUser.Email);
+
 
         IdentityResult res =  await userManager.CreateAsync(AddedUser, request.Password);
 
@@ -62,8 +62,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
             throw new RegistrationFailedException(errors);
         }
 
-        await userManager.AddToRoleAsync(user!, "User");
-        //var AddedUser = await userManager.FindByEmailAsync(request.Email);
+        await userManager.AddToRoleAsync(AddedUser, "User");
 
         var OTP = RandomNumberGenerator.GetInt32(10000, 100000); 
 
@@ -78,7 +77,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
             if (Sent)
             {
                 AddedUser.EmailConfirmationOtp = OTP;
-                AddedUser.EmailConfirmationOtpExpiry = DateTime.Now.AddMinutes(5);
+                AddedUser.EmailConfirmationOtpExpiry = DateTime.Now.AddMinutes(MagicValues.OTP_EXPIRY_MINS);
                 await userManager.UpdateAsync(AddedUser);
             }
             else

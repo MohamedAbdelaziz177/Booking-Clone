@@ -13,21 +13,27 @@ namespace BookingClone.Api.Controllers
     {
         private readonly IMediator mediator;
         private readonly IHostEnvironment env;
+        private readonly ILogger<AuthController> logger;
 
         [HttpGet("test")]
         public IActionResult test()
         {
             return Ok("kosom keda");
         }
-        public AuthController(IMediator mediator, IHostEnvironment Env)
+        public AuthController(IMediator mediator,
+            IHostEnvironment Env,
+            ILogger<AuthController> logger)
         {
             this.mediator = mediator;
             env = Env;
+            this.logger = logger;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterCommand registerCommand)
         {
+            logger
+                .LogInformation(registerCommand.FirstName + registerCommand.LastName + registerCommand.Email);
             Result<string> res = await mediator.Send(registerCommand);
             return Ok(res);
         }

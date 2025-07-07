@@ -8,6 +8,7 @@ using BookingClone.Application.Features.Auth.Responses;
 using BookingClone.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace BookingClone.Application.Features.Auth.Handlers.CommandHandlers;
 
@@ -15,11 +16,16 @@ public class ConfirmEmailCommandHandler : IRequestHandler<ConfirmEmailCommand, R
 {
     private readonly UserManager<User> userManager;
     private readonly IJwtService jwtService;
+    private readonly ILogger<ConfirmEmailCommandHandler> logger;
 
-    public ConfirmEmailCommandHandler(UserManager<User> userManager, IJwtService jwtService)
+    public ConfirmEmailCommandHandler(UserManager<User> userManager,
+        IJwtService jwtService,
+        ILogger<ConfirmEmailCommandHandler> logger
+        )
     {
         this.userManager = userManager;
         this.jwtService = jwtService;
+        this.logger = logger;
     }
 
     public async Task<Result<TokenResponseDto>> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
@@ -29,9 +35,15 @@ public class ConfirmEmailCommandHandler : IRequestHandler<ConfirmEmailCommand, R
         if (user == null)
             throw new EntityNotFoundException("no such user existed");
 
+        logger.LogInformation(user.EmailConfirmationOtp.ToString() + "---" + request.token
+            + "---" + (request.token == user.EmailConfirmationOtp.ToString())
+            + "---" + user.EmailConfirmationOtpExpiry.ToString());
+
         if (user.EmailConfirmationOtp.ToString() != request.token 
             || user.EmailConfirmationOtpExpiry < DateTime.Now)
             throw new OtpNotValidException("Code is not valid");
+
+        
 
 
         user.EmailConfirmed = true;
