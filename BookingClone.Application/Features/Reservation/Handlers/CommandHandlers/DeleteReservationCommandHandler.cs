@@ -3,6 +3,7 @@
 using BookingClone.Application.Common;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Reservation.Commands;
+using BookingClone.Application.Features.Reservation.Responses;
 using BookingClone.Domain.Enums;
 using BookingClone.Domain.IRepositories;
 using MediatR;
@@ -33,6 +34,6 @@ public class DeleteReservationCommandHandler : IRequestHandler<DeleteReservation
 
         await unitOfWork.SaveChangesAsync();
 
-        return ResultBuilder<string>.CreateSuccessResponse(data: "Reservation Cancelled successfully");
+        return new Result<string>("Reservation Cancelled successfully");
     }
 }

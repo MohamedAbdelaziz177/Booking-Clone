@@ -29,6 +29,6 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Resul
 
         RoomResponseDto roomResponseDto = mapper.Map<RoomResponseDto>(room);
 
-        return ResultBuilder<RoomResponseDto>.CreateSuccessResponse(roomResponseDto);
+        return new Result<RoomResponseDto>(roomResponseDto);
     }
 }

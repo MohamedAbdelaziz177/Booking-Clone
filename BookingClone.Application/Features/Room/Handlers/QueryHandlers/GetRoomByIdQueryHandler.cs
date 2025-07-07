@@ -28,6 +28,6 @@ public class GetRoomByIdQueryHandler : IRequestHandler<GetRoomByIdQuery, Result<
         if (room == null) 
             throw new EntityNotFoundException("Room Not existed");
 
-        return ResultBuilder<RoomResponseDto>.CreateSuccessResponse(mapper.Map<RoomResponseDto>(room));
+        return new Result<RoomResponseDto>(mapper.Map<RoomResponseDto>(room));
     }
 }

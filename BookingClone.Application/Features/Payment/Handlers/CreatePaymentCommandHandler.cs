@@ -34,7 +34,7 @@ public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand,
 
         await unitOfWork.PaymentRepo.AddAsync(payment);
 
-        return ResultBuilder<StripeResponseDto>.CreateSuccessResponse(res);
+        return new Result<StripeResponseDto>(res);
 
     }
 }

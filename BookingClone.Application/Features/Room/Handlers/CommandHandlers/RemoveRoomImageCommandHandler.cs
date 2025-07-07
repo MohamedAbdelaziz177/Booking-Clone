@@ -10,7 +10,7 @@ using MediatR;
 
 namespace BookingClone.Application.Features.Room.Handlers.CommandHandlers;
 
-public class RemoveRoomImageCommandHandler : IRequestHandler<RemoveRoomImageCommand, Result<RoomResponseDto>>
+public class RemoveRoomImageCommandHandler : IRequestHandler<RemoveRoomImageCommand, Result<string>>
 {
     private readonly IUnitOfWork unitOfWork;
 
@@ -18,7 +18,7 @@ public class RemoveRoomImageCommandHandler : IRequestHandler<RemoveRoomImageComm
     {
         this.unitOfWork = unitOfWork;
     }
-    public async Task<Result<RoomResponseDto>> Handle(RemoveRoomImageCommand request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(RemoveRoomImageCommand request, CancellationToken cancellationToken)
     {
         RoomImage? img = await unitOfWork.RoomImageRepo.GetByIdAsync(request.ImageId);
 
@@ -27,6 +27,6 @@ public class RemoveRoomImageCommandHandler : IRequestHandler<RemoveRoomImageComm
 
         await unitOfWork.RoomImageRepo.DeleteAsync(img);
 
-        return ResultBuilder<RoomResponseDto>.CreateSuccessResponse("Deleted Successfully");
+        return new Result<string>("Deleted Successfully");
     }
 }

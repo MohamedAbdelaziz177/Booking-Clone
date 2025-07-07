@@ -10,7 +10,7 @@ using RoomEntity = BookingClone.Domain.Entities.Room;
 
 namespace BookingClone.Application.Features.Room.Handlers.CommandHandlers;
 
-public class DeleteRoomCommandHandler : IRequestHandler<DeleteRoomCommand, Result<RoomResponseDto>>
+public class DeleteRoomCommandHandler : IRequestHandler<DeleteRoomCommand, Result<string>>
 {
     private readonly IUnitOfWork unitOfWork;
 
@@ -18,7 +18,7 @@ public class DeleteRoomCommandHandler : IRequestHandler<DeleteRoomCommand, Resul
     {
         this.unitOfWork = unitOfWork;
     }
-    public async Task<Result<RoomResponseDto>> Handle(DeleteRoomCommand request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(DeleteRoomCommand request, CancellationToken cancellationToken)
     {
         RoomEntity? room = await unitOfWork.RoomRepo.GetByIdAsync(request.Id);
 
@@ -27,8 +27,7 @@ public class DeleteRoomCommandHandler : IRequestHandler<DeleteRoomCommand, Resul
 
         await unitOfWork.RoomRepo.DeleteAsync(room);
 
-        return ResultBuilder<RoomResponseDto>
-            .CreateSuccessResponse("Deleted Successfully");
+        return new Result<string>("Deleted Successfully");
 
     }
 }

@@ -3,6 +3,7 @@ using BookingClone.Application.Common;
 using BookingClone.Application.Contracts;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Payment.Commands;
+using BookingClone.Application.Features.Payment.Responses;
 using BookingClone.Domain.IRepositories;
 using MediatR;
 
@@ -25,7 +26,7 @@ namespace BookingClone.Application.Features.Payment.Handlers
             if (!succ)
                 throw new EntityNotFoundException("Reservation not found");
 
-            return ResultBuilder<string>.CreateSuccessResponse(data: "Money Refunded successfully");
+            return new Result<string>("Money Refunded successfully");
         }
     }
 }

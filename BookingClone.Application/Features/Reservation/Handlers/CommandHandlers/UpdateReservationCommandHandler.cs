@@ -37,13 +37,13 @@ public class UpdateReservationCommandHandler : IRequestHandler<UpdateReservation
             .CheckAvailableBetweenAsync(request.RoomId, request.CheckInDate, request.CheckOutDate);
 
         if (!checkAvailable)
-            return ResultBuilder<ReservationResponseDto>.CreateFailureResponse("Room is occupied in that range");
+            return new Result<ReservationResponseDto>(success:false , "Room is occupied in that range");
 
         mapper.Map(request, reservation);
 
         ReservationResponseDto res = mapper.Map<ReservationResponseDto>(reservation);
 
-        return ResultBuilder<ReservationResponseDto>.CreateSuccessResponse(res, true, 
+        return new Result<ReservationResponseDto>(res, true, 
             "Reservation Updated Successfully");
     }
 }

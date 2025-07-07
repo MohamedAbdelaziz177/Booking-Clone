@@ -29,7 +29,7 @@ public class GetReservationByIdQueryHandler : IRequestHandler<GetReservationById
          
          ReservationResponseDto res = mapper.Map<ReservationResponseDto>(r);
          
-         return ResultBuilder<ReservationResponseDto>.CreateSuccessResponse(res);
+         return new Result<ReservationResponseDto>(res);
         
     }
 }

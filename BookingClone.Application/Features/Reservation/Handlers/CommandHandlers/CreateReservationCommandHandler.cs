@@ -29,6 +29,6 @@ public class CreateReservationCommandHandler : IRequestHandler<CreateReservation
 
         ReservationResponseDto res = mapper.Map<ReservationResponseDto>(entity);
 
-        return ResultBuilder<ReservationResponseDto>.CreateSuccessResponse(res, true, "Added Successfully");
+        return new Result<ReservationResponseDto>(res, true, "Added Successfully");
     }
 }
