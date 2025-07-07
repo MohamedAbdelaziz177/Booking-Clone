@@ -14,6 +14,11 @@ namespace BookingClone.Api.Controllers
         private readonly IMediator mediator;
         private readonly IHostEnvironment env;
 
+        [HttpGet("test")]
+        public IActionResult test()
+        {
+            return Ok("kosom keda");
+        }
         public AuthController(IMediator mediator, IHostEnvironment Env)
         {
             this.mediator = mediator;

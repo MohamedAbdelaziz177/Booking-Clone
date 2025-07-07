@@ -5,8 +5,6 @@ F:\BookingClone\BookingClone\bin\Debug\net8.0\BookingClone.Api.deps.json
 F:\BookingClone\BookingClone\bin\Debug\net8.0\BookingClone.Api.runtimeconfig.json
 F:\BookingClone\BookingClone\bin\Debug\net8.0\BookingClone.Api.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\BookingClone.Api.pdb
-F:\BookingClone\BookingClone\bin\Debug\net8.0\AutoMapper.dll
-F:\BookingClone\BookingClone\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\Azure.Core.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\Azure.Identity.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
@@ -160,3 +158,6 @@ F:\BookingClone\BookingClone\obj\Debug\net8.0\BookingClone.Api.pdb
 F:\BookingClone\BookingClone\obj\Debug\net8.0\BookingClone.Api.genruntimeconfig.cache
 F:\BookingClone\BookingClone\obj\Debug\net8.0\ref\BookingClone.Api.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+F:\BookingClone\BookingClone\bin\Debug\net8.0\Mapster.dll
+F:\BookingClone\BookingClone\bin\Debug\net8.0\Mapster.Core.dll
+F:\BookingClone\BookingClone\bin\Debug\net8.0\Mapster.DependencyInjection.dll

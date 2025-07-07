@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using BookingClone.Application.Common;
+﻿using BookingClone.Application.Common;
 using BookingClone.Application.Features.Reservation.Queries;
 using BookingClone.Application.Features.Reservation.Responses;
 using BookingClone.Domain.IRepositories;
+using MapsterMapper;
 using MediatR;
 using System.Collections.Generic;
 using ReservationEntity = BookingClone.Domain.Entities.Reservation;

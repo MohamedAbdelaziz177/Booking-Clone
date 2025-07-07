@@ -1,10 +1,10 @@
 ﻿
-using AutoMapper;
 using BookingClone.Application.Common;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Hotel.Queries;
 using BookingClone.Application.Features.Hotel.Responses;
 using BookingClone.Domain.IRepositories;
+using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore.Metadata;
 

@@ -1,11 +1,11 @@
 ﻿
 
-using AutoMapper;
 using BookingClone.Application.Common;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Room.Queries;
 using BookingClone.Application.Features.Room.Responses;
 using BookingClone.Domain.IRepositories;
+using MapsterMapper;
 using MediatR;
 
 namespace BookingClone.Application.Features.Room.Handlers.QueryHandlers;

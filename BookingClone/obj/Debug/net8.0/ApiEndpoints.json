@@ -74,6 +74,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BookingClone.Api.Controllers.AuthController",
+    "Method": "test",
+    "RelativePath": "api/Auth/test",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BookingClone.Api.Controllers.HotelController",
     "Method": "AddHotel",
     "RelativePath": "api/Hotel",
@@ -297,42 +307,6 @@
   },
   {
     "ContainingType": "BookingClone.Api.Controllers.RoomController",
-    "Method": "GetAllRooms",
-    "RelativePath": "api/Room",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "PageIdx",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "SortField",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "SortDir",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "City",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Active",
-        "Type": "System.Boolean",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BookingClone.Api.Controllers.RoomController",
     "Method": "AddRoom",
     "RelativePath": "api/Room",
     "HttpMethod": "POST",
@@ -391,6 +365,42 @@
         "Name": "Id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingClone.Api.Controllers.RoomController",
+    "Method": "GetAllRooms",
+    "RelativePath": "api/Room/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageIdx",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortField",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortDir",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Active",
+        "Type": "System.Boolean",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

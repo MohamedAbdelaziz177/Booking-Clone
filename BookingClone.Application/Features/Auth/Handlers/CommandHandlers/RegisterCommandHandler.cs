@@ -1,11 +1,12 @@
 ﻿
-using AutoMapper;
 using BookingClone.Application.Common;
 using BookingClone.Application.Contracts;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Auth.Commands;
 using BookingClone.Domain.Entities;
 using BookingClone.Domain.IRepositories;
+using Mapster;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -43,7 +44,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
         if (user != null)
             throw new RegistrationFailedException("Email already exists");
 
-        var AddedUser = mapper.Map<User>(request);
+        var AddedUser = request.Adapt<User>();
         //var AddedUser = new User() { Email = request.Email,
         //    Firstname = request.FirstName,
         //    Lastname = request.LastName,

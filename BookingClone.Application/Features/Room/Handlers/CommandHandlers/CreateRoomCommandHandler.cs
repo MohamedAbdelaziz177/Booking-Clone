@@ -1,9 +1,9 @@
 ﻿
-using AutoMapper;
 using BookingClone.Application.Common;
 using BookingClone.Application.Features.Room.Commands;
 using BookingClone.Application.Features.Room.Responses;
 using BookingClone.Domain.IRepositories;
+using MapsterMapper;
 using MediatR;
 using RoomEntity = BookingClone.Domain.Entities.Room;
 

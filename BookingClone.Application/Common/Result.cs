@@ -1,6 +1,6 @@
 ﻿
 namespace BookingClone.Application.Common;
-public class Result<T> where T : class
+public class Result<T> 
 {
     public T? Data { get; set; }
 
