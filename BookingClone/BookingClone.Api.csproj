@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookingClone.Application\BookingClone.Application.csproj" />
-    <ProjectReference Include="..\BookingClone.Domain\BookingClone.Domain.csproj" />
     <ProjectReference Include="..\BookingClone.Infrastructure\BookingClone.Infrastructure.csproj" />
   </ItemGroup>
 

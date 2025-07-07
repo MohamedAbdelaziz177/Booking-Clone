@@ -9,8 +9,9 @@ public class AuthMapper : Profile
 {
     public AuthMapper() 
     {
-        CreateMap<User, RegisterCommand>()
-            .ForMember(dest => dest.ConfirmPassword, opt => opt.Ignore())
-            .ReverseMap();
+        CreateMap<RegisterCommand, User>()
+            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForAllOtherMembers(opt => opt.Ignore());
     }
 }

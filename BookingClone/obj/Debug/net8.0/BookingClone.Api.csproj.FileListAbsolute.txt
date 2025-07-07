@@ -159,3 +159,4 @@ F:\BookingClone\BookingClone\obj\Debug\net8.0\refint\BookingClone.Api.dll
 F:\BookingClone\BookingClone\obj\Debug\net8.0\BookingClone.Api.pdb
 F:\BookingClone\BookingClone\obj\Debug\net8.0\BookingClone.Api.genruntimeconfig.cache
 F:\BookingClone\BookingClone\obj\Debug\net8.0\ref\BookingClone.Api.dll
+F:\BookingClone\BookingClone\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll

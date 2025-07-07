@@ -61,7 +61,7 @@ namespace BookingClone.Api
                     };
                 });
 
-            
+           
 
             var app = builder.Build();
 

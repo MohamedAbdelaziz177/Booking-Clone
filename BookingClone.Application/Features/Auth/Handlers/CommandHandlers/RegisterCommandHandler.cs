@@ -44,6 +44,11 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
             throw new RegistrationFailedException("Email already exists");
 
         var AddedUser = mapper.Map<User>(request);
+        //var AddedUser = new User() { Email = request.Email,
+        //    Firstname = request.FirstName,
+        //    Lastname = request.LastName,
+        //    
+        //};
 
         IdentityResult res =  await userManager.CreateAsync(AddedUser, request.Password);
 
@@ -56,6 +61,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
             throw new RegistrationFailedException(errors);
         }
 
+        await userManager.AddToRoleAsync(user!, "User");
         //var AddedUser = await userManager.FindByEmailAsync(request.Email);
 
         var OTP = RandomNumberGenerator.GetInt32(10000, 100000); 

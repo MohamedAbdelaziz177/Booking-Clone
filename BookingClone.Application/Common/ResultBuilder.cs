@@ -1,13 +1,14 @@
 ﻿
 namespace BookingClone.Application.Common;
-public static class ResultBuilder<T> where T : class
+internal static class ResultBuilder<T>  where T : class
 {
     public static Result<T> CreateFailureResponse(string message, bool success = false)
     {
         return new Result<T>(success, message);
     }
 
-    public static Result<T> CreateSuccessResponse(T data, bool success = true,
+    public static Result<T> CreateSuccessResponse(T data,
+        bool success = true,
         string message = null)
     {
         Result<T> result = new Result<T>(success, message);

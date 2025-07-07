@@ -2,7 +2,7 @@
 namespace BookingClone.Application.Common;
 public class Result<T> where T : class
 {
-    public T? Data { get; set; } = null;
+    public T? Data { get; set; }
 
     public bool Success { get; set; } = true;
 

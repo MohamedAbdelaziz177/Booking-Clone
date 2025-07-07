@@ -58,9 +58,9 @@
               "target": "Package",
               "version": "[8.6.3, )"
             },
-            "MediatR": {
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[8.1.0, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
