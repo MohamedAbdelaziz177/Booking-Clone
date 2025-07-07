@@ -8,7 +8,7 @@ using MediatR;
 
 namespace BookingClone.Application.Features.Hotel.Handlers.CommandHandlers;
 
-public class DeleteHotelCommandHandler : IRequestHandler<DeleteHotelCommand, Result<HotelResponseDto>>
+public class DeleteHotelCommandHandler : IRequestHandler<DeleteHotelCommand, Result<string>>
 {
     private readonly IUnitOfWork unitOfWork;
 
@@ -17,7 +17,7 @@ public class DeleteHotelCommandHandler : IRequestHandler<DeleteHotelCommand, Res
         this.unitOfWork = unitOfWork;
     }
 
-    public async Task<Result<HotelResponseDto>> Handle(DeleteHotelCommand request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(DeleteHotelCommand request, CancellationToken cancellationToken)
     {
         var Hotel = await unitOfWork.HotelRepo.GetByIdAsync(request.Id);
 
@@ -26,6 +26,6 @@ public class DeleteHotelCommandHandler : IRequestHandler<DeleteHotelCommand, Res
 
         await unitOfWork.HotelRepo.DeleteAsync(Hotel);
 
-        return ResultBuilder<HotelResponseDto>.CreateSuccessResponse("Deleted Successfully");
+        return new Result<string>(data: "Deleted successfully");
     }
 }

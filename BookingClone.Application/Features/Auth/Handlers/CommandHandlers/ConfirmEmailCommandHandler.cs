@@ -45,7 +45,7 @@ public class ConfirmEmailCommandHandler : IRequestHandler<ConfirmEmailCommand, R
 
         TokenResponseDto tokenResponse = await jwtService.GetTokensAsync(user.Id);
 
-        return ResultBuilder<TokenResponseDto>.CreateSuccessResponse(tokenResponse);
+        return new Result<TokenResponseDto>(tokenResponse);
 
         
     }

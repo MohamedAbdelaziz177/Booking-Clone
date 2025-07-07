@@ -6,7 +6,7 @@ using MediatR;
 
 namespace BookingClone.Application.Features.Hotel.Commands;
 
-public class DeleteHotelCommand : IRequest<Result<HotelResponseDto>>
+public class DeleteHotelCommand : IRequest<Result<string>>
 {
     public int Id { get; set; }
 }

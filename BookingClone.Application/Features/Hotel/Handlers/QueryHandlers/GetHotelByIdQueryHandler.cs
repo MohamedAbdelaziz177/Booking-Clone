@@ -28,7 +28,7 @@ public class GetHotelByIdQueryHandler : IRequestHandler<GetHotelByIdQuery, Resul
         if (hotel == null)
             throw new EntityNotFoundException("No such Entity existed");
 
-        return ResultBuilder<HotelResponseDto>.CreateSuccessResponse(mapper.Map<HotelResponseDto>(hotel),
+        return new Result<HotelResponseDto>(mapper.Map<HotelResponseDto>(hotel),
             true);
     }
 }

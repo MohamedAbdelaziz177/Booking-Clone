@@ -35,8 +35,7 @@ public class UpdateHotelCommandHandler : IRequestHandler<UpdateHotelCommand, Res
 
         HotelResponseDto hotelRes = mapper.Map<HotelResponseDto>(Hotel);
 
-        return ResultBuilder<HotelResponseDto>
-            .CreateSuccessResponse(hotelRes, true, "Updated Successfully");
+        return new Result<HotelResponseDto>(hotelRes, true, "Updated Successfully");
         
     }
 }

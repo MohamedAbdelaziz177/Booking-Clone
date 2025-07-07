@@ -40,6 +40,6 @@ public class GetHotelPageQueryHandler : IRequestHandler<GetHotelPageQuery, Resul
         List<HotelResponseDto> hotelResponseDtos = hotels.Select(h => 
         mapper.Map<HotelResponseDto>(h)).ToList();
 
-        return ResultBuilder<List<HotelResponseDto>>.CreateSuccessResponse(hotelResponseDtos);
+        return new Result<List<HotelResponseDto>>(hotelResponseDtos);
     }
 }

@@ -14,4 +14,10 @@ public class Result<T> where T : class
         Message = message;
     }
 
+    public Result(T? data, bool success = true, string message = "")
+    {
+        Data = data;
+        Success = success;
+        Message = message;
+    }
 }

@@ -4,6 +4,7 @@ using BookingClone.Application.Common;
 using BookingClone.Application.Contracts;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Auth.Commands;
+using BookingClone.Application.Features.Auth.Responses;
 using BookingClone.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -41,7 +42,7 @@ public class ResendConfirmationCodeCommandHandler : IRequestHandler<ResendConfir
         await emailService.SendMail(request.Email, "Confirmation Code",
             user.EmailConfirmationOtp.ToString());
 
-        return ResultBuilder<string>.CreateSuccessResponse(data:
+        return new Result<string>(data:
             "email confirmation token sent successfully");
     }
 

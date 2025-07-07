@@ -5,11 +5,8 @@ using BookingClone.Domain.Entities;
 using BookingClone.Infrastructure.Persistance;
 using BookingClone.Infrastructure.ServiceExe;
 using DotNetEnv;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
