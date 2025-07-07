@@ -16,7 +16,7 @@ public static class InfraServiceExe
     public static void AddInfraComponents(this IServiceCollection Service, IConfiguration configuration)
     {
         Service.AddDbContext<AppDbContext>(options =>
-        options.UseSqlServer(configuration.GetConnectionString("cs")));
+        options.UseSqlServer(configuration.GetConnectionString("default")));
 
 
         Service.AddScoped<IHotelRepo, HotelRepo>();

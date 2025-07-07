@@ -91,6 +91,35 @@ namespace BookingClone.Infrastructure.Migrations
                     b.ToTable("hotels");
                 });
 
+            modelBuilder.Entity("BookingClone.Domain.Entities.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("IntentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservationId")
+                        .IsUnique();
+
+                    b.ToTable("payments");
+                });
+
             modelBuilder.Entity("BookingClone.Domain.Entities.RefreshToken", b =>
                 {
                     b.Property<int>("Id")
@@ -131,7 +160,7 @@ namespace BookingClone.Infrastructure.Migrations
                     b.Property<DateTime>("BookingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 6, 29, 22, 12, 2, 120, DateTimeKind.Local).AddTicks(3294));
+                        .HasDefaultValue(new DateTime(2025, 7, 7, 3, 22, 46, 618, DateTimeKind.Local).AddTicks(771));
 
                     b.Property<DateTime>("CheckInDate")
                         .HasColumnType("datetime2");
@@ -234,7 +263,7 @@ namespace BookingClone.Infrastructure.Migrations
                     b.Property<long>("EmailConfirmationOtp")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("EmailConfirmationOtpExpiry")
+                    b.Property<DateTime?>("EmailConfirmationOtpExpiry")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("EmailConfirmed")
@@ -325,6 +354,20 @@ namespace BookingClone.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1e4458b0-5e59-4b9d-a2c3-dbc97d3ff1aa",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "debc5c97-54de-4e1c-8c8e-2a408d13df49",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -452,6 +495,17 @@ namespace BookingClone.Infrastructure.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("BookingClone.Domain.Entities.Payment", b =>
+                {
+                    b.HasOne("BookingClone.Domain.Entities.Reservation", "Reservation")
+                        .WithOne()
+                        .HasForeignKey("BookingClone.Domain.Entities.Payment", "ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reservation");
+                });
+
             modelBuilder.Entity("BookingClone.Domain.Entities.RefreshToken", b =>
                 {
                     b.HasOne("BookingClone.Domain.Entities.User", "User")
@@ -471,7 +525,7 @@ namespace BookingClone.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BookingClone.Domain.Entities.User", "user")
+                    b.HasOne("BookingClone.Domain.Entities.User", "User")
                         .WithMany("Reservations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -479,7 +533,7 @@ namespace BookingClone.Infrastructure.Migrations
 
                     b.Navigation("Room");
 
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BookingClone.Domain.Entities.Room", b =>
