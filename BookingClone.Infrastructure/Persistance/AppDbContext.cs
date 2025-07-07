@@ -1,6 +1,7 @@
 ﻿
 using BookingClone.Domain.Entities;
 using BookingClone.Infrastructure.Persistance.Configurations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,7 @@ public class AppDbContext : IdentityDbContext<User>
         new RoomImageConfiguration().Configure(builder.Entity<RoomImage>());
         new UserConfiguration().Configure(builder.Entity<User>());
         new PaymentConfiguration().Configure(builder.Entity<Payment>());
+        new RoleConfiguration().Configure(builder.Entity<IdentityRole>());
 
     }
 
