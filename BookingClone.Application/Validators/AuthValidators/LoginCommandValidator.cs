@@ -8,6 +8,8 @@ public class LoginCommandValidator : AbstractValidator<LoginCommand>
 {
     public LoginCommandValidator()
     {
-        RuleFor(lc => lc.Email).EmailAddress().WithMessage("Not valid email address");
+        RuleFor(lc => lc.Email)
+            .NotEmpty().WithMessage("Email field cannot be empty")
+            .EmailAddress().WithMessage("Not valid email address");
     }
 }
