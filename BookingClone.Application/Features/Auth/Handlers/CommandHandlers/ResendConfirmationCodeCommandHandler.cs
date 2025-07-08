@@ -31,7 +31,7 @@ public class ResendConfirmationCodeCommandHandler : IRequestHandler<ResendConfir
             throw new EntityNotFoundException("No such user found");
 
         user.EmailConfirmationOtp = RandomNumberGenerator
-            .GetInt32(MagicValues.MIN_OTP_VAL, MagicValues.MAX_OTP_VAL); // (!env.isProd)? 12345;
+            .GetInt32(MagicValues.MIN_OTP_VAL, MagicValues.MAX_OTP_VAL); 
 
         user.EmailConfirmationOtpExpiry = DateTime.Now.AddMinutes(MagicValues.OTP_EXPIRY_MINS);
 
