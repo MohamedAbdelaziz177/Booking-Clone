@@ -10,10 +10,7 @@ public static class HotelMapsterAdapter
 {
     public static void Configure()
     {
-        //TypeAdapterConfig<CreateHotelCommand, HotelEntity>.NewConfig();
-        //TypeAdapterConfig<HotelEntity, HotelResponseDto>.NewConfig()
-        //    .Map();
-            
+        // مش مستاهل
 
     }
 }
