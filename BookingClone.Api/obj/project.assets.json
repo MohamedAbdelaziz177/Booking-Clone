@@ -9451,11 +9451,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\BookingClone\\BookingClone\\BookingClone.Api.csproj",
+      "projectUniqueName": "F:\\BookingClone\\BookingClone.Api\\BookingClone.Api.csproj",
       "projectName": "BookingClone.Api",
-      "projectPath": "F:\\BookingClone\\BookingClone\\BookingClone.Api.csproj",
+      "projectPath": "F:\\BookingClone\\BookingClone.Api\\BookingClone.Api.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "F:\\BookingClone\\BookingClone\\obj\\",
+      "outputPath": "F:\\BookingClone\\BookingClone.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

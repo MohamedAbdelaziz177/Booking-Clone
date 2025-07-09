@@ -72,6 +72,23 @@ namespace BookingClone.Api.Controllers
 
             return Ok(res);
         }
+
+        [HttpPost("image")]
+        public async Task<IActionResult> AddRoomImage(AddRoomImageCommand request)
+        {
+            var res = await mediator.Send(request);
+            return Ok(res);
+        }
+
+        [HttpDelete("image/{Id:int}")]
+        public async Task<IActionResult> RemoveRoomImage([FromRoute] int Id)
+        {
+            var cmd = new RemoveRoomImageCommand() { ImageId = Id };
+            var res = await mediator.Send(cmd);
+
+            return Ok(res);
+        }
+
     }
 }
  

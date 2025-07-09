@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CYvSb37F2Bs=",
+  "dgSpecHash": "Uytg5G2cA7g=",
   "success": true,
-  "projectFilePath": "F:\\BookingClone\\BookingClone\\BookingClone.Api.csproj",
+  "projectFilePath": "F:\\BookingClone\\BookingClone.Api\\BookingClone.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

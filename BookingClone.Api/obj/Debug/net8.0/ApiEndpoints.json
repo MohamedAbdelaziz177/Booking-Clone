@@ -174,6 +174,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BookingClone.Api.Controllers.HotelController",
+    "Method": "GetByCity",
+    "RelativePath": "api/Hotel/filter-by-city",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "city",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BookingClone.Api.Controllers.PaymentController",
     "Method": "Pay",
     "RelativePath": "api/Payment/pay",
@@ -401,6 +417,43 @@
         "Name": "Active",
         "Type": "System.Boolean",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingClone.Api.Controllers.RoomController",
+    "Method": "AddRoomImage",
+    "RelativePath": "api/Room/image",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RoomId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingClone.Api.Controllers.RoomController",
+    "Method": "RemoveRoomImage",
+    "RelativePath": "api/Room/image/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
