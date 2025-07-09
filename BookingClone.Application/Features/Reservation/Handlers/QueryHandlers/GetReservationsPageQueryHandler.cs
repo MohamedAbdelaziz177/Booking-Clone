@@ -20,10 +20,7 @@ public class GetReservationsPageQueryHandler : IRequestHandler<GetReservationsPa
     }
     public async Task<Result<List<ReservationResponseDto>>> Handle(GetReservationsPageQuery request, CancellationToken cancellationToken)
     {
-        var reservations = await unitOfWork.ReservationRepo.GetAllAsync(request.PageIdx,
-        request.PageSize,
-        request.SortField!,
-        request.SortType.ToString()!);
+        var reservations = await unitOfWork.ReservationRepo.GetAllAsync();
 
         var Dtos = reservations.Select(r => mapper.Map<ReservationResponseDto>(r)).ToList();
 

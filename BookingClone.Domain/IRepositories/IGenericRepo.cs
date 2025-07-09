@@ -10,10 +10,10 @@ public interface IGenericRepo<T> where T : class
     Task<T?> GetByIdAsync(int id);
     Task<List<T>> GetAllAsync();
 
-    Task<List<T>> GetAllAsync(int pageIdx = 1,
-        int pageSize = 8,
-        string sortField = "id",
-        string sortDir = "desc"
-        );
+    //Task<List<T>> GetAllAsync(int pageIdx = 1,
+    //    int pageSize = 8,
+    //    string sortField = "id",
+    //    string sortDir = "desc"
+    //    );
 
 }

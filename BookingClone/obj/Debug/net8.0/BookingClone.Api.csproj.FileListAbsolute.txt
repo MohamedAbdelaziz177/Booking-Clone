@@ -161,3 +161,4 @@ F:\BookingClone\BookingClone\bin\Debug\net8.0\MediatR.Extensions.Microsoft.Depen
 F:\BookingClone\BookingClone\bin\Debug\net8.0\Mapster.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\Mapster.Core.dll
 F:\BookingClone\BookingClone\bin\Debug\net8.0\Mapster.DependencyInjection.dll
+F:\BookingClone\BookingClone\bin\Debug\net8.0\MockData\Hotels.json
