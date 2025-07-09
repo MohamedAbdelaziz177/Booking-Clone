@@ -70,5 +70,15 @@ namespace BookingClone.Api.Controllers
             var res = await mediator.Send(cmd);
             return Ok(res);
         }
+
+        [HttpGet("filter-by-city")]
+        public async Task<IActionResult> GetByCity([FromQuery] string city)
+        {
+            var req = new GetHotelsByCityOrCountryQuery() { City = city };
+
+            var res = await mediator.Send(req);
+
+            return Ok(res);
+        }
     }
 }
