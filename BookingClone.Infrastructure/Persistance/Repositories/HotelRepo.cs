@@ -31,4 +31,14 @@ public class HotelRepo : GenericRepo<Hotel>, IHotelRepo
 
         return await query.ToListAsync();
     }
+
+    public async Task<List<Hotel>> GetByCityAsync(string city)
+    {
+        return await this.Filter(x => x.City.ToUpper() == city.ToUpper());
+    }
+
+    public async Task<List<Hotel>> GetByCountryAsync(string country)
+    {
+        return await this.Filter(x => x.Country.ToUpper() == country.ToUpper());
+    }
 }
