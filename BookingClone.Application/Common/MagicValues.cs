@@ -12,6 +12,6 @@ public static class MagicValues
 
     public static readonly int OTP_EXPIRY_MINS = 5;
 
-    public static readonly int PAGE_SIZE = 8;
+    public static readonly int PAGE_SIZE = 3;
     
 }
