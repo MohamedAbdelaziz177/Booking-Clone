@@ -32,7 +32,7 @@ namespace BookingClone.Api.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetAllRooms(int PageIdx = 0,
             string SortField = "Id",
-            string SortDir = "Desc",
+            string SortDir = "desc",
             string City = "All",
             bool Active = true
             )
@@ -42,7 +42,7 @@ namespace BookingClone.Api.Controllers
                 PageIdx = PageIdx,
                 PageSize = MagicValues.PAGE_SIZE,
                 SortField = SortField,
-                SortType = Enum.Parse<SortType>(SortDir)
+                SortType = Enum.Parse<SortType>(SortDir.ToUpper())
             };
 
             var res = await mediator.Send(Query);
