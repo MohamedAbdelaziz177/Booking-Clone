@@ -34,6 +34,11 @@ public static class InfraServiceExe
         Service.AddScoped<IStripeService, StripeService>();
         Service.AddScoped<IFileUploadService, FileUploadService>();
         Service.AddScoped<IJwtService, JwtService>();
+
+        Service.AddStackExchangeRedisCache(opt => {
+            opt.Configuration = configuration.GetConnectionString("redis");
+        });
+        Service.AddScoped<IRedisService, RedisService>();
         
     }
 }

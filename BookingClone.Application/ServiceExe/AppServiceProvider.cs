@@ -8,6 +8,7 @@ using BookingClone.Application.Features.Hotel;
 using BookingClone.Application.Features.Room;
 using BookingClone.Domain.Entities;
 using BookingClone.Application.Features.Reservation;
+using BookingClone.Application.Contracts;
 
 namespace BookingClone.Application.ServiceExe;
 
@@ -15,12 +16,7 @@ public static class AppServiceProvider
 {
     public static void AddAppComponents(this IServiceCollection Service)
     {
-        //Service.AddAutoMapper(opt =>
-        //{
-        //    opt.AddProfile<HotelMapper>();
-        //    opt.AddProfile<AuthMapper>();
-        //});
-
+       
         Service.AddMapster();
 
         AuthMapsterAdapter.Configure();
@@ -30,6 +26,7 @@ public static class AppServiceProvider
 
         Service.AddValidatorsFromAssembly(typeof(CreateHotelCommandValidator).Assembly);
         Service.AddMediatR(typeof(CreateHotelCommandValidator).Assembly);
+
     
     }
 

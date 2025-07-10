@@ -328,3 +328,9 @@ F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\BookingClone.Api.pdb
 F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\BookingClone.Api.genruntimeconfig.cache
 F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\ref\BookingClone.Api.dll
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\BookingClone.Api.staticwebassets.runtime.json
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\StackExchange.Redis.dll
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
