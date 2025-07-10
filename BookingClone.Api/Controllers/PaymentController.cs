@@ -18,13 +18,15 @@ namespace BookingClone.Api.Controllers
         [HttpPost("pay")]
         public async Task<IActionResult> Pay(CreatePaymentCommand command)
         {
-            return null;
+            var res = await mediator.Send(command);
+            return Ok(res);
         }
         
         [HttpPost("refund")]
         public async Task<IActionResult> Refund(RefundPaymentCommand command)
         {
-            return null;
+            var res = await mediator.Send(command);
+            return Ok(res);
         }
     }
 }
