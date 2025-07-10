@@ -1052,6 +1052,7 @@
       "BookingClone.Application/1.0.0": {
         "dependencies": {
           "BookingClone.Domain": "1.0.0",
+          "FluentValidation": "8.6.3",
           "FluentValidation.DependencyInjectionExtensions": "8.6.3",
           "Mapster": "7.4.0",
           "Mapster.DependencyInjection": "1.0.1",

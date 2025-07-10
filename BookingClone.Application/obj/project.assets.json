@@ -1240,6 +1240,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "BookingClone.Domain >= 1.0.0",
+      "FluentValidation >= 8.6.3",
       "FluentValidation.DependencyInjectionExtensions >= 8.6.3",
       "Mapster >= 7.4.0",
       "Mapster.DependencyInjection >= 1.0.1",
@@ -1296,6 +1297,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "FluentValidation": {
+            "target": "Package",
+            "version": "[8.6.3, )"
+          },
           "FluentValidation.DependencyInjectionExtensions": {
             "target": "Package",
             "version": "[8.6.3, )"
