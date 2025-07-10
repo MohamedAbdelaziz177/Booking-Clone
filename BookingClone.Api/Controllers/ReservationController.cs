@@ -83,7 +83,9 @@ namespace BookingClone.Api.Controllers
         public async Task<IActionResult> CancelReservation([FromRoute] int Id)
         {
             var cmd = new DeleteReservationCommand() { Id = Id };
+
             await mediator.Send(cmd);
+
             return Ok("Reservation Canceled Successfully");
         }
 

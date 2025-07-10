@@ -26,6 +26,6 @@ public class RoomConfiguration : IEntityTypeConfiguration<Room>
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.Property(x => x.PricePerNight)
-            .HasPrecision(3, 1);
+            .HasPrecision(8, 2);
     }
 }

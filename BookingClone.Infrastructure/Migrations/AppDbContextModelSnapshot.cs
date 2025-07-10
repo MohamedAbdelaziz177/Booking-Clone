@@ -160,7 +160,7 @@ namespace BookingClone.Infrastructure.Migrations
                     b.Property<DateTime>("BookingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 7, 3, 22, 46, 618, DateTimeKind.Local).AddTicks(771));
+                        .HasDefaultValue(new DateTime(2025, 7, 10, 2, 14, 45, 85, DateTimeKind.Local).AddTicks(8839));
 
                     b.Property<DateTime>("CheckInDate")
                         .HasColumnType("datetime2");
@@ -202,8 +202,8 @@ namespace BookingClone.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("PricePerNight")
-                        .HasPrecision(3, 1)
-                        .HasColumnType("decimal(3,1)");
+                        .HasPrecision(8, 2)
+                        .HasColumnType("decimal(8,2)");
 
                     b.Property<string>("RoomNumber")
                         .IsRequired()

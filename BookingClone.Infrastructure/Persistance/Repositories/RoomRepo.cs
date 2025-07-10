@@ -26,9 +26,9 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
     {
         var query = con.rooms.Skip((pageIdx - 1) * pageSize).Take(pageSize);
 
-        if (sortField == "price")
+        if (sortField.ToUpper() == "PRICE")
         {
-            if (sortDir == "desc")
+            if (sortDir.ToUpper() == "DESC")
                 query = query.OrderByDescending(x => x.PricePerNight);
 
             else query = query.OrderBy(x => x.PricePerNight);

@@ -17,7 +17,8 @@ public class CreateRoomCommandValidator : AbstractValidator<CreateRoomCommand>
             .LessThanOrEqualTo(10).WithMessage("Capacity cannot exceed 10");
 
         RuleFor(x => x.PricePerNight)
-            .GreaterThan(0).WithMessage("Price per night must be positive");
+            .GreaterThan(0).WithMessage("Price per night must be positive")
+            .ScalePrecision(2, 8);
 
         RuleFor(x => x.Type)
             .IsInEnum().WithMessage("Invalid room type");

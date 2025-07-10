@@ -326,3 +326,4 @@ F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\refint\BookingClone.Api.dll
 F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\BookingClone.Api.pdb
 F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\BookingClone.Api.genruntimeconfig.cache
 F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\ref\BookingClone.Api.dll
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\MockData\Rooms.json
