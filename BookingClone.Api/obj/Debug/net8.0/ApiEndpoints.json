@@ -74,16 +74,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BookingClone.Api.Controllers.AuthController",
-    "Method": "test",
-    "RelativePath": "api/Auth/test",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "BookingClone.Api.Controllers.HotelController",
     "Method": "AddHotel",
     "RelativePath": "api/Hotel",
@@ -168,6 +158,16 @@
       {
         "Name": "SortDir",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Active",
+        "Type": "System.Boolean",
         "IsRequired": false
       }
     ],
@@ -323,60 +323,8 @@
   },
   {
     "ContainingType": "BookingClone.Api.Controllers.RoleController",
-    "Method": "AddRole",
-    "RelativePath": "api/Role",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "roleName",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BookingClone.Api.Controllers.RoleController",
-    "Method": "RemoveRole",
-    "RelativePath": "api/Role",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "roleName",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BookingClone.Api.Controllers.RoleController",
     "Method": "AssignRoleToUser",
-    "RelativePath": "api/Role",
+    "RelativePath": "api/Role/assign-user-role",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -392,17 +340,7 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "BookingClone.Api.Controllers.RoomController",

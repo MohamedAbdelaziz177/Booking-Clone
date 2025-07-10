@@ -18,10 +18,10 @@ public interface IGenericRepo<T> where T : class
         int PageSize = 8
         );
 
-    //Task<List<T>> GetAllAsync(int pageIdx = 1,
-    //    int pageSize = 8,
-    //    string sortField = "id",
-    //    string sortDir = "desc"
-    //    );
+    Task<List<T>> GetAllAsync(int pageIdx = 1,
+        int pageSize = 8,
+        string sortField = "id",
+        string sortDir = "desc"
+        );
 
 }

@@ -165,6 +165,7 @@ F:\BookingClone\BookingClone\bin\Debug\net8.0\MockData\Hotels.json
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\appsettings.Development.json
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\appsettings.json
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\MockData\Hotels.json
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\MockData\Rooms.json
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\BookingClone.Api.exe
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\BookingClone.Api.deps.json
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\BookingClone.Api.runtimeconfig.json
@@ -326,4 +327,4 @@ F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\refint\BookingClone.Api.dll
 F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\BookingClone.Api.pdb
 F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\BookingClone.Api.genruntimeconfig.cache
 F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\ref\BookingClone.Api.dll
-F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\MockData\Rooms.json
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\BookingClone.Api.staticwebassets.runtime.json

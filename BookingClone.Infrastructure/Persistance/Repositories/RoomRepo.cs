@@ -18,13 +18,13 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
 
     }
 
-    public async Task<List<Room>> GetAllAsync(int pageIdx = 1,
+    public override async Task<List<Room>> GetAllAsync(int pageIdx = 1,
         int pageSize = 8,
         string sortField = "id",
         string sortDir = "desc"
         )
     {
-        var query = con.rooms.Skip((pageIdx - 1) * pageSize).Take(pageSize);
+        var query = con.rooms.Include(r => r.RoomImages).Skip((pageIdx - 1) * pageSize).Take(pageSize);
 
         if (sortField.ToUpper() == "PRICE")
         {
@@ -37,14 +37,16 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
         else query = query.OrderByDescending(x => x.Id);
 
 
-        return await query.Include(x => x.RoomImages).ToListAsync();
+        return await query.ToListAsync();
     }
 
 
+    public override async Task<Room?> GetByIdAsync(int id)
+    {
+        return await con
+            .rooms
+            .Include(r => r.RoomImages)
+            .FirstOrDefaultAsync(r => r.Id == id);
+    }
 
-
-    //public async Task<List<Room>> GetAvailableBetweenAsync(DateTime start, DateTime end)
-    //{
-    //    
-    //}
 }

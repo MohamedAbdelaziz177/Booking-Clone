@@ -1,11 +1,77 @@
 {
   "Version": 1,
-  "Hash": "03x3SGkeYoVrIWCE3hrDWxAYvlq1601VP0WQ38HHeB8=",
+  "Hash": "uY8YEpGmK96p8FIRMS8iHt7oQfXyJLEKhTUm4WW+0QY=",
   "Source": "BookingClone.Api",
   "BasePath": "_content/BookingClone.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "BookingClone.Api\\wwwroot",
+      "Source": "BookingClone.Api",
+      "ContentRoot": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\",
+      "BasePath": "_content/BookingClone.Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\rooms\\60+ Hotel vibe bedroom neat ideas.jpeg",
+      "SourceId": "BookingClone.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\",
+      "BasePath": "_content/BookingClone.Api",
+      "RelativePath": "rooms/60+ Hotel vibe bedroom neat ideas.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\rooms\\60+ Hotel vibe bedroom neat ideas.jpeg"
+    },
+    {
+      "Identity": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\rooms\\download (2).jpeg",
+      "SourceId": "BookingClone.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\",
+      "BasePath": "_content/BookingClone.Api",
+      "RelativePath": "rooms/download (2).jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\rooms\\download (2).jpeg"
+    },
+    {
+      "Identity": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\rooms\\download.jpeg",
+      "SourceId": "BookingClone.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\",
+      "BasePath": "_content/BookingClone.Api",
+      "RelativePath": "rooms/download.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\rooms\\download.jpeg"
+    }
+  ]
 }

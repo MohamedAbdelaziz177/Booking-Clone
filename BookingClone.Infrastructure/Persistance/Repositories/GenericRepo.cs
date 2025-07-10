@@ -42,17 +42,17 @@ public class GenericRepo<T> : IGenericRepo<T> where T : class
         return await dbSet.ToListAsync();
     }
 
-    //public async Task<List<T>> GetAllAsync(int pageIdx = 1,
-    //    int pageSize = 8,
-    //    string sortField = "id",
-    //    string sortDir = "desc"
-    //    )
-    //{
-    //    var lst = await dbSet.Skip((pageIdx - 1) * pageSize).Take(pageSize).ToListAsync();
-    //    return lst;
-    //}
+    public virtual async Task<List<T>> GetAllAsync(int pageIdx = 1,
+        int pageSize = 8,
+        string sortField = "id",
+        string sortDir = "desc"
+        )
+    {
+        var lst = await dbSet.Skip((pageIdx - 1) * pageSize).Take(pageSize).ToListAsync();
+        return lst;
+    }
 
-    public async Task<T?> GetByIdAsync(int id)
+    public virtual async Task<T?> GetByIdAsync(int id)
     {
         return await dbSet.FindAsync(id);
     }

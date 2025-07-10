@@ -27,4 +27,8 @@
     <ProjectReference Include="..\BookingClone.Infrastructure\BookingClone.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\rooms\" />
+  </ItemGroup>
+
 </Project>
