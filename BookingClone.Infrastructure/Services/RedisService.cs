@@ -26,9 +26,23 @@ public class RedisService : IRedisService
         
     }
 
-    public async Task SetDataAsync<T>(string key, T data) where T : class
+    public async Task SetDataAsync<T>(string key, T data, string? tag) where T : class
     {
         await cache.StringSetAsync(key, JsonSerializer.Serialize(data));
+
+        if(tag != null)
+            await cache.SetAddAsync(tag, key);
+    }
+
+    public async Task RemoveByTagAsync(string tag)
+    {
+        var keys = await cache.SetMembersAsync(tag);
+        var keysAsStrings = keys.Select(x => x.ToString()).ToList();
+
+        foreach (var key in keysAsStrings)
+            await cache.KeyDeleteAsync(key);
+
+        await cache.KeyDeleteAsync(tag);
     }
 
     public async Task RemoveDataAsync(string key)
