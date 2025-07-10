@@ -1,4 +1,7 @@
-﻿using BookingClone.Domain.Entities;
+﻿using BookingClone.Application.Features.Auth.Commands;
+using BookingClone.Domain.Entities;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,32 +12,33 @@ namespace BookingClone.Api.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<User> userManager;
+        private readonly IMediator mediator;
 
-        public RoleController(RoleManager<IdentityRole> roleManager,
-            UserManager<User> userManager)
+        public RoleController(IMediator mediator)
         {
-            this.roleManager = roleManager;
-            this.userManager = userManager;
+            this.mediator = mediator;
         }
 
-        [HttpPost]
-        public async Task<string> AddRole(string roleName)
-        {
-            return null;
-        }
+        //[HttpPost]
+        //public async Task<string> AddRole(string roleName)
+        //{
+        //    return null;
+        //}
+        //
+        //[HttpDelete]
+        //public async Task<string> RemoveRole(string roleName)
+        //{
+        //    return null;
+        //}
+        // مش وقته
 
-        [HttpDelete]
-        public async Task<string> RemoveRole(string roleName)
+        [HttpPut("assign-user-role")]
+        [Authorize(Roles = ("Admin"))]
+        public async Task<IActionResult> AssignRoleToUser(string userId, string roleName)
         {
-            return null;
-        }
-
-        [HttpPut]
-        public async Task<string> AssignRoleToUser(string userId, string roleName)
-        {
-            return null;
+            var req = new AssignUserRoleCommand() { RoleName = roleName, UserId = userId };
+            var res = await mediator.Send(req);
+            return Ok(res);
         }
     }
 }
