@@ -1,38 +1,38 @@
 ﻿
 using BookingClone.Application.Contracts;
 using Microsoft.Extensions.Caching.Distributed;
+using StackExchange.Redis;
 using System.Text.Json;
 
 namespace BookingClone.Infrastructure.Services;
 
 public class RedisService : IRedisService
 {
-    private readonly IDistributedCache cache;
+    private readonly IDatabase cache;
 
-    public RedisService(IDistributedCache cache)
+    public RedisService(IDatabase cache)
     {
         this.cache = cache;
     }
 
-    public T? GetData<T>(string key)
+    public async Task<T?> GetDataAsync<T>(string key) where T : class
     {
-        var data = cache.Get(key);
+        var data = await cache.StringGetAsync(key);
 
-        if (data == null) 
-            return default(T);
+        if (data.IsNullOrEmpty)
+            return null;
 
-        return JsonSerializer.Deserialize<T>(data);
+        return JsonSerializer.Deserialize<T>(data!);
         
     }
 
-    public void SetData<T>(string key, T data)
+    public async Task SetDataAsync<T>(string key, T data) where T : class
     {
+        await cache.StringSetAsync(key, JsonSerializer.Serialize(data));
+    }
 
-        var options = new DistributedCacheEntryOptions()
-        {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5)
-        };
-
-        cache.SetString(key, JsonSerializer.Serialize(data), options);
+    public async Task RemoveDataAsync(string key)
+    {
+        await cache.KeyDeleteAsync(key);
     }
 }

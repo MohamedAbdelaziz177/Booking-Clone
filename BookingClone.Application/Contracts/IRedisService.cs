@@ -3,8 +3,10 @@ namespace BookingClone.Application.Contracts;
 
 public interface IRedisService
 {
-    void SetData<T>(string key, T data);
+    Task SetDataAsync<T>(string key, T data) where T : class;
 
-    T? GetData<T>(string key);
-     
+    Task<T?> GetDataAsync<T>(string key) where T : class;
+
+    Task RemoveDataAsync(string key);
+
 }
