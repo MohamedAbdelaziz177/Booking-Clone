@@ -7,6 +7,7 @@ public interface IRedisService
 
     Task<T?> GetDataAsync<T>(string key) where T : class;
 
+    
     Task RemoveDataAsync(string key);
 
 }

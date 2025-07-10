@@ -30,7 +30,7 @@ public class GetHotelByIdQueryHandler : IRequestHandler<GetHotelByIdQuery, Resul
 
     public async Task<Result<HotelResponseDto>> Handle(GetHotelByIdQuery request, CancellationToken cancellationToken)
     {
-        var hotelCache = redisService.GetData<HotelEntity>("hotel" + request.id.ToString());
+        var hotelCache = await redisService.GetDataAsync<HotelEntity>(MagicValues.HOTEL_REDIS_KEY + request.id.ToString());
 
         if(hotelCache is not null)
             return new Result<HotelResponseDto>(mapper.Map<HotelResponseDto>(hotelCache),
@@ -42,7 +42,7 @@ public class GetHotelByIdQueryHandler : IRequestHandler<GetHotelByIdQuery, Resul
         if (hotel == null)
             throw new EntityNotFoundException("No such Entity existed");
 
-        redisService.SetData("hotel" + request.id.ToString(), hotel);
+        await redisService.SetDataAsync<HotelEntity>(MagicValues.HOTEL_REDIS_KEY + request.id.ToString(), hotel);
 
         return new Result<HotelResponseDto>(mapper.Map<HotelResponseDto>(hotel),
             true);
