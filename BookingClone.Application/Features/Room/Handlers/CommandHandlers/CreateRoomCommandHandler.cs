@@ -5,6 +5,7 @@ using BookingClone.Application.Features.Room.Responses;
 using BookingClone.Domain.IRepositories;
 using MapsterMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using RoomEntity = BookingClone.Domain.Entities.Room;
 
 namespace BookingClone.Application.Features.Room.Handlers.CommandHandlers;
@@ -13,19 +14,30 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Resul
 {
     private readonly IUnitOfWork unitOfWork;
     private readonly IMapper mapper;
+    private readonly ILogger<CreateRoomCommandHandler> logger;
 
-    public CreateRoomCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public CreateRoomCommandHandler(IUnitOfWork unitOfWork,
+        IMapper mapper,
+        ILogger<CreateRoomCommandHandler> logger)
     {
         this.unitOfWork = unitOfWork;
         this.mapper = mapper;
+        this.logger = logger;
     }
     public async Task<Result<RoomResponseDto>> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Request hotel id: " + request.HotelId.ToString());
+
         var room = mapper.Map<RoomEntity>(request);
+
+        logger.LogInformation("entity hotel id: " + room.ToString());
 
         room.RoomNumber = Guid.NewGuid().ToString();
 
         await unitOfWork.RoomRepo.AddAsync(room);
+
+        
+
 
         RoomResponseDto roomResponseDto = mapper.Map<RoomResponseDto>(room);
 

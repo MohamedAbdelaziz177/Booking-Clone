@@ -12,7 +12,7 @@ public class UpdateRoomCommand : IRequest<Result<RoomResponseDto>>
     public string RoomNumber { get; set; } = string.Empty;
     public int Capacity { get; set; }
     public decimal PricePerNight { get; set; }
-    public RoomType Type { get; set; }
+    public string Type { get; set; } = "Single";
     public bool IsAvailable { get; set; }
     public int HotelId { get; set; }
 }
