@@ -4,6 +4,7 @@ using BookingClone.Application.Features.Hotel.Queries;
 using BookingClone.Application.Features.Room.Commands;
 using BookingClone.Application.Features.Room.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<IActionResult> GetAllRooms(int PageIdx = 0,
+        public async Task<IActionResult> GetAllRooms(int PageIdx = 1,
             string SortField = "Id",
             string SortDir = "desc",
             string City = "All",
@@ -51,6 +52,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpPost]
+        //[Authorize(Roles = "Admin")] 
         public async Task<IActionResult> AddRoom(CreateRoomCommand createRoomCommand)
         {
             var res = await mediator.Send(createRoomCommand);
@@ -58,6 +60,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpPut]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateRoom(UpdateRoomCommand updateRoomCommand)
         {
             var res = await mediator.Send(updateRoomCommand);
@@ -65,6 +68,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
             var cmd = new DeleteRoomCommand() { Id = id };
@@ -74,6 +78,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpPost("image")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRoomImage(AddRoomImageCommand request)
         {
             var res = await mediator.Send(request);
@@ -81,6 +86,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpDelete("image/{Id:int}")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> RemoveRoomImage([FromRoute] int Id)
         {
             var cmd = new RemoveRoomImageCommand() { ImageId = Id };

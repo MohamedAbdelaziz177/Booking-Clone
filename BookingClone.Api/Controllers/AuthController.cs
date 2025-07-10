@@ -15,11 +15,7 @@ namespace BookingClone.Api.Controllers
         private readonly IHostEnvironment env;
         private readonly ILogger<AuthController> logger;
 
-        [HttpGet("test")]
-        public IActionResult test()
-        {
-            return Ok("kosom keda");
-        }
+        
         public AuthController(IMediator mediator,
             IHostEnvironment Env,
             ILogger<AuthController> logger)
