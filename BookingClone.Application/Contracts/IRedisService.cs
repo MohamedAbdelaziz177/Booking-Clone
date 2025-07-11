@@ -11,4 +11,4 @@ public interface IRedisService
     Task RemoveDataAsync(string key);
 
     Task RemoveByTagAsync(string tag);
-}
+} 
