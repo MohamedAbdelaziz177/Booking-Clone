@@ -8,6 +8,7 @@ using BookingClone.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 namespace BookingClone.Infrastructure.ServiceExe;
 
@@ -35,9 +36,11 @@ public static class InfraServiceExe
         Service.AddScoped<IFileUploadService, FileUploadService>();
         Service.AddScoped<IJwtService, JwtService>();
 
-        Service.AddStackExchangeRedisCache(opt => {
-            opt.Configuration = configuration.GetConnectionString("redis");
+        Service.AddSingleton<IConnectionMultiplexer>(sp =>
+        {
+            return ConnectionMultiplexer.Connect(configuration.GetConnectionString("redis")!);
         });
+
         Service.AddScoped<IRedisService, RedisService>();
         
     }

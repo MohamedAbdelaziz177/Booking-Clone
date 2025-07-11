@@ -37,7 +37,9 @@ public class UpdateHotelCommandHandler : IRequestHandler<UpdateHotelCommand, Res
         mapper.Map(request, Hotel);
 
         await unitOfWork.HotelRepo.UpdateAsync(Hotel);
+
         await redisService.RemoveDataAsync(MagicValues.HOTEL_REDIS_KEY + request.Id);
+        await redisService.RemoveByTagAsync(MagicValues.HOTEL_PAGE_REDIS_TAG);
 
         HotelResponseDto hotelRes = mapper.Map<HotelResponseDto>(Hotel);
 

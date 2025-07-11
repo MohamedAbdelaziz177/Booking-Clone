@@ -41,11 +41,15 @@ public class GetHotelPageQueryHandler : IRequestHandler<GetHotelPageQuery, Resul
             mapper.Map<HotelResponseDto>(h)).ToList();
 
         else
-            hotels = await unitOfWork.HotelRepo.GetAllAsync(request.PageIdx,
-            request.PageSize,
-            request.SortField,
-            request.SortType.ToString());
+        {
+           hotels = await unitOfWork.HotelRepo.GetAllAsync(request.PageIdx,
+           request.PageSize,
+           request.SortField,
+           request.SortType.ToString());
 
+            await redisService.SetDataAsync(RedisKey, hotels, MagicValues.HOTEL_PAGE_REDIS_TAG);
+        }
+           
       
         hotelResponseDtos = hotels.Select(h => 
         mapper.Map<HotelResponseDto>(h)).ToList();

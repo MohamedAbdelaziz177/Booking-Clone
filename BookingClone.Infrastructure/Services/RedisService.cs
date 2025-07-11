@@ -10,9 +10,9 @@ public class RedisService : IRedisService
 {
     private readonly IDatabase cache;
 
-    public RedisService(IDatabase cache)
+    public RedisService(IConnectionMultiplexer multiplexer)
     {
-        this.cache = cache;
+        this.cache = multiplexer.GetDatabase();
     }
 
     public async Task<T?> GetDataAsync<T>(string key) where T : class
@@ -26,7 +26,7 @@ public class RedisService : IRedisService
         
     }
 
-    public async Task SetDataAsync<T>(string key, T data, string? tag) where T : class
+    public async Task SetDataAsync<T>(string key, T data, string? tag = null) where T : class
     {
         await cache.StringSetAsync(key, JsonSerializer.Serialize(data));
 
