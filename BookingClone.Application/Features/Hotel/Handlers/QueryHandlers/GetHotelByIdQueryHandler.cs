@@ -10,6 +10,7 @@ using BookingClone.Domain.IRepositories;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Logging;
 using HotelEntity = BookingClone.Domain.Entities.Hotel;
 
 namespace BookingClone.Application.Features.Hotel.Handlers.QueryHandlers;
@@ -19,14 +20,17 @@ public class GetHotelByIdQueryHandler : IRequestHandler<GetHotelByIdQuery, Resul
     private readonly IUnitOfWork unitOfWork;
     private readonly IMapper mapper;
     private readonly IRedisService redisService;
+    private readonly ILogger<GetHotelByIdQueryHandler> logger;
 
     public GetHotelByIdQueryHandler(IUnitOfWork unitOfWork,
         IMapper mapper,
-        IRedisService redisService)
+        IRedisService redisService,
+        ILogger<GetHotelByIdQueryHandler> logger)
     {
         this.unitOfWork = unitOfWork;
         this.mapper = mapper;
         this.redisService = redisService;
+        this.logger = logger;
     }
 
     public async Task<Result<HotelResponseDto>> Handle(GetHotelByIdQuery request, CancellationToken cancellationToken)
@@ -36,8 +40,12 @@ public class GetHotelByIdQueryHandler : IRequestHandler<GetHotelByIdQuery, Resul
 
 
         if (hotelCache is not null)
+        {
+            logger.LogInformation("Key found in Cache");
             return new Result<HotelResponseDto>(mapper.Map<HotelResponseDto>(hotelCache),
             true);
+        }
+            
 
 
         var hotel = await unitOfWork.HotelRepo.GetByIdAsync(request.id);

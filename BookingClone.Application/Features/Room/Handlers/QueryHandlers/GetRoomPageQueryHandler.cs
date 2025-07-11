@@ -7,6 +7,7 @@ using BookingClone.Application.Helpers;
 using BookingClone.Domain.IRepositories;
 using MapsterMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using RoomEntity = BookingClone.Domain.Entities.Room;
 namespace BookingClone.Application.Features.Room.Handlers.QueryHandlers;
 
@@ -15,14 +16,17 @@ public class GetRoomPageQueryHandler : IRequestHandler<GetRoomPageQuery, Result<
     private readonly IUnitOfWork unitOfWork;
     private readonly IMapper mapper;
     private readonly IRedisService redisService;
+    private readonly ILogger<GetRoomPageQueryHandler> logger;
 
     public GetRoomPageQueryHandler(IUnitOfWork unitOfWork,
         IMapper mapper,
-        IRedisService redisService)
+        IRedisService redisService,
+        ILogger<GetRoomPageQueryHandler> logger)
     {
         this.unitOfWork = unitOfWork;
         this.mapper = mapper;
         this.redisService = redisService;
+        this.logger = logger;
     }
     public async Task<Result<List<RoomResponseDto>>> Handle(GetRoomPageQuery request, CancellationToken cancellationToken)
     {
@@ -32,6 +36,7 @@ public class GetRoomPageQueryHandler : IRequestHandler<GetRoomPageQuery, Result<
 
         if(rooms == null)
         {
+            logger.LogInformation("Key Not found in Cache");
             rooms = await unitOfWork.RoomRepo.GetAllAsync(request.PageIdx,
                request.PageSize,
                request.SortField,
