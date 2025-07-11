@@ -16,14 +16,17 @@ public class AddRoomImageCommandHandler : IRequestHandler<AddRoomImageCommand, R
     private readonly IUnitOfWork unitOfWork;
     private readonly IFileUploadService uploadService;
     private readonly IMapper mapper;
+    private readonly IRedisService redisService;
 
     public AddRoomImageCommandHandler(IUnitOfWork unitOfWork,
         IFileUploadService uploadService,
-        IMapper mapper)
+        IMapper mapper,
+        IRedisService redisService)
     {
         this.unitOfWork = unitOfWork;
         this.uploadService = uploadService;
         this.mapper = mapper;
+        this.redisService = redisService;
     }
 
     public async Task<Result<RoomResponseDto>> Handle(AddRoomImageCommand request, CancellationToken cancellationToken)
@@ -36,6 +39,9 @@ public class AddRoomImageCommandHandler : IRequestHandler<AddRoomImageCommand, R
         string Url =  await uploadService.SaveImageAndGetUrl(request.Image, "rooms");
 
         await unitOfWork.RoomImageRepo.AddAsync(new RoomImage() { ImgUrl = Url, RoomId = request.RoomId});
+
+        await redisService.RemoveDataAsync(MagicValues.ROOM_REDIS_KEY + request.RoomId);
+        await redisService.RemoveByTagAsync(MagicValues.ROOM_PAGE_REDIS_TAG);
 
         RoomResponseDto responseDto = mapper.Map<RoomResponseDto>(room);
 

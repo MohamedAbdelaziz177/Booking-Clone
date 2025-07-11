@@ -1,5 +1,6 @@
 ﻿
 using BookingClone.Application.Common;
+using BookingClone.Application.Contracts;
 using BookingClone.Application.Features.Room.Commands;
 using BookingClone.Application.Features.Room.Responses;
 using BookingClone.Domain.IRepositories;
@@ -15,14 +16,17 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Resul
     private readonly IUnitOfWork unitOfWork;
     private readonly IMapper mapper;
     private readonly ILogger<CreateRoomCommandHandler> logger;
+    private readonly IRedisService redisService;
 
     public CreateRoomCommandHandler(IUnitOfWork unitOfWork,
         IMapper mapper,
-        ILogger<CreateRoomCommandHandler> logger)
+        ILogger<CreateRoomCommandHandler> logger,
+        IRedisService redisService)
     {
         this.unitOfWork = unitOfWork;
         this.mapper = mapper;
         this.logger = logger;
+        this.redisService = redisService;
     }
     public async Task<Result<RoomResponseDto>> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
     {
@@ -36,8 +40,7 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Resul
 
         await unitOfWork.RoomRepo.AddAsync(room);
 
-        
-
+        await redisService.RemoveByTagAsync(MagicValues.ROOM_PAGE_REDIS_TAG);
 
         RoomResponseDto roomResponseDto = mapper.Map<RoomResponseDto>(room);
 

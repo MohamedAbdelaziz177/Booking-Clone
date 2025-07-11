@@ -3,8 +3,10 @@
 using BookingClone.Application.Common;
 using BookingClone.Application.Contracts;
 using BookingClone.Application.Exceptions;
+using BookingClone.Application.Features.Hotel.Queries;
 using BookingClone.Application.Features.Room.Queries;
 using BookingClone.Application.Features.Room.Responses;
+using BookingClone.Application.Helpers;
 using BookingClone.Domain.IRepositories;
 using MapsterMapper;
 using MediatR;
@@ -29,8 +31,9 @@ public class GetRoomByIdQueryHandler : IRequestHandler<GetRoomByIdQuery, Result<
 
     public async Task<Result<RoomResponseDto>> Handle(GetRoomByIdQuery request, CancellationToken cancellationToken)
     {
-        var room = await redisService.GetDataAsync<RoomEntity>(MagicValues.ROOM_REDIS_KEY
-            + request.Id.ToString());
+        string redisKey = RedisKeyFactory<GetRoomByIdQuery>.GenerateRedisKey(request);
+
+        var room = await redisService.GetDataAsync<RoomEntity>(redisKey);
 
         if (room != null)
             return new Result<RoomResponseDto>(mapper.Map<RoomResponseDto>(room)); ;
@@ -39,6 +42,8 @@ public class GetRoomByIdQueryHandler : IRequestHandler<GetRoomByIdQuery, Result<
 
         if (room == null) 
             throw new EntityNotFoundException("Room Not existed");
+
+        await redisService.SetDataAsync(redisKey, room);
 
         return new Result<RoomResponseDto>(mapper.Map<RoomResponseDto>(room));
     }

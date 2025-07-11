@@ -1,6 +1,7 @@
 ﻿
 
 using BookingClone.Application.Common;
+using BookingClone.Application.Contracts;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Room.Commands;
 using BookingClone.Application.Features.Room.Responses;
@@ -13,10 +14,12 @@ namespace BookingClone.Application.Features.Room.Handlers.CommandHandlers;
 public class RemoveRoomImageCommandHandler : IRequestHandler<RemoveRoomImageCommand, Result<string>>
 {
     private readonly IUnitOfWork unitOfWork;
+    private readonly IRedisService redisService;
 
-    public RemoveRoomImageCommandHandler(IUnitOfWork unitOfWork)
+    public RemoveRoomImageCommandHandler(IUnitOfWork unitOfWork, IRedisService redisService)
     {
         this.unitOfWork = unitOfWork;
+        this.redisService = redisService;
     }
     public async Task<Result<string>> Handle(RemoveRoomImageCommand request, CancellationToken cancellationToken)
     {
@@ -26,6 +29,9 @@ public class RemoveRoomImageCommandHandler : IRequestHandler<RemoveRoomImageComm
             throw new EntityNotFoundException("Image does not exist");
 
         await unitOfWork.RoomImageRepo.DeleteAsync(img);
+
+        await redisService.RemoveDataAsync(MagicValues.ROOM_REDIS_KEY + img.RoomId);
+        await redisService.RemoveByTagAsync(MagicValues.ROOM_PAGE_REDIS_TAG);
 
         return new Result<string>("Deleted Successfully");
     }

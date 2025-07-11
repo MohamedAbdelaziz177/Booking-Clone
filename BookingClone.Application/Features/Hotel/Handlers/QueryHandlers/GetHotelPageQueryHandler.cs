@@ -5,6 +5,7 @@ using BookingClone.Application.Common;
 using BookingClone.Application.Contracts;
 using BookingClone.Application.Features.Hotel.Queries;
 using BookingClone.Application.Features.Hotel.Responses;
+using BookingClone.Application.Helpers;
 using BookingClone.Domain.IRepositories;
 using MapsterMapper;
 using MediatR;
@@ -31,23 +32,20 @@ public class GetHotelPageQueryHandler : IRequestHandler<GetHotelPageQuery, Resul
         CancellationToken cancellationToken)
     {
 
-        string RedisKey = GetPageRedisKey(request);
-        var hotels = await redisService.GetDataAsync<List<HotelEntity>>(RedisKey);
+        string redisKey = RedisKeyFactory<GetHotelPageQuery>.GenerateRedisKey(request);
+      
+        var hotels = await redisService.GetDataAsync<List<HotelEntity>>(redisKey);
 
         List<HotelResponseDto> hotelResponseDtos = new List<HotelResponseDto>();
 
-        if (hotels != null)
-            hotelResponseDtos = hotels.Select(h =>
-            mapper.Map<HotelResponseDto>(h)).ToList();
-
-        else
+        if(hotels == null)
         {
            hotels = await unitOfWork.HotelRepo.GetAllAsync(request.PageIdx,
            request.PageSize,
            request.SortField,
            request.SortType.ToString());
 
-            await redisService.SetDataAsync(RedisKey, hotels, MagicValues.HOTEL_PAGE_REDIS_TAG);
+            await redisService.SetDataAsync(redisKey, hotels, MagicValues.HOTEL_PAGE_REDIS_TAG);
         }
            
       
@@ -58,12 +56,5 @@ public class GetHotelPageQueryHandler : IRequestHandler<GetHotelPageQuery, Resul
     }
 
 
-    private string GetPageRedisKey(GetHotelPageQuery request)
-    {
-        return MagicValues.HOTEL_REDIS_KEY + ": "
-           + request.PageIdx.ToString() + " "
-           + request.PageSize.ToString() + " "
-           + request.SortField!.ToString().ToUpper() + " "
-           + request.SortType.ToString()!.ToUpper();
-    }
+   
 }

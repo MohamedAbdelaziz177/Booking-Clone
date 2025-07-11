@@ -4,6 +4,7 @@ using BookingClone.Application.Contracts;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Hotel.Queries;
 using BookingClone.Application.Features.Hotel.Responses;
+using BookingClone.Application.Helpers;
 using BookingClone.Domain.Entities;
 using BookingClone.Domain.IRepositories;
 using MapsterMapper;
@@ -30,9 +31,11 @@ public class GetHotelByIdQueryHandler : IRequestHandler<GetHotelByIdQuery, Resul
 
     public async Task<Result<HotelResponseDto>> Handle(GetHotelByIdQuery request, CancellationToken cancellationToken)
     {
-        var hotelCache = await redisService.GetDataAsync<HotelEntity>(MagicValues.HOTEL_REDIS_KEY + request.id.ToString());
+        string redisKey = RedisKeyFactory<GetHotelByIdQuery>.GenerateRedisKey(request);
+        var hotelCache = await redisService.GetDataAsync<HotelEntity>(redisKey);
 
-        if(hotelCache is not null)
+
+        if (hotelCache is not null)
             return new Result<HotelResponseDto>(mapper.Map<HotelResponseDto>(hotelCache),
             true);
 
@@ -42,7 +45,8 @@ public class GetHotelByIdQueryHandler : IRequestHandler<GetHotelByIdQuery, Resul
         if (hotel == null)
             throw new EntityNotFoundException("No such Entity existed");
 
-        await redisService.SetDataAsync<HotelEntity>(MagicValues.HOTEL_REDIS_KEY + request.id.ToString(), hotel);
+        await redisService.SetDataAsync<HotelEntity>(redisKey, hotel);
+
 
         return new Result<HotelResponseDto>(mapper.Map<HotelResponseDto>(hotel),
             true);
