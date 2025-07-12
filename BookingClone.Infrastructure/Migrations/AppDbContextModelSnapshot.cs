@@ -43,9 +43,6 @@ namespace BookingClone.Infrastructure.Migrations
                     b.Property<int>("ReservationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -53,8 +50,6 @@ namespace BookingClone.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ReservationId");
-
-                    b.HasIndex("RoomId");
 
                     b.HasIndex("UserId");
 
@@ -166,7 +161,7 @@ namespace BookingClone.Infrastructure.Migrations
                     b.Property<DateTime>("BookingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 12, 12, 42, 17, 260, DateTimeKind.Local).AddTicks(6621));
+                        .HasDefaultValue(new DateTime(2025, 7, 12, 13, 20, 58, 969, DateTimeKind.Local).AddTicks(1757));
 
                     b.Property<DateTime>("CheckInDate")
                         .HasColumnType("datetime2");
@@ -490,12 +485,6 @@ namespace BookingClone.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BookingClone.Domain.Entities.Room", "Room")
-                        .WithMany("FeedBacks")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("BookingClone.Domain.Entities.User", "user")
                         .WithMany("FeedBacks")
                         .HasForeignKey("UserId")
@@ -503,8 +492,6 @@ namespace BookingClone.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Reservation");
-
-                    b.Navigation("Room");
 
                     b.Navigation("user");
                 });
@@ -635,8 +622,6 @@ namespace BookingClone.Infrastructure.Migrations
 
             modelBuilder.Entity("BookingClone.Domain.Entities.Room", b =>
                 {
-                    b.Navigation("FeedBacks");
-
                     b.Navigation("Reservations");
 
                     b.Navigation("RoomImages");

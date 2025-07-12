@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Features\FeedBack\Handlers\CommandHandlers\" />
     <Folder Include="Features\FeedBack\Handlers\QueryHandlers\" />
-    <Folder Include="Features\FeedBack\Queries\" />
     <Folder Include="Features\Payment\Commands\" />
     <Folder Include="Features\Payment\Handlers\" />
   </ItemGroup>
