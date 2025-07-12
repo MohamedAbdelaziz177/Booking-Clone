@@ -4,10 +4,12 @@ using BookingClone.Application.ServiceExe;
 using BookingClone.Domain.Entities;
 using BookingClone.Infrastructure.Persistance;
 using BookingClone.Infrastructure.ServiceExe;
+using CloudinaryDotNet;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using System.Collections;
 using System.Text;
 
 namespace BookingClone.Api
@@ -58,7 +60,10 @@ namespace BookingClone.Api
                     };
                 });
 
-           
+            foreach (var (key, value) in Environment.GetEnvironmentVariables().Cast<DictionaryEntry>())
+            {
+                builder.Configuration[key.ToString()!] = value?.ToString();
+            }
 
             var app = builder.Build();
 
