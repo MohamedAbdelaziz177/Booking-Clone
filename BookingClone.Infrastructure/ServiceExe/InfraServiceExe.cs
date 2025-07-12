@@ -33,8 +33,8 @@ public static class InfraServiceExe
 
         Service.AddScoped<IEmailService, EmailService>();
         Service.AddScoped<IStripeService, StripeService>();
-        Service.AddScoped<IFileUploadService, FileUploadService>();
-        // Service.AddScoped<IFileUploadService, CloudinaryService>(); 
+        //Service.AddScoped<IFileUploadService, FileUploadService>();
+        Service.AddScoped<ICloudinaryService, CloudinaryService>();
         Service.AddScoped<IJwtService, JwtService>();
 
         Service.AddSingleton<IConnectionMultiplexer>(sp =>

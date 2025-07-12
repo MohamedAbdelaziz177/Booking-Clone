@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BookingClone.Infrastructure.Services;
 
-public class CloudinaryService : IFileUploadService
+public class CloudinaryService : ICloudinaryService
 {
     private readonly Cloudinary cloudinary;
     public CloudinaryService(IConfiguration configuration)
