@@ -16,4 +16,8 @@ public class FeedBack
 
     public Room Room { get; set; } = new Room();
 
+    public string UserId { get; set; } = default!;
+
+    public User user { get; set; } = default!;
+
 }

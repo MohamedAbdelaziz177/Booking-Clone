@@ -22,5 +22,5 @@ public class User : IdentityUser
 
     public List<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 
-
+    public List<FeedBack> FeedBacks { get; set; } = default!;
 }
