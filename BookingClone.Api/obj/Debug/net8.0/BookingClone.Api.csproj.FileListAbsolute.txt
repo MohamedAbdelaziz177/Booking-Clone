@@ -334,3 +334,4 @@ F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.A
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\CloudinaryDotNet.dll
