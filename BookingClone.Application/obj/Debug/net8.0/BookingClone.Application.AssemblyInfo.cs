@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookingClone.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36649bbbebbf660cd54fd618e7b87d9c97b32754")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29222024bd9b90ee7c7ba396b83742517e1beaa3")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookingClone.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookingClone.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

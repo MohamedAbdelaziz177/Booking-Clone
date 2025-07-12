@@ -10,7 +10,7 @@ public class HotelRepo : GenericRepo<Hotel>, IHotelRepo
     {
     }
 
-    public async Task<List<Hotel>> GetAllAsync(int pageIdx = 1,
+    public override async Task<List<Hotel>> GetAllAsync(int pageIdx = 1,
         int pageSize = 8,
         string sortField = "id",
         string sortDir = "desc"
