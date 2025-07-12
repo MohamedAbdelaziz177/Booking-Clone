@@ -11,4 +11,6 @@ public class UpdateFeedbackCommand : IRequest<Result<FeedbackResponse>>
     public double Rating { get; set; }
     public string Comment { get; set; } = string.Empty;
 
+    public string userId { get; set; } = default!;
+
 }
