@@ -23,6 +23,6 @@ public class Room
 
     public List<Reservation> Reservations { get; set; } = new List<Reservation>();
     public List<RoomImage> RoomImages { get; set; } = new List<RoomImage>();
-    public List<FeedBack> FeedBacks { get; set; } = new List<FeedBack>();
+    //public List<FeedBack> FeedBacks { get; set; } = new List<FeedBack>();
 
 }

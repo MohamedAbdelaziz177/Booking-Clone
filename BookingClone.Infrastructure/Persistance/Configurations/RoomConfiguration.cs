@@ -9,12 +9,6 @@ public class RoomConfiguration : IEntityTypeConfiguration<Room>
     public void Configure(EntityTypeBuilder<Room> builder)
     {
         
-
-        builder.HasMany(r => r.FeedBacks)
-            .WithOne(f => f.Room)
-            .HasForeignKey(f => f.RoomId)
-            .OnDelete(DeleteBehavior.Restrict);
-
         builder.HasMany(x => x.RoomImages)
             .WithOne(i => i.Room)
             .HasForeignKey(x => x.RoomId)
