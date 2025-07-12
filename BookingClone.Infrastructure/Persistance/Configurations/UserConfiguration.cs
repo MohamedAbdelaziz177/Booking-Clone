@@ -17,6 +17,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .WithOne(r => r.User)
             .HasForeignKey(u => u.UserId);
 
+        builder.HasMany(u => u.FeedBacks)
+            .WithOne(f => f.user)
+            .HasForeignKey(u => u.UserId);
+
         //builder.Property(u => u.PasswordResetOtp)
         //    .IsRequired(false);
         //

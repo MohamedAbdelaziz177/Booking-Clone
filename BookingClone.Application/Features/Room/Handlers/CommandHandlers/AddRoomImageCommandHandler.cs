@@ -14,12 +14,12 @@ namespace BookingClone.Application.Features.Room.Handlers.CommandHandlers;
 public class AddRoomImageCommandHandler : IRequestHandler<AddRoomImageCommand, Result<RoomResponseDto>>
 {
     private readonly IUnitOfWork unitOfWork;
-    private readonly IFileUploadService uploadService;
+    private readonly ICloudinaryService uploadService;
     private readonly IMapper mapper;
     private readonly IRedisService redisService;
 
     public AddRoomImageCommandHandler(IUnitOfWork unitOfWork,
-        IFileUploadService uploadService,
+        ICloudinaryService uploadService,
         IMapper mapper,
         IRedisService redisService)
     {

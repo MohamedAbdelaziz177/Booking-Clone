@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\FeedBack\Commands\" />
     <Folder Include="Features\FeedBack\Handlers\CommandHandlers\" />
     <Folder Include="Features\FeedBack\Handlers\QueryHandlers\" />
     <Folder Include="Features\FeedBack\Queries\" />

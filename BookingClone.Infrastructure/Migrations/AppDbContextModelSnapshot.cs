@@ -36,8 +36,8 @@ namespace BookingClone.Infrastructure.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<double>("Rating")
-                        .HasPrecision(3, 1)
-                        .HasColumnType("float(3)")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("float(8)")
                         .HasAnnotation("Range", new Dictionary<string, object> { ["Minimum"] = 0, ["Maximum"] = 10 });
 
                     b.Property<int>("ReservationId")
@@ -46,11 +46,17 @@ namespace BookingClone.Infrastructure.Migrations
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ReservationId");
 
                     b.HasIndex("RoomId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("feedBacks");
                 });
@@ -160,7 +166,7 @@ namespace BookingClone.Infrastructure.Migrations
                     b.Property<DateTime>("BookingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 10, 2, 14, 45, 85, DateTimeKind.Local).AddTicks(8839));
+                        .HasDefaultValue(new DateTime(2025, 7, 12, 12, 42, 17, 260, DateTimeKind.Local).AddTicks(6621));
 
                     b.Property<DateTime>("CheckInDate")
                         .HasColumnType("datetime2");
@@ -490,9 +496,17 @@ namespace BookingClone.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("BookingClone.Domain.Entities.User", "user")
+                        .WithMany("FeedBacks")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Reservation");
 
                     b.Navigation("Room");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("BookingClone.Domain.Entities.Payment", b =>
@@ -630,6 +644,8 @@ namespace BookingClone.Infrastructure.Migrations
 
             modelBuilder.Entity("BookingClone.Domain.Entities.User", b =>
                 {
+                    b.Navigation("FeedBacks");
+
                     b.Navigation("RefreshTokens");
 
                     b.Navigation("Reservations");

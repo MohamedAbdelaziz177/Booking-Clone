@@ -89,7 +89,7 @@ namespace BookingClone.Api.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> RemoveRoomImage([FromRoute] int Id)
         {
-            var cmd = new RemoveRoomImageCommand() { ImageId = Id };
+            var cmd = new RemoveRoomImageCommand() { ImageId = Id } ;
             var res = await mediator.Send(cmd);
 
             return Ok(res);
