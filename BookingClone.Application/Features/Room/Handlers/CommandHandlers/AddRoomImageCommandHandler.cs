@@ -14,7 +14,7 @@ namespace BookingClone.Application.Features.Room.Handlers.CommandHandlers;
 public class AddRoomImageCommandHandler : IRequestHandler<AddRoomImageCommand, Result<RoomResponseDto>>
 {
     private readonly IUnitOfWork unitOfWork;
-    private readonly ICloudinaryService uploadService;
+    private readonly ICloudinaryService cloudinaryService;
     private readonly IMapper mapper;
     private readonly IRedisService redisService;
 
@@ -24,7 +24,7 @@ public class AddRoomImageCommandHandler : IRequestHandler<AddRoomImageCommand, R
         IRedisService redisService)
     {
         this.unitOfWork = unitOfWork;
-        this.uploadService = uploadService;
+        this.cloudinaryService = uploadService;
         this.mapper = mapper;
         this.redisService = redisService;
     }
@@ -36,7 +36,7 @@ public class AddRoomImageCommandHandler : IRequestHandler<AddRoomImageCommand, R
         if (room == null)
             throw new EntityNotFoundException("No room associated to this Id");
 
-        string Url =  await uploadService.SaveImageAndGetUrl(request.Image, "rooms");
+        string Url =  await cloudinaryService.SaveImageAndGetUrl(request.Image, "rooms");
 
         await unitOfWork.RoomImageRepo.AddAsync(new RoomImage() { ImgUrl = Url, RoomId = request.RoomId});
 
