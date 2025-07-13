@@ -37,6 +37,7 @@ public class GetRoomPageQueryHandler : IRequestHandler<GetRoomPageQuery, Result<
         if(rooms == null)
         {
             logger.LogInformation("Key Not found in Cache");
+
             rooms = await unitOfWork.RoomRepo.GetAllAsync(request.PageIdx,
                request.PageSize,
                request.SortField,

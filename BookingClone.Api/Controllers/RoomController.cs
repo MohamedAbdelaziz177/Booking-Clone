@@ -34,10 +34,12 @@ namespace BookingClone.Api.Controllers
         public async Task<IActionResult> GetAllRooms(int PageIdx = 1,
             string SortField = "Id",
             string SortDir = "desc",
-            string City = "All",
-            bool Active = true
+            int HotelId = 0
             )
         {
+            if (SortDir.ToUpper() != "DESC" && SortDir.ToUpper() != "ASC")
+                return BadRequest("Sorting Direction is not valid");
+
             var Query = new GetRoomPageQuery()
             {
                 PageIdx = PageIdx,
@@ -50,6 +52,38 @@ namespace BookingClone.Api.Controllers
 
             return Ok(res);
         }
+
+        [HttpGet("get-available-between")]
+        public async Task<IActionResult> GetRoomsAvailableBetween(DateTime start,
+            DateTime end,
+            int? hotelId,
+            int pageIdx = 1,
+            string sortField = "id",
+            string sortDir = "desc"
+
+            )
+        {
+            if (sortDir.ToUpper() != "DESC" && sortDir.ToUpper() != "ASC")
+                return BadRequest("Sorting Direction is not valid");
+            
+
+            var query = new GetAllRoomsAvailableBetweenQuery()
+            {
+                start = start,
+                end = end,
+                hotelId = hotelId,
+
+                PageIdx = pageIdx,
+                SortField = sortField,
+                SortType = Enum.Parse<SortType>(sortDir.ToUpper())
+            };
+
+            
+
+            var res = await mediator.Send(query);
+            return Ok(res);
+        }
+
 
         [HttpPost]
         //[Authorize(Roles = "Admin")] 

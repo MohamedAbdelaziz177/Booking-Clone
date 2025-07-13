@@ -24,7 +24,9 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
         && x.CheckInDate < end );
     }
 
-    public async Task<List<Room>> GetAvaliableRoomsBetween(DateTime start, DateTime end, int? hotelId = null)
+    public async Task<List<Room>> GetAvaliableRoomsBetween(DateTime start,
+        DateTime end,
+        int? hotelId = null)
     {
         Expression<Func<Room, bool>> expr1, expr2;
 
@@ -35,7 +37,11 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
 
         expr2 = (hotelId != null) ? r => r.HotelId == hotelId : r => true;
 
-        return await con.rooms.Where(expr1).Where(expr2).ToListAsync();
+        return await con.rooms
+            .Where(expr1)
+            .Where(expr2)
+            .OrderByDescending(r => r.PricePerNight)
+            .ToListAsync();
         
     }
 

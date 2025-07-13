@@ -531,13 +531,49 @@
         "IsRequired": false
       },
       {
-        "Name": "City",
+        "Name": "HotelId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingClone.Api.Controllers.RoomController",
+    "Method": "GetRoomsAvailableBetween",
+    "RelativePath": "api/Room/get-available-between",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "start",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "end",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "hotelId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageIdx",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "sortField",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "Active",
-        "Type": "System.Boolean",
+        "Name": "sortDir",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
