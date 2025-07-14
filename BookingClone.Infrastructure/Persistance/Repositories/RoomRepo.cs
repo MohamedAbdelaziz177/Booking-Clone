@@ -77,7 +77,7 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
         string sortDir = "desc"
         )
     {
-        var query = con.rooms.Include(r => r.RoomImages).Skip((pageIdx - 1) * pageSize).Take(pageSize);
+        var query = con.rooms.Skip((pageIdx - 1) * pageSize).Take(pageSize);
 
         if (sortField.ToUpper() == "PRICE")
         {
@@ -89,7 +89,7 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
 
         else query = query.OrderByDescending(x => x.Id);
 
-        return await query.ToListAsync();
+        return await query.Include(r => r.RoomImages).Include(r => r.Hotel).ToListAsync();
     }
 
 

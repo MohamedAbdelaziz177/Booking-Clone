@@ -34,7 +34,7 @@ public class GetRoomPageQueryHandler : IRequestHandler<GetRoomPageQuery, Result<
 
         var rooms = await redisService.GetDataAsync<List<RoomEntity>>(redisKey);
 
-        if(rooms == null)
+        //if(rooms == null)
         {
             logger.LogInformation("Key Not found in Cache");
 
