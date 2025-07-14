@@ -1,4 +1,5 @@
 ﻿using BookingClone.Domain.Entities;
+using BookingClone.Domain.Enums;
 using BookingClone.Domain.IRepositories;
 using BookingClone.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,6 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
     {
     }
 
-
     public async Task<List<Room>> GetByHotelId(int hotelId)
     {
         return await con.rooms.Where(r => r.HotelId == hotelId).ToListAsync();
@@ -22,7 +22,9 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
         
         return !await con.reservations.AnyAsync(x => x.RoomId == roomId 
         && x.CheckOutDate > start
-        && x.CheckInDate < end );
+        && x.CheckInDate < end 
+        && x.ReservationStatus != ReservationStatus.Cancelled
+        );
     }
 
     public async Task<List<Room>> GetAvaliableRoomsBetween(DateTime start,

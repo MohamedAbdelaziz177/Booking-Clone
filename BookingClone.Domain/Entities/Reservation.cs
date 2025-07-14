@@ -19,9 +19,9 @@ public class Reservation
 
     public ReservationStatus ReservationStatus { get; set; } = ReservationStatus.Pending;
 
-    public Room Room { get; set; } = new Room();
+    public Room Room { get; set; } = default!;
 
-    public User User { get; set; } = new User();
+    public User User { get; set; } = default!;
 
     public List<FeedBack>? FeedBacks { get; set; }
 

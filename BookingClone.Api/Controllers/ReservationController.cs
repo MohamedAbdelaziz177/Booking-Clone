@@ -40,7 +40,7 @@ namespace BookingClone.Api.Controllers
             return Ok(res);
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         [Authorize] 
         public async Task<IActionResult> CreateReservation([FromBody] CreateReservationCommand request)
         {
@@ -49,6 +49,9 @@ namespace BookingClone.Api.Controllers
             request.UserId = userId;
 
             var res = await mediator.Send(request);
+
+            if(!res.Success)
+                return BadRequest(res);
 
             return Created();
         }
@@ -63,10 +66,13 @@ namespace BookingClone.Api.Controllers
 
             var res = await mediator.Send(request);
 
+            if (!res.Success)
+                return BadRequest(res);
+
             return CreatedAtAction(nameof(GetReservationById), new {id = request.Id}, res);
         }
 
-        [HttpPut("cancel")]
+        [HttpPut("cancel/{Id:int}")]
         [Authorize]
         public async Task<IActionResult> CancelReservation([FromRoute] int Id)
         {

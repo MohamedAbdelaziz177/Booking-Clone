@@ -45,10 +45,13 @@ namespace BookingClone.Api
             })
                 .AddJwtBearer(options =>
                 {
+                    options.SaveToken = true;
+                    options.RequireHttpsMetadata = false;
+
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateIssuer = true,
-                        ValidateAudience = false,
+                        ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
 

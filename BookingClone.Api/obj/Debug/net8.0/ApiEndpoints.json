@@ -319,22 +319,6 @@
   },
   {
     "ContainingType": "BookingClone.Api.Controllers.ReservationController",
-    "Method": "CreateReservation",
-    "RelativePath": "api/Reservation",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "BookingClone.Application.Features.Reservation.Commands.CreateReservationCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BookingClone.Api.Controllers.ReservationController",
     "Method": "UpdateReservation",
     "RelativePath": "api/Reservation",
     "HttpMethod": "PUT",
@@ -360,6 +344,22 @@
       {
         "Name": "Id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingClone.Api.Controllers.ReservationController",
+    "Method": "CreateReservation",
+    "RelativePath": "api/Reservation/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "BookingClone.Application.Features.Reservation.Commands.CreateReservationCommand",
         "IsRequired": true
       }
     ],
@@ -399,7 +399,7 @@
   {
     "ContainingType": "BookingClone.Api.Controllers.ReservationController",
     "Method": "CancelReservation",
-    "RelativePath": "api/Reservation/cancel",
+    "RelativePath": "api/Reservation/cancel/{Id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -407,7 +407,7 @@
       {
         "Name": "Id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
