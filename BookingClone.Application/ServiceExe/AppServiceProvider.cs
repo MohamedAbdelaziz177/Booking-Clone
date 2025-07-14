@@ -27,8 +27,6 @@ public static class AppServiceProvider
 
         Service.AddValidatorsFromAssembly(typeof(CreateHotelCommandValidator).Assembly);
         Service.AddMediatR(typeof(CreateHotelCommandValidator).Assembly);
-
-    
     }
 
 }
