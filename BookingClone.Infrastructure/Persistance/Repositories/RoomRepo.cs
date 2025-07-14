@@ -57,17 +57,17 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
         if(sortField.ToUpper() == "PRICE")
         {
             if (sortDir.ToUpper() == "ASC")
-                rooms.OrderBy(r => r.PricePerNight);
+                rooms = rooms.OrderBy(r => r.PricePerNight);
             
-            rooms.OrderByDescending(r => r.PricePerNight);
+            else rooms = rooms.OrderByDescending(r => r.PricePerNight);
         }
 
         else
-        rooms.OrderByDescending (r => r.PricePerNight);
+        rooms = rooms.OrderByDescending (r => r.Id);
 
-        rooms.Skip(pageSize * (pageIdx - 1)).Take(pageSize);
+        rooms = rooms.Skip(pageSize * (pageIdx - 1)).Take(pageSize);
 
-        return await rooms.ToListAsync();
+        return await rooms.Include(r => r.Hotel).ToListAsync();
         
     }
 

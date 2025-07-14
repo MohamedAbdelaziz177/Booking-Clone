@@ -17,7 +17,8 @@ public class GetAllRoomsAvailableBetweenQueryValidator : AbstractValidator<GetAl
 
         RuleFor(q => q).Must(q => q.start < q.end)
             .WithMessage("checkIn date must be less than checkout date");
-       
+
+        RuleFor(q => q.start).Must(q => q >= DateTime.Now);
 
     }
 }
