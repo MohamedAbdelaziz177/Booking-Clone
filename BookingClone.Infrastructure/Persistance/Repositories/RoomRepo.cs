@@ -3,6 +3,7 @@ using BookingClone.Domain.IRepositories;
 using BookingClone.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Text;
 
 namespace BookingClone.Infrastructure.Persistance.Repositories;
 public class RoomRepo : GenericRepo<Room>, IRoomRepo
@@ -26,9 +27,15 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
 
     public async Task<List<Room>> GetAvaliableRoomsBetween(DateTime start,
         DateTime end,
-        int? hotelId = null)
+        int? hotelId = null,
+        decimal? minPrice = null,
+        decimal? maxPrice = null,
+        int pageIdx = 1,
+        int pageSize = 3,
+        string sortField = "Id",
+        string sortDir = "asc")
     {
-        Expression<Func<Room, bool>> expr1, expr2;
+        Expression<Func<Room, bool>> expr1, expr2, expr3, expr4;
 
         expr1 = r =>
             !con.reservations.Any(x => x.RoomId == r.Id
@@ -37,11 +44,30 @@ public class RoomRepo : GenericRepo<Room>, IRoomRepo
 
         expr2 = (hotelId != null) ? r => r.HotelId == hotelId : r => true;
 
-        return await con.rooms
-            .Where(expr1)
+        expr3 = (minPrice != null) ? r => r.PricePerNight >= minPrice : r => true;
+
+        expr4 = (maxPrice != null) ? r => r.PricePerNight <= maxPrice : r => true;
+
+
+        IQueryable<Room> rooms = con.rooms.Where(expr1)
             .Where(expr2)
-            .OrderByDescending(r => r.PricePerNight)
-            .ToListAsync();
+            .Where(expr3)
+            .Where(expr4);
+        
+        if(sortField.ToUpper() == "PRICE")
+        {
+            if (sortDir.ToUpper() == "ASC")
+                rooms.OrderBy(r => r.PricePerNight);
+            
+            rooms.OrderByDescending(r => r.PricePerNight);
+        }
+
+        else
+        rooms.OrderByDescending (r => r.PricePerNight);
+
+        rooms.Skip(pageSize * (pageIdx - 1)).Take(pageSize);
+
+        return await rooms.ToListAsync();
         
     }
 

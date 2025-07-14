@@ -34,21 +34,9 @@ namespace BookingClone.Api.Controllers
 
         [HttpGet("all")]
         //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetReservationsPage([FromQuery] int PageIdx,
-            [FromQuery] string SortField = "Id",
-            [FromQuery] string SortDir = "Desc")
+        public async Task<IActionResult> GetReservationsPage([FromQuery] GetReservationsPageQuery query)
         {
-
-            var query = new GetReservationsPageQuery()
-            {
-                PageIdx = PageIdx,
-                PageSize = MagicValues.PAGE_SIZE,
-                SortField = SortField,
-                SortType = Enum.Parse<SortType>(SortDir)
-            };
-
             var res = await mediator.Send(query);
-
             return Ok(res);
         }
 

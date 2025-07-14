@@ -252,23 +252,18 @@
         "IsRequired": false
       },
       {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
         "Name": "SortField",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "SortDir",
+        "Name": "SortType",
         "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "City",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Active",
-        "Type": "System.Boolean",
         "IsRequired": false
       }
     ],
@@ -384,12 +379,17 @@
         "IsRequired": false
       },
       {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
         "Name": "SortField",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "SortDir",
+        "Name": "SortType",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -521,18 +521,18 @@
         "IsRequired": false
       },
       {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
         "Name": "SortField",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "SortDir",
+        "Name": "SortType",
         "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "HotelId",
-        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -562,17 +562,32 @@
         "IsRequired": false
       },
       {
-        "Name": "pageIdx",
+        "Name": "minPrice",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "maxPrice",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageIdx",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "sortField",
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortField",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "sortDir",
+        "Name": "SortType",
         "Type": "System.String",
         "IsRequired": false
       }

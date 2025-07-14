@@ -10,5 +10,5 @@ public abstract class PaginatedQuery<T> : IRequest<T>
 
     public string SortField { get; set; } = "Id";
 
-    public SortType SortType { get; set; } = SortType.DESC;
+    public string SortType { get; set; } = "DESC";
 }

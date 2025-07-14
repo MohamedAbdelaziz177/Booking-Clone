@@ -23,7 +23,14 @@ public class GetAllRoomsAvailableBetweenQueryHandler :
     {
         var rooms = await unitOfWork.RoomRepo.GetAvaliableRoomsBetween(request.start,
             request.end,
-            request.hotelId);
+            request.hotelId,
+            request.minPrice,
+            request.maxPrice,
+            request.PageIdx,
+            request.PageSize,
+            request.SortField,
+            request.SortType
+            );
 
         var response = rooms.Select(r => mapper.Map<RoomResponseDto>(r)).ToList();
 

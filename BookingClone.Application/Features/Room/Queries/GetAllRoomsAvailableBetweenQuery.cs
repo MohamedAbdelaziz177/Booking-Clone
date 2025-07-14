@@ -9,6 +9,7 @@ public class GetAllRoomsAvailableBetweenQuery : PaginatedQuery<Result<List<RoomR
 {
     public DateTime start {  get; set; }
     public DateTime end { get; set; }
-
     public int? hotelId { get; set; }
+    public decimal? minPrice { get; set; } = 0;
+    public decimal? maxPrice { get; set; } = decimal.MaxValue;
 }
