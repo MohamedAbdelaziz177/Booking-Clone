@@ -37,6 +37,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpPost]
+        
         public async Task<IActionResult> AddHotel(CreateHotelCommand createHotelCommand)
         {
             var res = await mediator.Send(createHotelCommand);
