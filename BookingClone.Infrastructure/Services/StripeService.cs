@@ -39,10 +39,10 @@ public class StripeService : IStripeService
                     Name = "Reservation with Id: " + cmd.ReservationResponse.Id.ToString(),
                 },
                 Currency = "usd",
-                UnitAmount = (long)(100 * cmd.ReservationResponse.RoomCardResponse.PricePerNight)
+                UnitAmount = (long)(100 * cmd.ReservationResponse.RoomDetails.PricePerNight)
             },
 
-            Quantity = cmd.ReservationResponse.GetNightsNo()
+            Quantity = cmd.ReservationResponse.NightsNo
         });
 
         SessionService sessionService = new();

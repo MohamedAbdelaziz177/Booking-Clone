@@ -22,7 +22,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetReservationById(int Id)
         {
             var query = new GetReservationByIdQuery() { Id = Id };
@@ -33,13 +33,27 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpGet("all")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetReservationsPage([FromQuery] GetReservationsPageQuery query)
         {
             var res = await mediator.Send(query);
             return Ok(res);
         }
 
+        [HttpGet("my-reservations")]
+        [Authorize]
+        public async Task<IActionResult> GetMyReservations()
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+            var query = new GetReservationsByUserIdQuery() { UserId = userId };
+
+            var res = await mediator.Send(query);
+
+            return Ok(res);
+        }
+
+       
         [HttpPost("add")]
         [Authorize] 
         public async Task<IActionResult> CreateReservation([FromBody] CreateReservationCommand request)
@@ -81,18 +95,6 @@ namespace BookingClone.Api.Controllers
             await mediator.Send(cmd);
 
             return Ok("Reservation Canceled Successfully");
-        }
-
-
-        [HttpGet("my-reservations")]
-        [Authorize]
-        public async Task<IActionResult> GetMyReservations()
-        {
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-
-            var res = await mediator.Send(userId);
-
-            return Ok(res);
         }
 
     }

@@ -11,6 +11,7 @@ public static class ReservationMapsterAdapter
     public static void Configure()
     {
         TypeAdapterConfig<ReservationEntity, ReservationResponseDto>.NewConfig()
-            .Map(dest => dest.ReservationStatus, src => src.ReservationStatus.ToString());
+            .Map(dest => dest.ReservationStatus, src => src.ReservationStatus.ToString())
+            .Map(dest => dest.RoomDetails, src => src.Room);
     }
 }

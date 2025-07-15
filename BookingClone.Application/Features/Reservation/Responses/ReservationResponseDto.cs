@@ -19,10 +19,10 @@ public class ReservationResponseDto
 
     public string ReservationStatus { get; set; } = string.Empty.ToString();
 
-    public int GetNightsNo() => (CheckOutDate - CheckInDate).Days;
+    public int NightsNo => (CheckOutDate - CheckInDate).Days;
 
-    public decimal GetTotalPrice() => GetNightsNo() * RoomCardResponse.PricePerNight;
+    public decimal TotalPrice => NightsNo * RoomDetails.PricePerNight;
 
-    public RoomCardResponse RoomCardResponse { get; set; } = new();
+    public RoomCardResponse RoomDetails { get; set; } = new();
 
 }

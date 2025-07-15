@@ -7,5 +7,7 @@ namespace BookingClone.Application.Features.Reservation.Queries;
 
 public class GetReservationsPageQuery : PaginatedQuery<Result<List<ReservationResponseDto>>>
 {
-   
+    public DateTime date { get; set; } = DateTime.Today;
+
+    public int? hotelId { get; set; } = null;
 }
