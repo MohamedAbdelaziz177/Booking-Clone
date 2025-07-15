@@ -1,5 +1,8 @@
 ﻿using BookingClone.Domain.IRepositories;
 using BookingClone.Infrastructure.Persistance;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Data;
 
 namespace BookingClone.Infrastructure.Persistance.Repositories;
 
@@ -46,5 +49,10 @@ public class UnitOfWork : IUnitOfWork
     public async Task<int> SaveChangesAsync()
     {
         return await con.SaveChangesAsync();
+    }
+
+    public async Task<IDbContextTransaction> GetSerializableTransaction()
+    {
+        return await con.Database.BeginTransactionAsync(IsolationLevel.Serializable);
     }
 }

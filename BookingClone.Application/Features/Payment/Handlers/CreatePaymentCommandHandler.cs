@@ -29,8 +29,8 @@ public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand,
 
         payment.Status = PaymentStatus.Succedded;
         payment.IntentId = res.IntentId;
-        payment.ReservationId = request.ReservationResponse.Id;
-        payment.Amount = request.ReservationResponse.TotalPrice;
+        payment.ReservationId = request.ReservationDetails.Id;
+        payment.Amount = request.ReservationDetails.TotalPrice;
 
         await unitOfWork.PaymentRepo.AddAsync(payment);
 

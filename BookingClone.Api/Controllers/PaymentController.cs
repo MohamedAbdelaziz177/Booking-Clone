@@ -23,7 +23,7 @@ namespace BookingClone.Api.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (command.ReservationResponse.UserId != userId)
+            if (command.ReservationDetails.UserId != userId)
                 return Forbid("U r not authorized to take this action");
             
             var res = await mediator.Send(command);

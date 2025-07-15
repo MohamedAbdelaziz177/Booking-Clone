@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1p3ZckerG0eCb9mlLIOHkThgxeR+USIOmruZ7FG0+bk=",
+  "Hash": "XVQ6kVhl5WhKeS8hQgQZgFm2RzCso9De1oPtqAhO4QQ=",
   "Source": "BookingClone.Api",
   "BasePath": "_content/BookingClone.Api",
   "Mode": "Default",
@@ -16,6 +16,44 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\PaymentPages\\payment_cancel.html",
+      "SourceId": "BookingClone.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\",
+      "BasePath": "_content/BookingClone.Api",
+      "RelativePath": "PaymentPages/payment_cancel.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PaymentPages\\payment_cancel.html"
+    },
+    {
+      "Identity": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\PaymentPages\\payment_success.html",
+      "SourceId": "BookingClone.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\",
+      "BasePath": "_content/BookingClone.Api",
+      "RelativePath": "PaymentPages/payment_success.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PaymentPages\\payment_success.html"
+    },
     {
       "Identity": "F:\\BookingClone\\BookingClone.Api\\wwwroot\\rooms\\60+ Hotel vibe bedroom neat ideas.jpeg",
       "SourceId": "BookingClone.Api",

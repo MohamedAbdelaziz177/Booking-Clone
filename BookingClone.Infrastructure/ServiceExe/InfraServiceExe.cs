@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
+using Stripe;
 
 namespace BookingClone.Infrastructure.ServiceExe;
 
@@ -43,6 +44,8 @@ public static class InfraServiceExe
         });
 
         Service.AddScoped<IRedisService, RedisService>();
-        
+
+        StripeConfiguration.ApiKey = configuration["STRIPE:SECRET_KEY"]!;
+
     }
 }

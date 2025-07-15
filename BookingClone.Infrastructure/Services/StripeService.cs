@@ -23,11 +23,17 @@ public class StripeService : IStripeService
 
     public async Task<StripeResponseDto> CreateStripeSession(CreatePaymentCommand cmd)
     {
+        string Domain = configuration["DOMAIN"]!;
+        string SuccessPage = configuration["STRIPE:SUCCESS_PAGE"]!;
+        string CancelPage = configuration["STRIPE:CANCEL_PAGE"]!;
+
         SessionCreateOptions options = new SessionCreateOptions()
         {
-            SuccessUrl = configuration["Stripe:Success_Url"],
-            CancelUrl = configuration["Stripe:Cancel_Url"],
-            PaymentMethodTypes = new List<string>() { "Card" },
+            SuccessUrl = Domain + SuccessPage,
+            CancelUrl = Domain + CancelPage,
+            PaymentMethodTypes = new List<string>() { "card" },
+            Mode = "payment",
+            LineItems = new List<SessionLineItemOptions>()
         };
 
         options.LineItems.Add(new()
@@ -36,13 +42,13 @@ public class StripeService : IStripeService
             {
                 ProductData = new SessionLineItemPriceDataProductDataOptions()
                 {
-                    Name = "Reservation with Id: " + cmd.ReservationResponse.Id.ToString(),
+                    Name = "Reservation with Id: " + cmd.ReservationDetails.Id.ToString(),
                 },
                 Currency = "usd",
-                UnitAmount = (long)(100 * cmd.ReservationResponse.RoomDetails.PricePerNight)
+                UnitAmount = (long)(100 * cmd.ReservationDetails.RoomDetails.PricePerNight)
             },
 
-            Quantity = cmd.ReservationResponse.NightsNo
+            Quantity = cmd.ReservationDetails.NightsNo
         });
 
         SessionService sessionService = new();

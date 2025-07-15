@@ -9,6 +9,5 @@ namespace BookingClone.Application.Features.Payment.Commands;
 
 public class CreatePaymentCommand : IRequest<Result<StripeResponseDto>>
 {
-    [JsonPropertyName("ReservationDetails")]
-    public ReservationResponseDto ReservationResponse { get; set; } = default!;
+    public ReservationResponseDto ReservationDetails { get; set; } = default!;
 }

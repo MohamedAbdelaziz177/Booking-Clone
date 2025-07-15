@@ -77,11 +77,14 @@ namespace BookingClone.Api
                 app.UseSwaggerUI();
             }
 
+            app.UseStaticFiles();
+
             app.UseMiddleware<GlobalExceptionMiddleware>();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
+            
 
             app.MapControllers();
 

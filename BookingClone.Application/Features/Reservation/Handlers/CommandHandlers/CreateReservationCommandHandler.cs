@@ -25,20 +25,31 @@ public class CreateReservationCommandHandler : IRequestHandler<CreateReservation
 
     public async Task<Result<ReservationResponseDto>> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
     {
-        
-        bool checkAvailable = await unitOfWork
+
+        using var Trx = await unitOfWork.GetSerializableTransaction();
+        try
+        {
+            bool checkAvailable = await unitOfWork
             .RoomRepo
             .CheckAvailableBetweenAsync(request.RoomId, request.CheckInDate, request.CheckOutDate);
 
-        if (!checkAvailable)
-            return new Result<ReservationResponseDto>(success: false, "Room is occupied in that range");
+            if (!checkAvailable)
+                return new Result<ReservationResponseDto>(success: false, "Room is occupied in that range");
 
-        ReservationEntity entity = mapper.Map<ReservationEntity>(request);
+            ReservationEntity entity = mapper.Map<ReservationEntity>(request);
 
-        await unitOfWork.ReservationRepo.AddAsync(entity);
+            await unitOfWork.ReservationRepo.AddAsync(entity);
 
-        ReservationResponseDto res = mapper.Map<ReservationResponseDto>(entity);
+            ReservationResponseDto res = mapper.Map<ReservationResponseDto>(entity);
 
-        return new Result<ReservationResponseDto>(res, true, "Added Successfully");
+            await Trx.CommitAsync();
+
+            return new Result<ReservationResponseDto>(res, true, "Added Successfully");
+        }
+        catch (Exception ex)
+        {
+            await Trx.RollbackAsync();
+            return new Result<ReservationResponseDto>(false, "Room is occupied");
+        }
     }
 }

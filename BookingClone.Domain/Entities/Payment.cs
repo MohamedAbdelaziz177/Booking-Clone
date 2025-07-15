@@ -11,10 +11,10 @@ public class Payment
 
     public PaymentStatus Status {  get; set; } = PaymentStatus.Pending;
 
-    public string IntentId { get; set; } = string.Empty;
+    public string? IntentId { get; set; } = string.Empty;
 
     public int ReservationId {  get; set; }
 
-    public Reservation Reservation { get; set; } = new();
+    public Reservation Reservation { get; set; } = default!;
 
 }
