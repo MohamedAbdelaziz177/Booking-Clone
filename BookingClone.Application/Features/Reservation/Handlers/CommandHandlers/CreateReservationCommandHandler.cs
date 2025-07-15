@@ -45,7 +45,7 @@ public class CreateReservationCommandHandler : IRequestHandler<CreateReservation
             await Trx.CommitAsync();
 
             return new Result<ReservationResponseDto>(res, true, "Added Successfully");
-        }
+        } 
         catch (Exception ex)
         {
             await Trx.RollbackAsync();

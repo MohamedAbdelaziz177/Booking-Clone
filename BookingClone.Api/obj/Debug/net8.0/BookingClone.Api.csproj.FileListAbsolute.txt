@@ -335,3 +335,5 @@ F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.S
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\CloudinaryDotNet.dll
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\BookingClone.Api.xml
+F:\BookingClone\BookingClone.Api\obj\Debug\net8.0\BookingClone.Api.xml
