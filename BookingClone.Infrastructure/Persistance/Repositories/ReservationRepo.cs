@@ -10,6 +10,11 @@ public class ReservationRepo : GenericRepo<Reservation>, IReservationRepo
     public ReservationRepo(AppDbContext con) : base(con)
     {
     }
+
+    public override async Task<Reservation?> GetByIdAsync(int id)
+    {
+        return await con.reservations.Include(r => r.User).FirstOrDefaultAsync();
+    }
     public Task<List<Reservation>> GetByDateAsync(DateTime date,
         int pageIdx = 1,
         int pageSize = 3,

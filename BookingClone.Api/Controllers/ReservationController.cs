@@ -2,6 +2,8 @@
 using BookingClone.Application.Features.Reservation.Commands;
 using BookingClone.Application.Features.Reservation.Queries;
 using BookingClone.Application.Features.Reservation.Responses;
+using BookingClone.Infrastructure.BackgroundJobs;
+using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +24,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> GetReservationById(int Id)
         {
             var query = new GetReservationByIdQuery() { Id = Id };
@@ -67,6 +69,9 @@ namespace BookingClone.Api.Controllers
             if(!res.Success)
                 return BadRequest(res);
 
+            BackgroundJob.Schedule<PaymentReminderJob>(j =>
+            j.SendReminderAsync(res.Data!.Id), TimeSpan.FromSeconds(25/*for testing purposes*/));
+
             return Created();
         }
 
@@ -93,6 +98,9 @@ namespace BookingClone.Api.Controllers
             var cmd = new DeleteReservationCommand() { Id = Id };
 
             await mediator.Send(cmd);
+
+            BackgroundJob.Schedule<RefundReminderJob>(j =>
+            j.SendReminderAsync(Id), TimeSpan.FromSeconds(25));
 
             return Ok("Reservation Canceled Successfully");
         }
