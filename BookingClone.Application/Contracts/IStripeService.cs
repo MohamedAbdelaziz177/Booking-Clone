@@ -6,6 +6,6 @@ using BookingClone.Application.Features.Reservation.Responses;
 namespace BookingClone.Application.Contracts;
 public interface IStripeService
 {
-    Task<StripeResponseDto> CreateStripeSession(CreatePaymentCommand createPaymentCommand);
-    Task<bool> Refund(RefundPaymentCommand cmd);
+    Task<StripeResponseDto> CreatePaymentIntent(CreatePaymentCommand createPaymentCommand);
+    Task<bool> Refund(string intent);
 }

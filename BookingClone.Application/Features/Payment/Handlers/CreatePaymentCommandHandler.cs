@@ -25,7 +25,7 @@ public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand,
 
     public async Task<Result<StripeResponseDto>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
     {
-        var res = await stripeService.CreateStripeSession(request);
+        var res = await stripeService.CreatePaymentIntent(request);
 
         var reservation = await unitOfWork.ReservationRepo.GetByIdAsync(request.ReservationDetails.Id);
 

@@ -21,66 +21,44 @@ public class StripeService : IStripeService
         this.unitOfWork = unitOfWork;
     }
 
-    public async Task<StripeResponseDto> CreateStripeSession(CreatePaymentCommand cmd)
+    public async Task<StripeResponseDto> CreatePaymentIntent(CreatePaymentCommand cmd)
     {
-        string Domain = configuration["DOMAIN"]!;
-        string SuccessPage = configuration["STRIPE:SUCCESS_PAGE"]!;
-        string CancelPage = configuration["STRIPE:CANCEL_PAGE"]!;
-
-        SessionCreateOptions options = new SessionCreateOptions()
+         
+        PaymentIntentCreateOptions options = new PaymentIntentCreateOptions()
         {
-            SuccessUrl = Domain + SuccessPage,
-            CancelUrl = Domain + CancelPage,
+            Amount = (long)cmd.ReservationDetails.TotalPrice,
+            Currency = "usd",
             PaymentMethodTypes = new List<string>() { "card" },
-            Mode = "payment",
-            LineItems = new List<SessionLineItemOptions>()
+            Customer = cmd.ReservationDetails.UserId,
+            Metadata = new Dictionary<string, string>()
+            {
+                {"reservationId", cmd.ReservationDetails.Id.ToString()},
+                {"userId", cmd.ReservationDetails.UserId},
+            }
         };
 
-        options.LineItems.Add(new()
-        {
-            PriceData = new SessionLineItemPriceDataOptions()
-            {
-                ProductData = new SessionLineItemPriceDataProductDataOptions()
-                {
-                    Name = "Reservation with Id: " + cmd.ReservationDetails.Id.ToString(),
-                },
-                Currency = "usd",
-                UnitAmount = (long)(100 * cmd.ReservationDetails.RoomDetails.PricePerNight)
-            },
-
-            Quantity = cmd.ReservationDetails.NightsNo
-        });
-
-        SessionService sessionService = new();
-        Session session = await sessionService.CreateAsync(options);
+        PaymentIntentService service = new PaymentIntentService();
+        PaymentIntent intent = await service.CreateAsync(options);
 
         return new StripeResponseDto()
         {
-            SessionId = session.Id,
-            SessionUrl = session.Url,
-            IntentId = session.PaymentIntentId
+            IntentId = intent.Id,
+            ClientSecret = intent.ClientSecret
         };
         
     }
 
 
-    public async Task<bool> Refund(RefundPaymentCommand cmd)
+    public async Task<bool> Refund(string IntentId)
     {
-        Payment? p = await unitOfWork.PaymentRepo.GetPaymentByReservatioIdAsync(cmd.ReservationId);
+        var refundService = new RefundService();
 
-        if (p == null)
-            return false;
-
-        p.Status = PaymentStatus.Refunded;
-
-        await unitOfWork.SaveChangesAsync();
-
-        RefundCreateOptions options = new RefundCreateOptions() { PaymentIntent = p.IntentId,
-            Reason = cmd.Reason };
-
-        RefundService service = new RefundService();
-        await service.CreateAsync(options);
-      
+        await refundService.CreateAsync(new RefundCreateOptions()
+        {
+            PaymentIntent = IntentId,
+            Reason = "---------",
+        });
+       
         return true;
     }
 }

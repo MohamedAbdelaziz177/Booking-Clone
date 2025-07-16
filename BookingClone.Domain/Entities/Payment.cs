@@ -9,9 +9,9 @@ public class Payment
 
     public decimal Amount {  get; set; }
 
-    public PaymentStatus Status {  get; set; } = PaymentStatus.Pending;
+    public PaymentStatus Status {  get; set; } = PaymentStatus.Succedded;
 
-    public string? IntentId { get; set; } = string.Empty;
+    public string IntentId { get; set; } = string.Empty;
 
     public int ReservationId {  get; set; }
 
