@@ -382,7 +382,7 @@
   {
     "ContainingType": "BookingClone.Api.Controllers.HotelController",
     "Method": "GetByCity",
-    "RelativePath": "api/Hotel/filter-by-city",
+    "RelativePath": "api/Hotel/get-by-city",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

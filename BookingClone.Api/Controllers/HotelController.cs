@@ -36,8 +36,17 @@ namespace BookingClone.Api.Controllers
             return Ok(res);
         }
 
+        [HttpGet("get-by-city")]
+        public async Task<IActionResult> GetByCity([FromQuery] string city)
+        {
+            var req = new GetHotelsByCityOrCountryQuery() { City = city };
+
+            var res = await mediator.Send(req);
+
+            return Ok(res);
+        }
+
         [HttpPost]
-        
         public async Task<IActionResult> AddHotel(CreateHotelCommand createHotelCommand)
         {
             var res = await mediator.Send(createHotelCommand);
@@ -60,14 +69,5 @@ namespace BookingClone.Api.Controllers
             return Ok(res);
         }
 
-        [HttpGet("filter-by-city")]
-        public async Task<IActionResult> GetByCity([FromQuery] string city)
-        {
-            var req = new GetHotelsByCityOrCountryQuery() { City = city };
-
-            var res = await mediator.Send(req);
-
-            return Ok(res);
-        }
     }
 }

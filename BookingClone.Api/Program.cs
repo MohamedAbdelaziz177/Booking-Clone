@@ -7,6 +7,7 @@ using BookingClone.Infrastructure.Persistance;
 using BookingClone.Infrastructure.ServiceExe;
 using CloudinaryDotNet;
 using DotNetEnv;
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -55,7 +56,7 @@ namespace BookingClone.Api
             app.UseAuthentication();
             app.UseAuthorization();
 
-            
+            app.UseHangfireDashboard();
 
             app.MapControllers();
 

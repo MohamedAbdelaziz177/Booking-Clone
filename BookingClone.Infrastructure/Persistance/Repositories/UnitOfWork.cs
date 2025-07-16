@@ -55,4 +55,9 @@ public class UnitOfWork : IUnitOfWork
     {
         return await con.Database.BeginTransactionAsync(IsolationLevel.Serializable);
     }
+
+    public async Task<IDbContextTransaction> GetTransaction()
+    {
+        return await con.Database.BeginTransactionAsync();
+    }
 }

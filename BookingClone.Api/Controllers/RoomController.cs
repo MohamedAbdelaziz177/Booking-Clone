@@ -53,6 +53,14 @@ namespace BookingClone.Api.Controllers
             return Created();
         }
 
+        [HttpPost("image")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddRoomImage(AddRoomImageCommand request)
+        {
+            var res = await mediator.Send(request);
+            return Ok(res);
+        }
+
         [HttpPut]
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateRoom(UpdateRoomCommand updateRoomCommand)
@@ -71,13 +79,6 @@ namespace BookingClone.Api.Controllers
             return Ok(res);
         }
 
-        [HttpPost("image")]
-        //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AddRoomImage(AddRoomImageCommand request)
-        {
-            var res = await mediator.Send(request);
-            return Ok(res);
-        }
 
         [HttpDelete("image/{Id:int}")]
         //[Authorize(Roles = "Admin")]

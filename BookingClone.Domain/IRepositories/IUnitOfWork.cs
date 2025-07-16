@@ -24,4 +24,6 @@ public interface IUnitOfWork
     Task<int> SaveChangesAsync();
     Task<IDbContextTransaction> GetSerializableTransaction();
 
+    Task<IDbContextTransaction> GetTransaction();
+
 }

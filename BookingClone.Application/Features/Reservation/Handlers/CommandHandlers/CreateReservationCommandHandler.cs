@@ -49,7 +49,7 @@ public class CreateReservationCommandHandler : IRequestHandler<CreateReservation
         catch (Exception ex)
         {
             await Trx.RollbackAsync();
-            return new Result<ReservationResponseDto>(false, "Room is occupied");
+            throw;
         }
     }
 }

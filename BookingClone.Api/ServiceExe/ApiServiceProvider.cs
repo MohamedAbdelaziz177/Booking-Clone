@@ -1,5 +1,6 @@
 ﻿using BookingClone.Domain.Entities;
 using BookingClone.Infrastructure.Persistance;
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -13,8 +14,8 @@ namespace BookingClone.Api.ServiceExe
     {
         public static void AddApiComponents(this IServiceCollection Services, IConfiguration configuration)
         {
-           Services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+            Services.AddIdentity<User, IdentityRole>()
+                 .AddEntityFrameworkStores<AppDbContext>();
 
             Services.AddSwaggerGen(options =>
             {
@@ -89,6 +90,10 @@ namespace BookingClone.Api.ServiceExe
                     };
                 });
 
+            Services.AddHangfire(config =>
+            config.UseSqlServerStorage(configuration.GetConnectionString("default")));
+
+            Services.AddHangfireServer();
         }
     }
 }
