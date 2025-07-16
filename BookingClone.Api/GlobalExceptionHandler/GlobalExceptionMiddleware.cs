@@ -37,29 +37,23 @@ namespace BookingClone.Api.GlobalExceptionHandler
 
         private ExceptionResponse HandleException(Exception ex)
         {
-            ExceptionResponse response;
+            ExceptionResponse response = new ExceptionResponse();
             Type type = ex.GetType();
 
             if (type == typeof(EntityNotFoundException))
-                response = new ExceptionResponse()
-                {
-                    StatusCode = HttpStatusCode.NotFound,
-                };
+                response.StatusCode = HttpStatusCode.NotFound;
 
             else if (type == typeof(LoginFailedException)
                 || type == typeof(RegistrationFailedException)
                 || type == typeof(OtpNotValidException)
+                || type == typeof(UnavailablePaymentException)
+                || type == typeof(AlreadyPaidException)
                 )
-                response = new ExceptionResponse()
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                };
+                response.StatusCode = HttpStatusCode.BadRequest;
 
             else if (type == typeof(RefreshTokenNotValidException))
-                response = new ExceptionResponse()
-                {
-                    StatusCode = HttpStatusCode.Unauthorized,
-                };
+                response.StatusCode=HttpStatusCode.Unauthorized;
+
             else
                 response = new ExceptionResponse()
                 {
