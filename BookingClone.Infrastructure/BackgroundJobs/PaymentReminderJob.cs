@@ -1,5 +1,6 @@
 ﻿
 using BookingClone.Application.Contracts;
+using BookingClone.Domain.Enums;
 using BookingClone.Domain.IRepositories;
 
 namespace BookingClone.Infrastructure.BackgroundJobs;
@@ -20,7 +21,7 @@ public class PaymentReminderJob
         var payment = await unitOfWork.PaymentRepo.GetPaymentByReservatioIdAsync(reservationId);
         var reservation = await unitOfWork.ReservationRepo.GetByIdAsync(reservationId);
         
-        if (payment == null)
+        if (payment == null && reservation!.ReservationStatus == ReservationStatus.Pending)
         {
             var userEmail = reservation!.User.Email;
             var userFname = reservation!.User.Firstname;

@@ -32,7 +32,7 @@ public class DeleteReservationCommandHandler : IRequestHandler<DeleteReservation
         reservation.CheckOutDate = DateTime.Now;
 
         await unitOfWork.ReservationRepo.UpdateAsync(reservation);
-        // await unitOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
         return new Result<string>("Reservation Cancelled successfully");
     }
