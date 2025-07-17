@@ -10,6 +10,7 @@ using BookingClone.Domain.Entities;
 using BookingClone.Application.Features.Reservation;
 using BookingClone.Application.Contracts;
 using BookingClone.Application.Features.FeedBack;
+using BookingClone.Application.Behaviors;
 
 namespace BookingClone.Application.ServiceExe;
 
@@ -26,6 +27,8 @@ public static class AppServiceProvider
         ReservationMapsterAdapter.Configure();
 
         Service.AddValidatorsFromAssembly(typeof(CreateHotelCommandValidator).Assembly);
+        Service.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
         Service.AddMediatR(typeof(CreateHotelCommandValidator).Assembly);
     }
 

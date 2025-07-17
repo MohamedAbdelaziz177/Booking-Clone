@@ -1,5 +1,6 @@
 ﻿using BookingClone.Application.Common;
 using BookingClone.Application.Exceptions;
+using FluentValidation;
 using System.Net;
 
 namespace BookingClone.Api.GlobalExceptionHandler
@@ -48,6 +49,7 @@ namespace BookingClone.Api.GlobalExceptionHandler
                 || type == typeof(OtpNotValidException)
                 || type == typeof(UnavailablePaymentException)
                 || type == typeof(AlreadyPaidException)
+                || type == typeof(ValidationException)
                 )
                 response.StatusCode = HttpStatusCode.BadRequest;
 
