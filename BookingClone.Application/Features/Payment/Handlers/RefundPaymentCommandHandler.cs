@@ -39,7 +39,7 @@ namespace BookingClone.Application.Features.Payment.Handlers
             if (!succ)
                 throw new EntityNotFoundException("Reservation not found");
 
-            return new Result<string>("Money Refunded successfully");
+            return  Result<string>.CreateSuccessResult("Money Refunded successfully");
         }
     }
 }

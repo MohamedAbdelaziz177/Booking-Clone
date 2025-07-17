@@ -33,6 +33,6 @@ public class GetHotelsByCityOrCountryHandler : IRequestHandler<GetHotelsByCityOr
 
         var res =  Hotels.Select(h => mapper.Map<HotelResponseDto>(h)).ToList();
 
-        return new Result<List<HotelResponseDto>>(res);
+        return Result<List<HotelResponseDto>>.CreateSuccessResult(res);
     }
 }

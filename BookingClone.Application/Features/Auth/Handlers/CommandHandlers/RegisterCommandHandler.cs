@@ -87,9 +87,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
             }
                 
         }
-             
-
-        return new Result<string>(true, message: "Registeration successfully completed - check ur email");
-
+            
+        return Result<string>.CreateSuccessResult("Registeration successfully completed - check ur email");
     }
 }

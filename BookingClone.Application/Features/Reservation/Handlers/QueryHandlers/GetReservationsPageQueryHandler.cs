@@ -29,6 +29,6 @@ public class GetReservationsPageQueryHandler : IRequestHandler<GetReservationsPa
 
         var Dtos = reservations.Select(r => mapper.Map<ReservationResponseDto>(r)).ToList();
 
-        return new Result<List<ReservationResponseDto>>(Dtos);
+        return Result<List<ReservationResponseDto>>.CreateSuccessResult(Dtos);
     }
 }

@@ -56,7 +56,7 @@ public class GetHotelByIdQueryHandler : IRequestHandler<GetHotelByIdQuery, Resul
         await redisService.SetDataAsync<HotelEntity>(redisKey, hotel);
 
 
-        return new Result<HotelResponseDto>(mapper.Map<HotelResponseDto>(hotel),
+        return Result<HotelResponseDto>.CreateSuccessResult(mapper.Map<HotelResponseDto>(hotel),
             true);
     }
 }

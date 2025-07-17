@@ -32,6 +32,6 @@ public class DeleteHotelCommandHandler : IRequestHandler<DeleteHotelCommand, Res
         await redisService.RemoveDataAsync(MagicValues.HOTEL_REDIS_KEY + request.Id.ToString());
         await redisService.RemoveByTagAsync(MagicValues.HOTEL_PAGE_REDIS_TAG);
 
-        return new Result<string>(data: "Deleted successfully");
+        return Result<string>.CreateSuccessResult(data: "Deleted successfully");
     }
 }

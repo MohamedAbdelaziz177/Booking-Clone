@@ -24,6 +24,6 @@ public class GetReservationsByUserIdQueryHandler : IRequestHandler<GetReservatio
         var reservations = await unitOfWork.ReservationRepo.GetByUserIdAsync(request.UserId);
         var res = reservations.Select(r => mapper.Map<ReservationResponseDto>(r)).ToList();
 
-        return new Result<List<ReservationResponseDto>>(res);
+        return Result<List<ReservationResponseDto>>.CreateSuccessResult(res);
     }
 }

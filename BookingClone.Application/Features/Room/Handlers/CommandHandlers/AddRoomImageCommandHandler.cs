@@ -45,6 +45,6 @@ public class AddRoomImageCommandHandler : IRequestHandler<AddRoomImageCommand, R
 
         RoomResponseDto responseDto = mapper.Map<RoomResponseDto>(room);
 
-        return new Result<RoomResponseDto>(responseDto);
+        return Result<RoomResponseDto>.CreateSuccessResult(responseDto);
     }
 }

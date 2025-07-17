@@ -31,7 +31,7 @@ namespace BookingClone.Api.GlobalExceptionHandler
 
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)response.StatusCode;
-                await context.Response.WriteAsJsonAsync(new Result<ExceptionResponse>(false, ex.Message));
+                await context.Response.WriteAsJsonAsync(Result<ExceptionResponse>.CreateFailuteResult(ex.Message));
             }
         }
 

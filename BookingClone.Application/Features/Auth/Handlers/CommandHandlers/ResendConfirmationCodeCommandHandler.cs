@@ -42,7 +42,7 @@ public class ResendConfirmationCodeCommandHandler : IRequestHandler<ResendConfir
         await emailService.SendMail(request.Email, "Confirmation Code",
             user.EmailConfirmationOtp.ToString());
 
-        return new Result<string>(data:
+        return  Result<string>.CreateSuccessResult(data:
             "email confirmation token sent successfully");
     }
 

@@ -33,7 +33,7 @@ public class DeleteRoomCommandHandler : IRequestHandler<DeleteRoomCommand, Resul
         await redisService.RemoveDataAsync(MagicValues.ROOM_REDIS_KEY + request.Id);
         await redisService.RemoveByTagAsync(MagicValues.ROOM_PAGE_REDIS_TAG);
 
-        return new Result<string>("Deleted Successfully");
+        return Result<string>.CreateSuccessResult("Deleted Successfully");
 
     }
 }

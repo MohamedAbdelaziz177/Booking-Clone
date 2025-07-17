@@ -48,6 +48,6 @@ public class GetRoomPageQueryHandler : IRequestHandler<GetRoomPageQuery, Result<
          
         List<RoomResponseDto> roomDtos = rooms.Select(r => mapper.Map<RoomResponseDto>(r)).ToList();
 
-        return new Result<List<RoomResponseDto>>(roomDtos);
+        return Result<List<RoomResponseDto>>.CreateSuccessResult(roomDtos);
     }
 }

@@ -53,6 +53,6 @@ public class GetRoomByIdQueryHandler : IRequestHandler<GetRoomByIdQuery, Result<
 
         await redisService.SetDataAsync(redisKey, room);
 
-        return new Result<RoomResponseDto>(mapper.Map<RoomResponseDto>(room));
+        return Result<RoomResponseDto>.CreateSuccessResult(mapper.Map<RoomResponseDto>(room));
     }
 }

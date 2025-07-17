@@ -32,8 +32,7 @@ public class CreateHotelCommandHandler : IRequestHandler<CreateHotelCommand, Res
 
         await unitOfWork.HotelRepo.AddAsync(hotel);
 
-        return new Result<HotelResponseDto>(mapper.Map<HotelResponseDto>(hotel));
-        
+        return Result<HotelResponseDto>.CreateSuccessResult(mapper.Map<HotelResponseDto>(hotel));
     }
 
     

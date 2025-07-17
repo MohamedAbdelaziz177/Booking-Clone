@@ -34,6 +34,6 @@ public class DeleteReservationCommandHandler : IRequestHandler<DeleteReservation
         await unitOfWork.ReservationRepo.UpdateAsync(reservation);
         await unitOfWork.SaveChangesAsync();
 
-        return new Result<string>("Reservation Cancelled successfully");
+        return Result<string>.CreateSuccessResult("Reservation Cancelled successfully");
     }
 }

@@ -43,7 +43,6 @@ public class UpdateReservationCommandHandler : IRequestHandler<UpdateReservation
 
         ReservationResponseDto res = mapper.Map<ReservationResponseDto>(reservation);
 
-        return new Result<ReservationResponseDto>(res, true, 
-            "Reservation Updated Successfully");
+        return  Result<ReservationResponseDto>.CreateSuccessResult(res);
     }
 }

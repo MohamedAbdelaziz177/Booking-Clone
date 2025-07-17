@@ -32,6 +32,6 @@ public class AssignUserRoleCommandHandler : IRequestHandler<AssignUserRoleComman
         if (!res.Succeeded)
             throw new Exception("Assiging failed, try again");
 
-        return new Result<string>("Role Assigned to User successfully");
+        return Result<string>.CreateSuccessResult(data: "Role Assigned to User successfully");
     }
 }

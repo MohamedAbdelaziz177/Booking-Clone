@@ -42,6 +42,6 @@ public class UpdateRoomCommandHandler : IRequestHandler<UpdateRoomCommand, Resul
 
         RoomResponseDto roomResponse = mapper.Map<RoomResponseDto>(room);
 
-        return new Result<RoomResponseDto>(roomResponse, true, "Updated Successfully");
+        return Result<RoomResponseDto>.CreateSuccessResult(roomResponse);
     }
 }

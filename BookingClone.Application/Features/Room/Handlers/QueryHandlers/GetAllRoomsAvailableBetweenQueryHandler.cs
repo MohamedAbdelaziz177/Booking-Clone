@@ -41,6 +41,6 @@ public class GetAllRoomsAvailableBetweenQueryHandler :
 
         var response = rooms.Select(r => mapper.Map<RoomResponseDto>(r)).ToList();
 
-        return new Result<List<RoomResponseDto>>(response);
+        return Result<List<RoomResponseDto>>.CreateSuccessResult(response);
     }
 }

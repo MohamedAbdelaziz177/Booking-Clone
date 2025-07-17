@@ -62,7 +62,7 @@ public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand,
             throw;
         }
         
-        return new Result<StripeResponseDto>(res);
+        return Result<StripeResponseDto>.CreateSuccessResult(res);
 
     }
 }
