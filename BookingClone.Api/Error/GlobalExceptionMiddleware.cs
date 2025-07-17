@@ -35,7 +35,6 @@ namespace BookingClone.Api.GlobalExceptionHandler
             }
         }
 
-
         private ExceptionResponse HandleException(Exception ex)
         {
             ExceptionResponse response = new ExceptionResponse();
