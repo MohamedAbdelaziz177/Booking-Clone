@@ -4,6 +4,8 @@ using BookingClone.Application.Features.Auth.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 namespace BookingClone.Api.Controllers
 {
@@ -13,6 +15,7 @@ namespace BookingClone.Api.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
+    [EnableRateLimiting("SlidingWindow")]
     public class AuthController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -50,6 +53,7 @@ namespace BookingClone.Api.Controllers
         /// <returns>A JWT token and a refresh token (in cookie).</returns>
 
         [HttpPost("login")]
+        [EnableRateLimiting("TokensBucket")]
         public async Task<IActionResult> Login([FromBody] LoginCommand loginCommand)
         {
             Result<TokenResponseDto> res = await mediator.Send(loginCommand);
@@ -76,7 +80,7 @@ namespace BookingClone.Api.Controllers
 
             Result<TokenResponseDto> res = await mediator.Send(refreshTokenCommand);
 
-            SetRefTokenInCookie(refToken);
+            SetRefTokenInCookie(res.Data!.RefreshToken);
 
             return Ok(res);
         }
@@ -87,6 +91,7 @@ namespace BookingClone.Api.Controllers
         /// <param name="req">User's email.</param>
         /// <returns>A success message or error.</returns>
         [HttpPost("resend-confirmation-code")]
+        [EnableRateLimiting("TokensBucket")]
         public async Task<IActionResult> ResendConfirmationCode([FromBody] ResendConfirmationCodeCommand req)
         {
             var res = await mediator.Send(req);

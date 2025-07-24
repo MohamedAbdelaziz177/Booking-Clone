@@ -3,10 +3,12 @@ using BookingClone.Infrastructure.Persistance;
 using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using System.Threading.RateLimiting;
 
 namespace BookingClone.Api.ServiceExe
 {
@@ -94,6 +96,31 @@ namespace BookingClone.Api.ServiceExe
             config.UseSqlServerStorage(configuration.GetConnectionString("default")));
 
             Services.AddHangfireServer();
+        }
+
+        public static void AddRateLimitters(this IServiceCollection services)
+        {
+            services.AddRateLimiter(options =>
+            {
+                options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+                options.AddSlidingWindowLimiter("SlidingWindow", opts =>
+                {
+                    opts.Window = TimeSpan.FromSeconds(30);
+                    opts.PermitLimit = 5;
+                    opts.QueueLimit = 2;
+                    opts.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+                    opts.SegmentsPerWindow = 3;
+                });
+
+                options.AddTokenBucketLimiter("TokensBucket", opts =>
+                {
+                    opts.TokenLimit = 5;
+                    opts.TokensPerPeriod = 2;
+                    opts.ReplenishmentPeriod = TimeSpan.FromSeconds(40);
+                    opts.AutoReplenishment = true;
+                });
+            });
         }
     }
 }

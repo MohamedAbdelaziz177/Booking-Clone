@@ -34,6 +34,7 @@ namespace BookingClone.Api
             builder.Services.AddInfraComponents(builder.Configuration);
             builder.Services.AddAppComponents();
             builder.Services.AddApiComponents(builder.Configuration);
+            builder.Services.AddRateLimitters();
 
             foreach (var (key, value) in Environment.GetEnvironmentVariables().Cast<DictionaryEntry>())
             {
@@ -50,6 +51,8 @@ namespace BookingClone.Api
             }
 
             app.UseStaticFiles();
+           
+            app.UseRateLimiter();
 
             app.UseMiddleware<GlobalExceptionMiddleware>();
 

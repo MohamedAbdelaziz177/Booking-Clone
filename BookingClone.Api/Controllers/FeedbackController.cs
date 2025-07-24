@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using System.Configuration;
 using System.Security.Claims;
 
@@ -19,6 +20,7 @@ namespace BookingClone.Api.Controllers
    
     [Route("api/[controller]")]
     [ApiController]
+    [EnableRateLimiting("SlidingWindow")]
     public class FeedbackController : ControllerBase
     {
         private readonly IMediator mediator;
