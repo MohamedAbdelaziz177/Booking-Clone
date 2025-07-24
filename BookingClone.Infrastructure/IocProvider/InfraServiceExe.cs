@@ -17,9 +17,13 @@ public static class InfraServiceExe
 {
     public static void AddInfraComponents(this IServiceCollection Service, IConfiguration configuration)
     {
-        Service.AddDbContext<AppDbContext>(options =>
-        options.UseSqlServer(configuration.GetConnectionString("default")));
+        //Service.AddDbContext<AppDbContext>(options =>
+        //options.Use(configuration.GetConnectionString("default")));
 
+        Service.AddDbContext<AppDbContext>(options =>
+        {
+            options.UseNpgsql(configuration.GetConnectionString("default"));
+        });
 
         Service.AddScoped<IHotelRepo, HotelRepo>();
         Service.AddScoped<IRoomImageRepo, RoomImageRepo>();

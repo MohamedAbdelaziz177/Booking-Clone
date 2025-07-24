@@ -1,13 +1,47 @@
 
 services:
+  postgres:
+    image: postgres
+    container_name: pgCont
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: bookingDb
+
+    ports:
+      - "5432:5432" 
+
+    networks:
+      - net1
+
+    volumes:
+      - db:/var/lib/postgresql/data
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: mohamecabdelaziz66@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+    ports:
+      - "5050:80"
+
+    depends_on:
+      - postgres
+
+    networks:
+      - net1
+
   redis: 
     image: redis
     ports:
       - "6380:6379"
+
     networks:
       - net1
-    environment:
-      - REDIS_CONNECTION=redis:6379
+    #environment:
+    #  - REDIS_CONNECTION=redis:6379
   
   #api:
   #  build:
@@ -26,6 +60,9 @@ services:
 networks:
   net1:
     driver: bridge
+
+volumes:
+  db:
 
 
       

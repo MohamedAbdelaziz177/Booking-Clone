@@ -92,10 +92,10 @@ namespace BookingClone.Api.ServiceExe
                     };
                 });
 
-            Services.AddHangfire(config =>
-            config.UseSqlServerStorage(configuration.GetConnectionString("default")));
-
-            Services.AddHangfireServer();
+            //Services.AddHangfire(config =>
+            //config.UseSqlServerStorage(configuration.GetConnectionString("default")));
+            //
+            //Services.AddHangfireServer();
         }
 
         public static void AddRateLimitters(this IServiceCollection services)

@@ -16,7 +16,7 @@ public class User : IdentityUser
 
     public long PasswordResetOtp { get; set; } = default!;
 
-    public DateTime PasswordResetOtpExpiry { get;  set; } = default!;
+    public DateTime PasswordResetOtpExpiry { get;  set; } = DateTime.UtcNow;
 
     public List<Reservation> Reservations { get; set; } = new List<Reservation>();
 
