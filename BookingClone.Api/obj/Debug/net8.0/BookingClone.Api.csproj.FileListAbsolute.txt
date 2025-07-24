@@ -340,3 +340,5 @@ F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\zh-TW\Hangfire.Core.resources.
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\zh\Hangfire.Core.resources.dll
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Npgsql.dll
 F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Dapper.dll
+F:\BookingClone\BookingClone.Api\bin\Debug\net8.0\Hangfire.PostgreSql.dll

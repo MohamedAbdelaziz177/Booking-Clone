@@ -1,6 +1,7 @@
 ﻿using BookingClone.Domain.Entities;
 using BookingClone.Infrastructure.Persistance;
 using Hangfire;
+using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
@@ -92,10 +93,12 @@ namespace BookingClone.Api.ServiceExe
                     };
                 });
 
-            //Services.AddHangfire(config =>
-            //config.UseSqlServerStorage(configuration.GetConnectionString("default")));
-            //
-            //Services.AddHangfireServer();
+            Services.AddHangfire(config =>
+                config.UsePostgreSqlStorage(c =>
+                    c
+                    .UseNpgsqlConnection(configuration.GetConnectionString("HangfireConnection"))));
+
+            Services.AddHangfireServer();
         }
 
         public static void AddRateLimitters(this IServiceCollection services)

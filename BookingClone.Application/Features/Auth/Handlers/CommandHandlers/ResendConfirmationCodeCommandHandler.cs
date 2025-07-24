@@ -33,7 +33,7 @@ public class ResendConfirmationCodeCommandHandler : IRequestHandler<ResendConfir
         user.EmailConfirmationOtp = RandomNumberGenerator
             .GetInt32(MagicValues.MIN_OTP_VAL, MagicValues.MAX_OTP_VAL); 
 
-        user.EmailConfirmationOtpExpiry = DateTime.Now.AddMinutes(MagicValues.OTP_EXPIRY_MINS);
+        user.EmailConfirmationOtpExpiry = DateTime.UtcNow.AddMinutes(MagicValues.OTP_EXPIRY_MINS);
 
         await userManager.UpdateAsync(user);
 

@@ -12,7 +12,7 @@ public class User : IdentityUser
 
     public long EmailConfirmationOtp { get; set; }
 
-    public DateTime? EmailConfirmationOtpExpiry { get; set; }
+    public DateTime? EmailConfirmationOtpExpiry { get; set; } = DateTime.UtcNow;
 
     public long PasswordResetOtp { get; set; } = default!;
 

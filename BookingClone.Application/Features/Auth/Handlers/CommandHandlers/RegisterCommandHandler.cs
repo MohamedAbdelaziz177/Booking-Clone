@@ -77,7 +77,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
             if (Sent)
             {
                 AddedUser.EmailConfirmationOtp = OTP;
-                AddedUser.EmailConfirmationOtpExpiry = DateTime.Now.AddMinutes(MagicValues.OTP_EXPIRY_MINS);
+                AddedUser.EmailConfirmationOtpExpiry = DateTime.UtcNow.AddMinutes(MagicValues.OTP_EXPIRY_MINS);
                 await userManager.UpdateAsync(AddedUser);
             }
             else
