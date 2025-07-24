@@ -40,7 +40,7 @@ public class ConfirmEmailCommandHandler : IRequestHandler<ConfirmEmailCommand, R
             + "---" + user.EmailConfirmationOtpExpiry.ToString());
 
         if (user.EmailConfirmationOtp.ToString() != request.token 
-            || user.EmailConfirmationOtpExpiry < DateTime.Now)
+            || user.EmailConfirmationOtpExpiry < DateTime.UtcNow)
             throw new OtpNotValidException("Code is not valid");
 
         
