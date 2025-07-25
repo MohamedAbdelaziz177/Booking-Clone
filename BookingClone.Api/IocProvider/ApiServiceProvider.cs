@@ -1,4 +1,5 @@
 ﻿using BookingClone.Domain.Entities;
+using BookingClone.Infrastructure.BackgroundJobs;
 using BookingClone.Infrastructure.Persistance;
 using Hangfire;
 using Hangfire.PostgreSql;
@@ -95,10 +96,10 @@ namespace BookingClone.Api.ServiceExe
 
             Services.AddHangfire(config =>
                 config.UsePostgreSqlStorage(c =>
-                    c
-                    .UseNpgsqlConnection(configuration.GetConnectionString("HangfireConnection"))));
+                    c.UseNpgsqlConnection(configuration.GetConnectionString("HangfireConnection"))));
 
             Services.AddHangfireServer();
+
         }
 
         public static void AddRateLimitters(this IServiceCollection services)
@@ -124,6 +125,14 @@ namespace BookingClone.Api.ServiceExe
                     opts.AutoReplenishment = true;
                 });
             });
+        }
+
+        public static void CallCancelExpiredReservationsJob()
+        {
+            RecurringJob.AddOrUpdate<CancelExpiredReservationsJob>("cancel-expired-reservations",
+                j => j.InvalalidateExpiredReservations(),
+                Cron.Daily
+                );
         }
     }
 }

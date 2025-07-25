@@ -61,6 +61,8 @@ namespace BookingClone.Api
 
             app.UseHangfireDashboard();
 
+            ApiServiceProvider.CallCancelExpiredReservationsJob();
+
             app.MapControllers();
 
             app.Run();

@@ -2,6 +2,7 @@
 using BookingClone.Application.Contracts;
 using BookingClone.Domain.Entities;
 using BookingClone.Domain.IRepositories;
+using BookingClone.Infrastructure.BackgroundJobs;
 using BookingClone.Infrastructure.Persistance;
 using BookingClone.Infrastructure.Persistance.Repositories;
 using BookingClone.Infrastructure.Services;
@@ -17,9 +18,6 @@ public static class InfraServiceExe
 {
     public static void AddInfraComponents(this IServiceCollection Service, IConfiguration configuration)
     {
-        //Service.AddDbContext<AppDbContext>(options =>
-        //options.Use(configuration.GetConnectionString("default")));
-
         Service.AddDbContext<AppDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("default"));
@@ -38,9 +36,12 @@ public static class InfraServiceExe
 
         Service.AddScoped<IEmailService, EmailService>();
         Service.AddScoped<IStripeService, StripeService>();
-        //Service.AddScoped<IFileUploadService, FileUploadService>();
         Service.AddScoped<ICloudinaryService, CloudinaryService>();
         Service.AddScoped<IJwtService, JwtService>();
+
+        Service.AddScoped<CancelExpiredReservationsJob>();
+        Service.AddScoped<PaymentReminderJob>();
+        Service.AddScoped<RefundReminderJob>();
 
         Service.AddSingleton<IConnectionMultiplexer>(sp =>
         {
