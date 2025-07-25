@@ -29,7 +29,7 @@ A production-grade **hotel reservation system** built using **Clean Architecture
 - 🔁 **Refresh token flow** for session persistence with token rotation.
 - 🔁 **Replay protection**:
   - Prevents **double payment** for the same reservation.
-  - Prevents **double booking** of the same room using **serializable transactions**.
+  - Prevents **double booking** of the same room using **serializable transactions** (Serializable Isolation)..
 - 🧵 **Rate Limiting** (built-in protection for abuse/throttling):
   - **Token Bucket**: Used for authentication endpoints (e.g., login attempts).
   - **Sliding Window**: Applied to general endpoints with burst traffic tolerance (e.g., hotel/room search).
@@ -58,7 +58,9 @@ A production-grade **hotel reservation system** built using **Clean Architecture
 ### ⚙️ Background Jobs
 
 - Uses **Hangfire** to manage background services and recurring jobs.
-- Automatically cancels **expired** or **pending** reservations after timeout windows.
+- Automatically cancels **pending** reservations after timeout windows.
+- Automatically sends Email notification for users after Reservation to start **payment** process
+- Automatically sends Email notification for users after Reservation Cancellation to start **Refund** process
 
 ---
 
@@ -97,7 +99,7 @@ Booking-Clone/
 │
 ├── BookingClone.Api/               → API layer (controllers, auth, middleware)
 ├── BookingClone.Application/      → Application logic (CQRS handlers, validators)
-├── BookingClone.Domain/           → Domain models, aggregates, value objects
+├── BookingClone.Domain/           → Domain models, Repositories contracts, Encapsuled logic
 ├── BookingClone.Infrastructure/   → External integrations (DB, Redis, Email, Stripe, etc.)
 │
 ├── docker-compose.yaml            → Local containers for Redis, Postgres, etc.
@@ -120,10 +122,10 @@ Booking-Clone/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/Booking-Clone.git
+git clone https://github.com/MohamedAbdelaziz177/Booking-Clone.git
 cd Booking-Clone
 
-# 2. Start infrastructure (PostgreSQL, Redis, Hangfire dashboard)
+# 2. Start infrastructure (PostgreSQL, Redis, PgAdmin)
 docker-compose up -d
 
 # 3. Apply migrations
