@@ -801,6 +801,38 @@
   },
   {
     "ContainingType": "BookingClone.Api.Controllers.ReservationController",
+    "Method": "CommitReservationCheckIn",
+    "RelativePath": "api/Reservation/check-in",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reservationId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingClone.Api.Controllers.ReservationController",
+    "Method": "CommitReservationCheckOut",
+    "RelativePath": "api/Reservation/check-out",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reservationId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingClone.Api.Controllers.ReservationController",
     "Method": "GetMyReservations",
     "RelativePath": "api/Reservation/my-reservations",
     "HttpMethod": "GET",

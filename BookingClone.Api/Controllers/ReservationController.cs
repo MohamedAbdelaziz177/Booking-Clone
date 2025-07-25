@@ -141,9 +141,27 @@ namespace BookingClone.Api.Controllers
 
             BackgroundJob.Schedule<RefundReminderJob>(j =>
                 j.SendReminderAsync(Id),
-                TimeSpan.FromSeconds(25));
+                TimeSpan.FromSeconds(25)); // for testing only
 
             return Ok("Reservation Canceled Successfully");
+        }
+
+        [HttpPut("check-in")]
+        public async Task<IActionResult> CommitReservationCheckIn([FromQuery] int reservationId)
+        {
+            var res = await mediator
+                .Send(new CommitReservationCheckInCommand() { reservationId = reservationId });
+
+            return Ok(res);
+        }
+
+        [HttpPut("check-out")]
+        public async Task<IActionResult> CommitReservationCheckOut([FromQuery] int reservationId)
+        {
+            var res = await mediator
+                .Send(new CommitReservationCheckOutCommand() { reservationId = reservationId });
+
+            return Ok(res);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BookingClone.Domain.Entities;
+using BookingClone.Domain.Enums;
 using BookingClone.Domain.IRepositories;
 using BookingClone.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
@@ -53,5 +54,44 @@ public class ReservationRepo : GenericRepo<Reservation>, IReservationRepo
             .Where(con => con.UserId == userId)
             .Include(r => r.Room)
             .ToListAsync();
+    }
+
+    public async Task<List<Reservation>> GetExpiredReservations()
+    {
+        DateTime SupposedCheckIn = DateTime.UtcNow.AddDays(-1);
+
+        return await con
+            .reservations
+            .Where(r =>
+             r.CheckInDate <= SupposedCheckIn &&
+             r.ReservationStatus == ReservationStatus.Pending ).ToListAsync();
+    }
+
+    public async Task CommitCheckIn(int reservationId)
+    {
+        Reservation? reservation = await con.reservations.FirstOrDefaultAsync(r => r.Id ==  reservationId);
+
+        reservation.ReservationStatus = ReservationStatus.CheckedIn;
+
+        await con.SaveChangesAsync();
+
+    }
+
+    public async Task CommitCheckOut(int reservationId)
+    {
+        Reservation? reservation = await con.reservations.FirstOrDefaultAsync(r => r.Id == reservationId);
+
+        reservation.ReservationStatus = ReservationStatus.Completed;
+
+        await con.SaveChangesAsync();
+    }
+
+    public async Task CommitCancelation(int reservationId)
+    {
+        Reservation? reservation = await con.reservations.FirstOrDefaultAsync(r => r.Id == reservationId);
+
+        reservation.ReservationStatus = ReservationStatus.Cancelled;
+
+        await con.SaveChangesAsync();
     }
 }

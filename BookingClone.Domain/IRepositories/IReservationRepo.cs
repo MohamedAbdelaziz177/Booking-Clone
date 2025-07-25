@@ -13,5 +13,13 @@ public interface IReservationRepo : IGenericRepo<Reservation>
         string sortType = "asc",
         int? hotelId = null);
 
+    Task<List<Reservation>> GetExpiredReservations();
+
+    Task CommitCheckIn(int reservationId);
+
+    Task CommitCheckOut(int reservationId);
+
+    Task CommitCancelation(int reservationId);
+
 
 }
