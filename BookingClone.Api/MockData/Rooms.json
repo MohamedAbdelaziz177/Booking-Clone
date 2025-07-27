@@ -3,7 +3,7 @@
     "roomNumber": "A102",
     "capacity": 2,
     "pricePerNight": 120,
-    "type": 1,
+    "type": "Single",
     "isAvailable": true,
     "hotelId": 3
   },
@@ -12,7 +12,7 @@
     "roomNumber": "B201",
     "capacity": 4,
     "pricePerNight": 220,
-    "type": 2,
+    "type": "Double",
     "isAvailable": false,
     "hotelId": 1
   },
@@ -20,7 +20,7 @@
     "roomNumber": "C305",
     "capacity": 1,
     "pricePerNight": 90,
-    "type": 0,
+    "type": "Double",
     "isAvailable": true,
     "hotelId": 4
   },
@@ -28,7 +28,7 @@
     "roomNumber": "D407",
     "capacity": 3,
     "pricePerNight": 180,
-    "type": 1,
+    "type": "Single",
     "isAvailable": false,
     "hotelId": 2
   },
@@ -36,7 +36,7 @@
     "roomNumber": "E109",
     "capacity": 2,
     "pricePerNight": 140,
-    "type": 1,
+    "type": "Deluxe",
     "isAvailable": true,
     "hotelId": 5
   }

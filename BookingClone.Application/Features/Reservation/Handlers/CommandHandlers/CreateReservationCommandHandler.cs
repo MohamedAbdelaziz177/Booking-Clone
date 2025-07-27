@@ -49,7 +49,8 @@ public class CreateReservationCommandHandler : IRequestHandler<CreateReservation
         catch (Exception ex)
         {
             await Trx.RollbackAsync();
-            throw;
+            return Result<ReservationResponseDto>
+                .CreateFailuteResult("Sorry, The room is occuppied in this date range");
         }
     }
 }

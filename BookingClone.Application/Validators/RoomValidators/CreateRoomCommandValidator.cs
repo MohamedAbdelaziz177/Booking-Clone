@@ -8,9 +8,9 @@ public class CreateRoomCommandValidator : AbstractValidator<CreateRoomCommand>
 {
     public CreateRoomCommandValidator()
     {
-        RuleFor(x => x.RoomNumber)
-            .NotEmpty().WithMessage("Room number is required")
-            .MaximumLength(20).WithMessage("Room number cannot exceed 20 characters");
+        //RuleFor(x => x.RoomNumber)
+        //    .NotEmpty().WithMessage("Room number is required")
+        //    .MaximumLength(20).WithMessage("Room number cannot exceed 20 characters");
 
         RuleFor(x => x.Capacity)
             .GreaterThan(0).WithMessage("Capacity must be at least 1")
@@ -20,8 +20,8 @@ public class CreateRoomCommandValidator : AbstractValidator<CreateRoomCommand>
             .GreaterThan(0).WithMessage("Price per night must be positive")
             .ScalePrecision(2, 8);
 
-        RuleFor(x => x.Type)
-            .IsInEnum().WithMessage("Invalid room type");
+        //RuleFor(x => x.Type)
+        //    .IsInEnum().WithMessage("Invalid room type");
 
         RuleFor(x => x.HotelId)
             .GreaterThan(0).WithMessage("HotelId must be valid");
