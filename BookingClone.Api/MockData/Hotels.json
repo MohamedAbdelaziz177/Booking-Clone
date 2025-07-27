@@ -1,0 +1,47 @@
+{
+  {
+    "name": "Casa del Mar",
+    "description": "A luxury coastal escape with spa, fine dining, and private beaches.",
+    "city": "Barcelona",
+    "country": "Spain",
+    "phone": "+34 93 123 4567"
+  },
+
+
+  {
+    "name": "Tokyo Business Inn",
+    "description": "Ideal for business travelers, offering fast internet, workspaces, and easy access to Tokyo Station.",
+    "city": "Tokyo",
+    "country": "Japan",
+    "phone": "+81 3-1234-5678"
+  },
+
+
+  {
+    "name": "La Belle Maison",
+    "description": "Charming boutique hotel in the heart of the city with a French-style ambiance.",
+    "city": "Paris",
+    "country": "France",
+    "phone": "+33 1 42 68 53 00"
+  },
+
+
+  {
+    "name": "Mountain View Resort",
+    "description": "A serene mountain retreat perfect for winter getaways and hiking adventures.",
+    "city": "Aspen",
+    "country": "USA",
+    "phone": "+1 970 555 1234"
+  },
+
+
+  {
+    "name": "Sunrise Hotel",
+    "description": "A cozy beachfront hotel with excellent amenities and ocean views.",
+    "city": "Alexandria",
+    "country": "Egypt",
+    "phone": "+20 123 456 7890"
+  }
+
+}
+

@@ -12,6 +12,9 @@ public class PaymentRepo : GenericRepo<Payment>, IPaymentRepo
 
     public async Task<Payment?> GetPaymentByReservatioIdAsync(int reservationId)
     {
-        return await con.payments.FirstOrDefaultAsync(p => p.ReservationId == reservationId);
+        return await con.payments
+            .Include(p => p.Reservation)
+            .ThenInclude(r => r.User)
+            .FirstOrDefaultAsync(p => p.ReservationId == reservationId);
     }
 }

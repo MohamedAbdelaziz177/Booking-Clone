@@ -24,7 +24,7 @@ public class AppDbContext : IdentityDbContext<User>
         new UserConfiguration().Configure(builder.Entity<User>());
         new PaymentConfiguration().Configure(builder.Entity<Payment>());
         new RoleConfiguration().Configure(builder.Entity<IdentityRole>());
-
+      
     }
 
     public DbSet<Hotel> hotels { get; set; }

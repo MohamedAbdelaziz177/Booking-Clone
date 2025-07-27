@@ -20,6 +20,7 @@ public class FileUploadService : IFileUploadService
 
         var fullPath = Path.Combine(rootDir, Subfolder, img.FileName);
 
+
         using(var fileStream = new FileStream(fullPath, FileMode.Create, FileAccess.Write))
         {
             await img.CopyToAsync(fileStream);

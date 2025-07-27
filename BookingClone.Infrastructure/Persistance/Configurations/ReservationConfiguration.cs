@@ -11,7 +11,7 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
     {
         builder.Property(r => r.BookingDate)
             .IsRequired(true)
-            .HasDefaultValue(DateTime.Now);
+            .HasDefaultValue(DateTime.UtcNow);
 
         builder.Property(r => r.CheckInDate)
             .IsRequired(true);

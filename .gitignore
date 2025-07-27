@@ -11,4 +11,4 @@ obj/
 .env
 
 # Others
-*.log
+*.log.vs/

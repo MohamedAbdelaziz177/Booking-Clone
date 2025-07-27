@@ -1,11 +1,12 @@
 ﻿
-using AutoMapper;
 using BookingClone.Application.Common;
 using BookingClone.Application.Contracts;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Auth.Commands;
 using BookingClone.Domain.Entities;
 using BookingClone.Domain.IRepositories;
+using Mapster;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -37,18 +38,18 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
 
     public async Task<Result<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
-        
+        logger.LogInformation(request.FirstName + request.LastName + request.Email);
+
+
         var user = await userManager.FindByEmailAsync(request.Email);
 
         if (user != null)
             throw new RegistrationFailedException("Email already exists");
 
-        var AddedUser = mapper.Map<User>(request);
-        //var AddedUser = new User() { Email = request.Email,
-        //    Firstname = request.FirstName,
-        //    Lastname = request.LastName,
-        //    
-        //};
+        var AddedUser = request.Adapt<User>();
+
+        logger.LogInformation(AddedUser.Firstname + AddedUser.Firstname + AddedUser.Email);
+
 
         IdentityResult res =  await userManager.CreateAsync(AddedUser, request.Password);
 
@@ -61,8 +62,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
             throw new RegistrationFailedException(errors);
         }
 
-        await userManager.AddToRoleAsync(user!, "User");
-        //var AddedUser = await userManager.FindByEmailAsync(request.Email);
+        await userManager.AddToRoleAsync(AddedUser, "User");
 
         var OTP = RandomNumberGenerator.GetInt32(10000, 100000); 
 
@@ -77,7 +77,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
             if (Sent)
             {
                 AddedUser.EmailConfirmationOtp = OTP;
-                AddedUser.EmailConfirmationOtpExpiry = DateTime.Now.AddMinutes(5);
+                AddedUser.EmailConfirmationOtpExpiry = DateTime.UtcNow.AddMinutes(MagicValues.OTP_EXPIRY_MINS);
                 await userManager.UpdateAsync(AddedUser);
             }
             else
@@ -87,9 +87,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<st
             }
                 
         }
-             
-
-        return new Result<string>(true, message: "Registeration successfully completed - check ur email");
-
+            
+        return Result<string>.CreateSuccessResult("Registeration successfully completed - check ur email");
     }
 }

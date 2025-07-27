@@ -48,7 +48,7 @@ public class JwtService : IJwtService
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString())
+            //new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString())
 
         };
 
@@ -70,7 +70,7 @@ public class JwtService : IJwtService
 
             signingCredentials: new SigningCredentials(
 
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"]!)),
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"]!)),
             SecurityAlgorithms.HmacSha256
 
             )

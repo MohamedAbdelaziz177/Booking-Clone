@@ -1,11 +1,11 @@
 ﻿
 
-using AutoMapper;
 using BookingClone.Application.Common;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Reservation.Commands;
 using BookingClone.Application.Features.Reservation.Responses;
 using BookingClone.Domain.IRepositories;
+using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using ReservationEntity = BookingClone.Domain.Entities.Reservation;
@@ -32,18 +32,33 @@ public class UpdateReservationCommandHandler : IRequestHandler<UpdateReservation
         if (reservation == null)
             throw new EntityNotFoundException("Reservation not found");
 
-        bool checkAvailable = await unitOfWork
+        using var Trx = await unitOfWork.GetSerializableTransaction();
+
+        try
+        {
+            bool checkAvailable = await unitOfWork
             .RoomRepo
             .CheckAvailableBetweenAsync(request.RoomId, request.CheckInDate, request.CheckOutDate);
 
-        if (!checkAvailable)
-            return new Result<ReservationResponseDto>(success:false , "Room is occupied in that range");
+            if (!checkAvailable)
+                return new Result<ReservationResponseDto>(success: false, "Room is occupied in that range");
 
-        mapper.Map(request, reservation);
+            mapper.Map(request, reservation);
 
-        ReservationResponseDto res = mapper.Map<ReservationResponseDto>(reservation);
+            await unitOfWork.ReservationRepo.UpdateAsync(reservation);
 
-        return new Result<ReservationResponseDto>(res, true, 
-            "Reservation Updated Successfully");
+            await Trx.CommitAsync();
+
+            ReservationResponseDto res = mapper.Map<ReservationResponseDto>(reservation);
+
+            return Result<ReservationResponseDto>.CreateSuccessResult(res);
+        }
+        catch (Exception ex) 
+        {
+            await Trx.RollbackAsync();
+            return Result<ReservationResponseDto>
+                .CreateFailuteResult("Sorry, The room is occuppied in this date range");
+        }
+       
     }
 }

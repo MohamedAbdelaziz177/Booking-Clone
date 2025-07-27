@@ -1,8 +1,20 @@
 
+using BookingClone.Api.GlobalExceptionHandler;
+using BookingClone.Api.ServiceExe;
+using BookingClone.Application.ServiceExe;
 using BookingClone.Domain.Entities;
 using BookingClone.Infrastructure.Persistance;
+using BookingClone.Infrastructure.ServiceExe;
+using CloudinaryDotNet;
+using DotNetEnv;
+using Hangfire;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Collections;
+using System.Reflection;
+using System.Text;
 
 namespace BookingClone.Api
 {
@@ -10,22 +22,24 @@ namespace BookingClone.Api
     {
         public static void Main(string[] args)
         {
+            Env.Load();
+
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+        
+            builder.Services.AddInfraComponents(builder.Configuration);
+            builder.Services.AddAppComponents();
+            builder.Services.AddApiComponents(builder.Configuration);
+            builder.Services.AddRateLimitters();
 
-
-            builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("default")));
-
-
-            builder.Services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+            foreach (var (key, value) in Environment.GetEnvironmentVariables().Cast<DictionaryEntry>())
+            {
+                builder.Configuration[key.ToString()!] = value?.ToString();
+            }
 
             var app = builder.Build();
 
@@ -36,8 +50,18 @@ namespace BookingClone.Api
                 app.UseSwaggerUI();
             }
 
+            app.UseStaticFiles();
+           
+            app.UseRateLimiter();
+
+            app.UseMiddleware<GlobalExceptionMiddleware>();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseHangfireDashboard();
+
+            ApiServiceProvider.CallCancelExpiredReservationsJob();
 
             app.MapControllers();
 

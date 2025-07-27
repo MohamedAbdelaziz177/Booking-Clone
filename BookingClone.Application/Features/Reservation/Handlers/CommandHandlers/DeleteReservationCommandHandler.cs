@@ -31,9 +31,8 @@ public class DeleteReservationCommandHandler : IRequestHandler<DeleteReservation
         reservation.CheckInDate = DateTime.Now;
         reservation.CheckOutDate = DateTime.Now;
 
+        await unitOfWork.ReservationRepo.UpdateAsync(reservation);
 
-        await unitOfWork.SaveChangesAsync();
-
-        return new Result<string>("Reservation Cancelled successfully");
+        return Result<string>.CreateSuccessResult("Reservation Cancelled successfully");
     }
 }

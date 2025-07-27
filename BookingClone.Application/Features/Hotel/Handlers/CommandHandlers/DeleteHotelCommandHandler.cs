@@ -1,5 +1,6 @@
 ﻿
 using BookingClone.Application.Common;
+using BookingClone.Application.Contracts;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Hotel.Commands;
 using BookingClone.Application.Features.Hotel.Responses;
@@ -11,10 +12,12 @@ namespace BookingClone.Application.Features.Hotel.Handlers.CommandHandlers;
 public class DeleteHotelCommandHandler : IRequestHandler<DeleteHotelCommand, Result<string>>
 {
     private readonly IUnitOfWork unitOfWork;
+    private readonly IRedisService redisService;
 
-    public DeleteHotelCommandHandler(IUnitOfWork unitOfWork)
+    public DeleteHotelCommandHandler(IUnitOfWork unitOfWork, IRedisService redisService)
     {
         this.unitOfWork = unitOfWork;
+        this.redisService = redisService;
     }
 
     public async Task<Result<string>> Handle(DeleteHotelCommand request, CancellationToken cancellationToken)
@@ -26,6 +29,9 @@ public class DeleteHotelCommandHandler : IRequestHandler<DeleteHotelCommand, Res
 
         await unitOfWork.HotelRepo.DeleteAsync(Hotel);
 
-        return new Result<string>(data: "Deleted successfully");
+        await redisService.RemoveDataAsync(MagicValues.HOTEL_REDIS_KEY + request.Id.ToString());
+        await redisService.RemoveByTagAsync(MagicValues.HOTEL_PAGE_REDIS_TAG);
+
+        return Result<string>.CreateSuccessResult(data: "Deleted successfully");
     }
 }

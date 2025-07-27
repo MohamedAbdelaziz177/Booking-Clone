@@ -9,7 +9,7 @@ namespace BookingClone.Application.Features.Hotel.Commands;
 
 public class CreateHotelCommand : IRequest<Result<HotelResponseDto>>
 {
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty; 
     public string Description { get; set; } = string.Empty;
     public string City { get; set; } = string.Empty;
     public string Country { get; set; } = "Egypt";

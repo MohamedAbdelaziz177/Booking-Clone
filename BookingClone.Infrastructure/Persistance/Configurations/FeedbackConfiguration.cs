@@ -12,8 +12,9 @@ public class FeedbackConfiguration : IEntityTypeConfiguration<FeedBack>
             .HasMaxLength(300);
 
         builder.Property(f => f.Rating).IsRequired(true)
-            .HasPrecision(3, 1)
+            .HasPrecision(8, 2)
             .HasAnnotation("Range", new Dictionary<String, Object>()
             { ["Minimum"] = 0, ["Maximum"] = 10 });
+
     }
 }

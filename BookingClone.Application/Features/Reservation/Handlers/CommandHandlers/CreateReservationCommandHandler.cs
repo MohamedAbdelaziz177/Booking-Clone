@@ -1,10 +1,12 @@
 ﻿
-using AutoMapper;
 using BookingClone.Application.Common;
+using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Hotel.Responses;
 using BookingClone.Application.Features.Reservation.Commands;
 using BookingClone.Application.Features.Reservation.Responses;
+using BookingClone.Domain.Entities;
 using BookingClone.Domain.IRepositories;
+using MapsterMapper;
 using MediatR;
 using ReservationEntity = BookingClone.Domain.Entities.Reservation;
 
@@ -23,12 +25,32 @@ public class CreateReservationCommandHandler : IRequestHandler<CreateReservation
 
     public async Task<Result<ReservationResponseDto>> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
     {
-        ReservationEntity entity = mapper.Map<ReservationEntity>(request);
 
-        await unitOfWork.ReservationRepo.AddAsync(entity);
+        using var Trx = await unitOfWork.GetSerializableTransaction();
+        try
+        {
+            bool checkAvailable = await unitOfWork
+            .RoomRepo
+            .CheckAvailableBetweenAsync(request.RoomId, request.CheckInDate, request.CheckOutDate);
 
-        ReservationResponseDto res = mapper.Map<ReservationResponseDto>(entity);
+            if (!checkAvailable)
+                return new Result<ReservationResponseDto>(success: false, "Room is occupied in that range");
 
-        return new Result<ReservationResponseDto>(res, true, "Added Successfully");
+            ReservationEntity entity = mapper.Map<ReservationEntity>(request);
+
+            await unitOfWork.ReservationRepo.AddAsync(entity);
+
+            ReservationResponseDto res = mapper.Map<ReservationResponseDto>(entity);
+
+            await Trx.CommitAsync();
+
+            return Result<ReservationResponseDto>.CreateSuccessResult(res);
+        } 
+        catch (Exception ex)
+        {
+            await Trx.RollbackAsync();
+            return Result<ReservationResponseDto>
+                .CreateFailuteResult("Sorry, The room is occuppied in this date range");
+        }
     }
 }

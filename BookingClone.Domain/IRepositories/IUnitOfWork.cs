@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore.Storage;
+
 namespace BookingClone.Domain.IRepositories;
 
 public interface IUnitOfWork
@@ -20,7 +22,8 @@ public interface IUnitOfWork
     IPaymentRepo PaymentRepo { get; }
 
     Task<int> SaveChangesAsync();
+    Task<IDbContextTransaction> GetSerializableTransaction();
 
+    Task<IDbContextTransaction> GetTransaction();
 
-     
 }

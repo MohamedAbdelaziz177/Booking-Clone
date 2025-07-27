@@ -1,6 +1,8 @@
-﻿using BookingClone.Domain.IRepositories;
+﻿using BookingClone.Application.Common;
+using BookingClone.Domain.IRepositories;
 using BookingClone.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BookingClone.Infrastructure.Persistance.Repositories;
 public class GenericRepo<T> : IGenericRepo<T> where T : class
@@ -40,19 +42,17 @@ public class GenericRepo<T> : IGenericRepo<T> where T : class
         return await dbSet.ToListAsync();
     }
 
-    public async Task<List<T>> GetAllAsync(int pageIdx = 1,
+    public virtual async Task<List<T>> GetAllAsync(int pageIdx = 1,
         int pageSize = 8,
         string sortField = "id",
         string sortDir = "desc"
         )
     {
         var lst = await dbSet.Skip((pageIdx - 1) * pageSize).Take(pageSize).ToListAsync();
-    
-       
         return lst;
     }
 
-    public async Task<T?> GetByIdAsync(int id)
+    public virtual async Task<T?> GetByIdAsync(int id)
     {
         return await dbSet.FindAsync(id);
     }
@@ -61,5 +61,26 @@ public class GenericRepo<T> : IGenericRepo<T> where T : class
     {
         dbSet.Update(item);
         await con.SaveChangesAsync();
+    }
+
+    public async Task<List<T>> Filter(Expression<Func<T, bool>> predicate,
+        string includes = "",
+        int PageIdx = 1,
+        int PageSize = 8
+        )
+    {
+        IQueryable<T> query = dbSet.Where(predicate);
+        query = query.Skip(PageSize * (PageIdx - 1)).Take(PageSize);
+
+        if(includes != string.Empty)
+        {
+            string[] includeArr = includes.Split(',');
+
+            foreach(string inc in includeArr)
+                query.Include(inc);
+        }
+            
+
+        return await query.ToListAsync();
     }
 }

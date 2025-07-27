@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\FeedBack\Commands\" />
-    <Folder Include="Features\FeedBack\Handlers\CommandHandlers\" />
-    <Folder Include="Features\FeedBack\Handlers\QueryHandlers\" />
-    <Folder Include="Features\FeedBack\Queries\" />
     <Folder Include="Features\Payment\Commands\" />
     <Folder Include="Features\Payment\Handlers\" />
   </ItemGroup>
@@ -20,8 +16,10 @@
 	</ItemGroup>
 	
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentValidation" Version="8.6.3" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.3" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
   </ItemGroup>

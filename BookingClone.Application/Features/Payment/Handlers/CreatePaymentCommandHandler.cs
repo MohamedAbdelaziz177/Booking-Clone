@@ -1,11 +1,13 @@
 ﻿
 using BookingClone.Application.Common;
 using BookingClone.Application.Contracts;
+using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Payment.Commands;
 using BookingClone.Application.Features.Payment.Responses;
 using BookingClone.Domain.Enums;
 using BookingClone.Domain.IRepositories;
 using MediatR;
+using System.Linq.Expressions;
 using PaymentEntity = BookingClone.Domain.Entities.Payment;
 
 namespace BookingClone.Application.Features.Payment.Handlers;
@@ -23,18 +25,44 @@ public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand,
 
     public async Task<Result<StripeResponseDto>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
     {
-        var res = await stripeService.CreateStripeSession(request);
+        var res = await stripeService.CreatePaymentIntent(request);
 
-        PaymentEntity payment = new PaymentEntity();
+        var reservation = await unitOfWork.ReservationRepo.GetByIdAsync(request.ReservationDetails.Id);
 
-        payment.Status = PaymentStatus.Succedded;
-        payment.IntentId = res.IntentId;
-        payment.ReservationId = request.ReservationResponse.Id;
-        payment.Amount = request.ReservationResponse.GetTotalPrice();
+        if (reservation == null)
+            throw new EntityNotFoundException("No reservation associated with this Id");
 
-        await unitOfWork.PaymentRepo.AddAsync(payment);
+        var ExistingPayment = await unitOfWork.PaymentRepo.GetPaymentByReservatioIdAsync(reservation.Id);
 
-        return new Result<StripeResponseDto>(res);
+        if (ExistingPayment != null)
+            throw new AlreadyPaidException($"Reservation with Id: {reservation.Id} has already been paid");
+
+        PaymentEntity payment = new PaymentEntity()
+        {
+            Status = PaymentStatus.Succedded,
+            IntentId = res.IntentId,
+            ReservationId = request.ReservationDetails.Id,
+            Amount = request.ReservationDetails.TotalPrice
+        };
+
+        using var Trx = await unitOfWork.GetTransaction();
+
+        try
+        {
+            await unitOfWork.PaymentRepo.AddAsync(payment);
+
+            reservation.ReservationStatus = ReservationStatus.Confirmed;
+            await unitOfWork.ReservationRepo.UpdateAsync(reservation);
+
+            await Trx.CommitAsync();
+        }
+        catch
+        {
+            await Trx.RollbackAsync();
+            throw;
+        }
+        
+        return Result<StripeResponseDto>.CreateSuccessResult(res);
 
     }
 }

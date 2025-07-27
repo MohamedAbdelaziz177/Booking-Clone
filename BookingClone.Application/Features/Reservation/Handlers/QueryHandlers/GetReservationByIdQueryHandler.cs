@@ -1,10 +1,10 @@
 ﻿
-using AutoMapper;
 using BookingClone.Application.Common;
 using BookingClone.Application.Exceptions;
 using BookingClone.Application.Features.Reservation.Queries;
 using BookingClone.Application.Features.Reservation.Responses;
 using BookingClone.Domain.IRepositories;
+using MapsterMapper;
 using MediatR;
 using ReservationEntity = BookingClone.Domain.Entities.Reservation; 
 namespace BookingClone.Application.Features.Reservation.Handlers.QueryHandlers;
@@ -29,7 +29,7 @@ public class GetReservationByIdQueryHandler : IRequestHandler<GetReservationById
          
          ReservationResponseDto res = mapper.Map<ReservationResponseDto>(r);
          
-         return new Result<ReservationResponseDto>(res);
+         return Result<ReservationResponseDto>.CreateSuccessResult(res);
         
     }
 }

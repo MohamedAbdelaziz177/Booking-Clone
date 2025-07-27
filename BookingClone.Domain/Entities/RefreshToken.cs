@@ -19,5 +19,5 @@ public class RefreshToken
     public string Token { get; set; } = default!;
     public bool IsRevoked { get; set; }
     
-    public DateTime ExpiryDate { get; set; }
+    public DateTime ExpiryDate { get; set; } = DateTime.UtcNow; 
 }

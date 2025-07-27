@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace BookingClone.Domain.Entities;
 
 public class Hotel
@@ -15,5 +17,6 @@ public class Hotel
 
     public string Phone { get; set; } = string.Empty;
 
-    public List<Room> Rooms { get; set; } = new List<Room>();
+    [JsonIgnore]
+    public List<Room> Rooms { get; set; } = default!;
 }

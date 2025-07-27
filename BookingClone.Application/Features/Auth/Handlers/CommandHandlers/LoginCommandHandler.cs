@@ -40,6 +40,6 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<TokenRes
 
         TokenResponseDto tokenResponseDto = await jwtService.GetTokensAsync(user.Id);
 
-        return new Result<TokenResponseDto>(tokenResponseDto);
+        return  Result<TokenResponseDto>.CreateSuccessResult(tokenResponseDto);
     }
 }

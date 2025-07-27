@@ -19,11 +19,10 @@ public class Room
 
     public int HotelId { get; set; }
 
-    public Hotel Hotel { get; set; } = new Hotel();
+    public Hotel Hotel { get; set; } = default!;
 
     public List<Reservation> Reservations { get; set; } = new List<Reservation>();
     public List<RoomImage> RoomImages { get; set; } = new List<RoomImage>();
-
-    public List<FeedBack> FeedBacks { get; set; } = new List<FeedBack>();
+    
 
 }

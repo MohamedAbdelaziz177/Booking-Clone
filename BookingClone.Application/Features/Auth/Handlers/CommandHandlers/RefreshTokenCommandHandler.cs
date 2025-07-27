@@ -18,6 +18,6 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, R
     public async Task<Result<TokenResponseDto>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
         TokenResponseDto responseDto = await jwtService.RefreshTokenAsync(request.RefreshToken);
-        return new Result<TokenResponseDto>(responseDto);
+        return Result<TokenResponseDto>.CreateSuccessResult(responseDto);
     }
 }

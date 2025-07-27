@@ -12,6 +12,12 @@ public static class MagicValues
 
     public static readonly int OTP_EXPIRY_MINS = 5;
 
-    public static readonly int PAGE_SIZE = 8;
-    
+    public static readonly int PAGE_SIZE = 3;
+
+    public static readonly string HOTEL_REDIS_KEY = "HOTEL";
+    public static readonly string ROOM_REDIS_KEY = "ROOM";
+
+    public static readonly string HOTEL_PAGE_REDIS_TAG = "H_TAG";
+    public static readonly string ROOM_PAGE_REDIS_TAG = "R_TAG";
+
 }

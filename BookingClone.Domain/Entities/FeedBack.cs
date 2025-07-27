@@ -12,8 +12,8 @@ public class FeedBack
 
     public Reservation Reservation { get; set; } = new Reservation();
 
-    public int RoomId { get; set; }
+    public string UserId { get; set; } = default!;
 
-    public Room Room { get; set; } = new Room();
+    public User user { get; set; } = default!;
 
 }

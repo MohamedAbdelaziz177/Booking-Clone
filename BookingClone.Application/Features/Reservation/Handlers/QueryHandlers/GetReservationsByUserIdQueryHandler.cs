@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using BookingClone.Application.Common;
+﻿using BookingClone.Application.Common;
 using BookingClone.Application.Features.Reservation.Queries;
 using BookingClone.Application.Features.Reservation.Responses;
 using BookingClone.Domain.IRepositories;
+using MapsterMapper;
 using MediatR;
 using System.Collections.Generic;
 using ReservationEntity = BookingClone.Domain.Entities.Reservation;
@@ -24,6 +24,6 @@ public class GetReservationsByUserIdQueryHandler : IRequestHandler<GetReservatio
         var reservations = await unitOfWork.ReservationRepo.GetByUserIdAsync(request.UserId);
         var res = reservations.Select(r => mapper.Map<ReservationResponseDto>(r)).ToList();
 
-        return new Result<List<ReservationResponseDto>>(res);
+        return Result<List<ReservationResponseDto>>.CreateSuccessResult(res);
     }
 }
