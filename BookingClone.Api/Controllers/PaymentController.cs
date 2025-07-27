@@ -22,7 +22,7 @@ namespace BookingClone.Api.Controllers
         /// <summary>
         /// Make a payment for a reservation.
         /// </summary>
-        /// <param name="command">Payment details including reservation and user info.</param>
+        /// <param name="reservationId">Payment details including reservation and user info.</param>
         /// <returns>Stripe payment session info or error.</returns>
         /// <response code="200">Payment session created successfully.</response>
         /// <response code="403">User is not allowed to pay for this reservation.</response>
@@ -32,14 +32,14 @@ namespace BookingClone.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> Pay([FromBody] CreatePaymentCommand command)
+        public async Task<IActionResult> Pay([FromQuery] int reservationId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (command.ReservationDetails.UserId != userId)
-                return Forbid("You are not authorized to perform this action");
+            var createPayCmd = new CreatePaymentCommand() { reservationId = reservationId, userId = userId };
 
-            var res = await mediator.Send(command);
+            var res = await mediator.Send(createPayCmd);
+
             return Ok(res);
         }
 

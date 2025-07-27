@@ -503,9 +503,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "command",
-        "Type": "BookingClone.Application.Features.Payment.Commands.CreatePaymentCommand",
-        "IsRequired": true
+        "Name": "reservationId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
