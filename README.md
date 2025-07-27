@@ -151,7 +151,7 @@ dotnet run --project BookingClone.Api
 
 ---
 
-## 📬 Contact
+## 📬 Contributions
 
 For contributions, issues, or feature requests, feel free to fork the repo, open an issue, or submit a pull request.
 
