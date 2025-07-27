@@ -40,7 +40,9 @@ public class CreateReservationCommandHandler : IRequestHandler<CreateReservation
 
             await unitOfWork.ReservationRepo.AddAsync(entity);
 
-            ReservationResponseDto res = mapper.Map<ReservationResponseDto>(entity);
+            var reservationWithRoomData = await unitOfWork.ReservationRepo.GetByIdAsync(entity.Id);
+
+            ReservationResponseDto res = mapper.Map<ReservationResponseDto>(reservationWithRoomData!);
 
             await Trx.CommitAsync();
 

@@ -87,7 +87,7 @@ namespace BookingClone.Api.Controllers
         /// <param name="request">Image upload data.</param>
         /// <returns>Success response.</returns>
         [HttpPost("image")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

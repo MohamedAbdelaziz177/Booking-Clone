@@ -22,5 +22,7 @@ public class RoomMapsterAdapter
             .Map(dest => dest.RoomImageDtos, src => src.RoomImages.Select(ri =>
             new RoomImgDto() { ImageId = ri.Id, ImageUrl = ri.ImgUrl }));
 
+        TypeAdapterConfig<RoomEntity, RoomCardResponse>.NewConfig();
+
     }
 }
