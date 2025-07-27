@@ -21,7 +21,7 @@ public class PaymentReminderJob
         var payment = await unitOfWork.PaymentRepo.GetPaymentByReservatioIdAsync(reservationId);
         var reservation = await unitOfWork.ReservationRepo.GetByIdAsync(reservationId);
         
-        if (payment == null && reservation!.ReservationStatus == ReservationStatus.Pending)
+        if (payment == null && reservation != null && reservation.ReservationStatus == ReservationStatus.Pending)
         {
             var userEmail = reservation!.User.Email;
             var userFname = reservation!.User.Firstname;

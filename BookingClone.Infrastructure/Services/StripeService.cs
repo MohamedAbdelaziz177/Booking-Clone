@@ -1,6 +1,7 @@
 ﻿using BookingClone.Application.Contracts;
 using BookingClone.Application.Features.Payment.Commands;
 using BookingClone.Application.Features.Payment.Responses;
+using BookingClone.Application.Features.Reservation.Responses;
 using BookingClone.Domain.Entities;
 using BookingClone.Domain.Enums;
 using BookingClone.Domain.IRepositories;
@@ -21,19 +22,19 @@ public class StripeService : IStripeService
         this.unitOfWork = unitOfWork;
     }
 
-    public async Task<StripeResponseDto> CreatePaymentIntent(CreatePaymentCommand cmd)
+    public async Task<StripeResponseDto> CreatePaymentIntent(ReservationResponseDto reservationDetails)
     {
          
         PaymentIntentCreateOptions options = new PaymentIntentCreateOptions()
         {
-            Amount = (long)cmd.ReservationDetails.TotalPrice,
+            Amount = (long)reservationDetails.TotalPrice,
             Currency = "usd",
             PaymentMethodTypes = new List<string>() { "card" },
-            Customer = cmd.ReservationDetails.UserId,
+         //   Customer = reservationDetails.UserId,
             Metadata = new Dictionary<string, string>()
             {
-                {"reservationId", cmd.ReservationDetails.Id.ToString()},
-                {"userId", cmd.ReservationDetails.UserId},
+                {"reservationId", reservationDetails.Id.ToString()},
+                {"userId", reservationDetails.UserId},
             }
         };
 
