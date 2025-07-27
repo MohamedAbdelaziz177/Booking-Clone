@@ -14,7 +14,7 @@ public class ReservationRepo : GenericRepo<Reservation>, IReservationRepo
 
     public override async Task<Reservation?> GetByIdAsync(int id)
     {
-        return await con.reservations.Include(r => r.User).FirstOrDefaultAsync(r => r.Id == id);
+        return await con.reservations.Include(r => r.User).Include(r => r.Room).FirstOrDefaultAsync(r => r.Id == id);
     }
     public Task<List<Reservation>> GetByDateAsync(DateTime date,
         int pageIdx = 1,

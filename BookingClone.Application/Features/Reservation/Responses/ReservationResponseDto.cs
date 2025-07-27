@@ -23,6 +23,6 @@ public class ReservationResponseDto
 
     public decimal TotalPrice => NightsNo * RoomDetails.PricePerNight;
 
-    public RoomCardResponse RoomDetails { get; set; } = new();
+    public RoomCardResponse RoomDetails { get; set; } = default!;
 
 }

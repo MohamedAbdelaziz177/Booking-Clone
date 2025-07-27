@@ -76,7 +76,7 @@ namespace BookingClone.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddHotel(CreateHotelCommand createHotelCommand)
         {
             var res = await mediator.Send(createHotelCommand);
