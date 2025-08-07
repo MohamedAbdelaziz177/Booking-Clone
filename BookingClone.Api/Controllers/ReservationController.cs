@@ -3,6 +3,7 @@ using BookingClone.Application.Features.Reservation.Commands;
 using BookingClone.Application.Features.Reservation.Queries;
 using BookingClone.Application.Features.Reservation.Responses;
 using BookingClone.Infrastructure.BackgroundJobs;
+using CloudinaryDotNet.Actions;
 using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -147,6 +148,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpPut("check-in")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CommitReservationCheckIn([FromQuery] int reservationId)
         {
             var res = await mediator
@@ -156,6 +158,7 @@ namespace BookingClone.Api.Controllers
         }
 
         [HttpPut("check-out")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CommitReservationCheckOut([FromQuery] int reservationId)
         {
             var res = await mediator
