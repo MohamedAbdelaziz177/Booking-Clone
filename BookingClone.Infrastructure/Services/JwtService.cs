@@ -40,7 +40,7 @@ public class JwtService : IJwtService
         return !environment.IsProduction() ? DateTime.UtcNow.AddDays(1) 
             : DateTime.UtcNow.AddMinutes(MagicValues.ACCESS_TOKEN_LIFE_TIME_MINS);
     }
-    public async Task<string> GenerateAccessTokenAsync(User user)
+    private async Task<string> GenerateAccessTokenAsync(User user)
     {
 
         List<Claim> claims = new List<Claim>()
@@ -106,19 +106,6 @@ public class JwtService : IJwtService
         return await this.GenerateRefreshTokenAsync(user);
     }
 
-    
-    //public async Task<(string token, bool refreshed)> GenerateRefreshToken(string refreshToken)
-    //{
-    //    var ValidationRes = ValidateRefreshToken(refreshToken);
-    //
-    //    if (!ValidationRes.valid)
-    //        return ("", false);
-    //
-    //    RefreshToken token = await GetRefreshToken(ValidationRes.refToken.UserId);
-    //
-    //    return (token.Token, true);
-    //}
-
     private async Task<TokenResponseDto> GetTokensAsync(User user)
     {
         RefreshToken refreshToken = await this.GenerateRefreshTokenAsync(user);
@@ -148,6 +135,11 @@ public class JwtService : IJwtService
         if (!ValidationRes.valid)
             throw new RefreshTokenNotValidException("Refresh Token is not valid");
 
+        else if(ValidationRes.refToken.IsRevoked)
+            await InvalidateAllTokens(ValidationRes.refToken.UserId);
+
+        /* Rotate token if hijack detected */
+        
         return await GetTokensAsync(ValidationRes.refToken.UserId);
 
     }
@@ -159,10 +151,21 @@ public class JwtService : IJwtService
 
         RefreshToken? token = await unitOfWork.RefreshRokenRepo.GetByTokenAsync(refreshToken);
 
-        if (token == null || token.IsRevoked || token.ExpiryDate < DateTime.Now)
+        if (token == null || token.ExpiryDate < DateTime.Now)
             return (false, null!);
 
+       
         return (true, token);
+    }
+
+    private async Task InvalidateAllTokens(string userId)
+    {
+        List<RefreshToken> refreshTokens = await unitOfWork.RefreshRokenRepo.GetByUserIdAsync(userId);
+
+        foreach (var rt in refreshTokens)
+            rt.IsRevoked = true;
+
+        await unitOfWork.SaveChangesAsync();
     }
 }
 
