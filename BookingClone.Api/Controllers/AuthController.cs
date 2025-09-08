@@ -94,8 +94,7 @@ namespace BookingClone.Api.Controllers
         [EnableRateLimiting("TokensBucket")]
         public async Task<IActionResult> ResendConfirmationCode([FromBody] ResendConfirmationCodeCommand req)
         {
-            var res = await mediator.Send(req);
-            return Ok(res);
+            return Ok(await mediator.Send(req));
         }
 
         /// <summary>
@@ -106,8 +105,19 @@ namespace BookingClone.Api.Controllers
         [HttpPost("confirm-email")]
         public async Task<IActionResult> ConfirmEmail([FromBody]ConfirmEmailCommand confirmEmailCommand)
         {
-            var res = await mediator.Send(confirmEmailCommand);
-            return Ok(res);
+            return Ok(await mediator.Send(confirmEmailCommand));
+        }
+
+        [HttpPost("forget-password")]
+        public async Task<IActionResult> ForgetPassword([FromBody]ForgetPasswordCommand req)
+        {
+            return Ok(await mediator.Send(req));
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody]ResetPasswordCommand req)
+        {
+            return Ok(await mediator.Send(req));
         }
 
         /// <summary>
@@ -136,6 +146,6 @@ namespace BookingClone.Api.Controllers
             return Request.Cookies["refresh-token"];
         }
 
-        // forget password / reset .. كلام فاضي 
+       
     }
 }

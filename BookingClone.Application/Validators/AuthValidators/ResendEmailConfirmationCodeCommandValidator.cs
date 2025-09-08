@@ -11,5 +11,6 @@ public class ResendEmailConfirmationCodeCommandValidator : AbstractValidator<Res
         RuleFor(recc => recc.Email)
             .NotEmpty().WithMessage("Email field cannot be empty")
             .EmailAddress().WithMessage("Enter Valid email address");
+
     }
 }
