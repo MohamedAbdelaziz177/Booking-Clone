@@ -1,5 +1,6 @@
 ﻿
 using BookingClone.Domain.Entities;
+using BookingClone.Domain.Enums;
 using System.Linq.Expressions;
 
 namespace BookingClone.Application.Specifications.RoomSpecifications;
@@ -15,8 +16,10 @@ public class RoomAvailableBetweenSpec : Specification<Room>
         this.end = end;
     }
 
-    public override Expression<Func<Room, bool>> ToExpression()
-    {
-        throw new NotImplementedException();
-    }
+    public override Expression<Func<Room, bool>> ToExpression() =>
+        r => !r
+        .Reservations
+        .Any(rs => rs.CheckInDate > start
+        && rs.CheckOutDate < end
+        && rs.ReservationStatus != ReservationStatus.Cancelled);
 }
